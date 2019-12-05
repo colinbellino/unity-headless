@@ -7,9 +7,11 @@ using Zenject;
 public class ProjectSettingsInstaller : ScriptableObjectInstaller<ProjectSettingsInstaller>
 {
 	[SerializeField] private CameraRigFacade _cameraRigPrefab;
+	[SerializeField] private EntityFacade _playerPrefab;
 
 	public override void InstallBindings()
 	{
 		Container.BindInstance(_cameraRigPrefab);
+		Container.BindInstance(_playerPrefab);
 	}
 }
