@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Greed.UnityWrapper
 {
-	class UnityTransform : ITransform
+	public class UnityTransform : ITransform
 	{
 		private readonly Transform _transform;
 

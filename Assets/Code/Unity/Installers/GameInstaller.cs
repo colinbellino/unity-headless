@@ -1,4 +1,5 @@
 using Greed.Core;
+using Greed.UnityWrapper;
 using Zenject;
 
 namespace Greed.Unity
@@ -13,6 +14,8 @@ namespace Greed.Unity
 			Container.Bind<ICameraRig>().FromComponentInNewPrefab(_cameraRigPrefab).AsSingle();
 			Container.Bind<IEntity>().FromComponentInNewPrefab(_playerPrefab).AsSingle();
 
+			Container.Bind<PlayerActions>().AsSingle();
+			Container.BindInterfacesTo<UnityTime>().AsSingle();
 			Container.BindInterfacesTo<Bootstrap>().AsSingle();
 		}
 	}
