@@ -1,4 +1,3 @@
-using Greed.Core;
 using UnityEngine;
 
 namespace Greed.UnityWrapper

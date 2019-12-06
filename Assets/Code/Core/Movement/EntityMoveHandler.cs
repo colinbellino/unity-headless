@@ -1,3 +1,4 @@
+using Greed.UnityWrapper;
 using UnityEngine;
 using Zenject;
 
@@ -8,14 +9,14 @@ namespace Greed.Core
 		private readonly EntityInputState _inputState;
 		private readonly IEntityView _view;
 		private readonly ITime _time;
+		private readonly int _speed;
 
-		private readonly int _speed = 6;
-
-		public EntityMoveHandler(EntityInputState inputState, IEntityView view, ITime time)
+		public EntityMoveHandler(EntityInputState inputState, IEntityView view, ITime time, int speed)
 		{
 			_inputState = inputState;
 			_view = view;
 			_time = time;
+			_speed = speed;
 		}
 
 		public void FixedTick()

@@ -1,4 +1,4 @@
-namespace Greed.Core
+namespace Greed.UnityWrapper
 {
 	public interface ITime
 	{
