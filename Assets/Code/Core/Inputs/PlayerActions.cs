@@ -122,6 +122,17 @@ namespace Greed.Core
                     ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ec85d1c-a7a8-442a-9b0c-64dd5df1e585"",
+                    ""path"": ""<Gamepad>/<Button>"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
