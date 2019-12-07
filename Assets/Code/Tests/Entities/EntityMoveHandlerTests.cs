@@ -1,5 +1,4 @@
-﻿using System;
-using Greed.Core;
+﻿using Greed.Core;
 using Greed.UnityWrapper;
 using NSubstitute;
 using NUnit.Framework;
@@ -67,11 +66,20 @@ namespace Greed.Tests
 			ThenMovePosition(Vector3.zero);
 		}
 
-		private void WhenSpeed(int value) => _speed = value;
+		private void WhenSpeed(int value)
+		{
+			_speed = value;
+		}
 
-		private void WhenMoveInput(Vector3 value) => _inputState.Move = value;
+		private void WhenMoveInput(Vector3 value)
+		{
+			_inputState.Move = value;
+		}
 
-		private void WhenFixedDeltaTime(float value) => _time.FixedDeltaTime.Returns(value);
+		private void WhenFixedDeltaTime(float value)
+		{
+			_time.FixedDeltaTime.Returns(value);
+		}
 
 		private void FixedTick()
 		{
@@ -79,6 +87,9 @@ namespace Greed.Tests
 			_handler.FixedTick();
 		}
 
-		private void ThenMovePosition(Vector3 position) => _view.Received().MovePosition(position);
+		private void ThenMovePosition(Vector3 position)
+		{
+			_view.Received().MovePosition(position);
+		}
 	}
 }
