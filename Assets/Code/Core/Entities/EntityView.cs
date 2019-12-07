@@ -16,9 +16,8 @@ namespace Greed.Core
 
 		public Vector3 Position => _transform.Position;
 
-		public void MovePosition(Vector3 position)
-		{
-			_rigidbody.MovePosition(position);
-		}
+		public void MovePosition(Vector3 position) => _rigidbody.MovePosition(position);
+
+		public void Place(Vector3 position) => _transform.Position = position;
 	}
 }

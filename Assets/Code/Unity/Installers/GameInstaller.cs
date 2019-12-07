@@ -9,7 +9,7 @@ namespace Greed.Unity
 {
 	public class GameInstaller : MonoInstaller
 	{
-		[Inject] private CameraRigFacade _cameraRigPrefab;
+		// [Inject] private CameraRigFacade _cameraRigPrefab;
 		[Inject] private EntityFacade _playerPrefab;
 
 		public override void InstallBindings()
@@ -20,15 +20,18 @@ namespace Greed.Unity
 
 			Container.Bind<ITime>().To<UnityTime>().AsSingle();
 
-			// Factories
-			Container.BindFactory<IEntity, PlayerFactory>().FromComponentInNewPrefab(_playerPrefab);
+			InstallFactories();
+			InstallSignals();
 
 			// Bootstrap the game
 			Container.Bind<PlayerActions>().AsSingle();
 			// Container.BindInterfacesTo<TitleScreenHandler>().AsSingle().NonLazy();
-			Container.BindInterfacesTo<Bootstrap>().AsSingle().NonLazy();
+			Container.BindInterfacesTo<Bootstrap>().AsSingle().WithArguments(Wrappers.Wrap(_playerPrefab.gameObject)).NonLazy();
+		}
 
-			InstallSignals();
+		private void InstallFactories()
+		{
+			Container.BindFactory<Object, IEntity, EntityFactory>().FromFactory<PrefabFactory<IEntity>>();
 		}
 
 		private void InstallSignals()

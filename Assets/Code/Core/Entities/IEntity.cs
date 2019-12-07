@@ -1,9 +1,9 @@
-using Greed.UnityWrapper;
+using UnityEngine;
 
 namespace Greed.Core
 {
 	public interface IEntity
 	{
-		// IGameObject GameObject { get; }
+		void Place(Vector3 position);
 	}
 }

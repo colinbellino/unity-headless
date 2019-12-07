@@ -6,5 +6,6 @@ namespace Greed.Core
 	{
 		Vector3 Position { get; }
 		void MovePosition(Vector3 position);
+		void Place(Vector3 position);
 	}
 }

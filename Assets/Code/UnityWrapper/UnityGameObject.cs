@@ -11,6 +11,8 @@ namespace Greed.UnityWrapper
 			_gameObject = gameObject;
 		}
 
+		public GameObject Original => _gameObject;
+
 		public bool CompareTag(string tag) => _gameObject.CompareTag(tag);
 
 		public void Destroy() => Object.Destroy(_gameObject);

@@ -1,4 +1,5 @@
 using System;
+using Greed.UnityWrapper;
 using UniRx.Async;
 using UnityEngine;
 using Zenject;
@@ -8,14 +9,16 @@ namespace Greed.Core
 	public class Bootstrap : IInitializable
 	{
 		private readonly SignalBus _signalBus;
-		private readonly PlayerFactory _playerFactory;
+		private readonly EntityFactory _entityFactory;
+		private readonly IGameObject _playerPrefab;
 
 		private readonly Vector3 _playerPosition = new Vector3(0f, -2f, 0f);
 
-		public Bootstrap(SignalBus signalBus, PlayerFactory playerFactory)
+		public Bootstrap(SignalBus signalBus, EntityFactory entityFactory, IGameObject playerPrefab)
 		{
 			_signalBus = signalBus;
-			_playerFactory = playerFactory;
+			_entityFactory = entityFactory;
+			_playerPrefab = playerPrefab;
 		}
 
 		public async void Initialize()
@@ -34,11 +37,13 @@ namespace Greed.Core
 
 		private async UniTask InitializeScene()
 		{
-			await UniTask.Delay(TimeSpan.FromSeconds(1));
+			await UniTask.Delay(TimeSpan.FromSeconds(0));
 
-			// TODO: Position the player.
 			// FIXME: Disable all inputs when the game isn't started.
-			_playerFactory.Create();
+			// FIXME: Load level scene (additive).
+
+			var player = _entityFactory.Create(_playerPrefab.Original);
+			player.Place(_playerPosition);
 		}
 
 		private void ShowTitleScreen()

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Greed.UnityWrapper
 {
 	public interface IGameObject
@@ -6,5 +8,7 @@ namespace Greed.UnityWrapper
 		T GetComponent<T>();
 		void Destroy();
 		void SetActive(bool value);
+
+		GameObject Original { get; }
 	}
 }
