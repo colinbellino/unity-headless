@@ -51,7 +51,6 @@ namespace Greed.Core
 		{
 			await _sceneLoader.LoadScene(_scenesToLoad[0]);
 
-			// FIXME: Disable all inputs when the game isn't started.
 			var player = _entityFactory.Create(_playerPrefab.Original);
 			player.Place(_playerPosition);
 		}
