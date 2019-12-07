@@ -29,7 +29,7 @@ namespace Greed.Core
 
 		private void OnGameStartedSignal()
 		{
-			_actions.Enable();
+			_actions.Default.Enable();
 		}
 
 		public void Tick()

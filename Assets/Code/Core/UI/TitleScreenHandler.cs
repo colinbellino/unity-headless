@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Greed.Core
@@ -7,11 +8,13 @@ namespace Greed.Core
 	{
 		private readonly SignalBus _signalBus;
 		private readonly IPanelView _view;
+		private readonly PlayerActions _actions;
 
-		public TitleScreenHandler(SignalBus signalBus, IPanelView view)
+		public TitleScreenHandler(SignalBus signalBus, IPanelView view, PlayerActions actions)
 		{
 			_signalBus = signalBus;
 			_view = view;
+			_actions = actions;
 		}
 
 		public void Initialize()
@@ -28,8 +31,24 @@ namespace Greed.Core
 			_signalBus.Unsubscribe<GameStartedSignal>(OnGameStartedSignal);
 		}
 
-		private void OnTitleScreenLoaded() => _view.Show();
+		private void OnTitleScreenLoaded()
+		{
+			_actions.TitleScreen.Enable();
+			_actions.TitleScreen.Start.performed += OnStartPerformed;
+			_view.Show();
+		}
 
-		private void OnGameStartedSignal() => _view.Hide();
+		private void OnGameStartedSignal()
+		{
+			_actions.TitleScreen.Disable();
+			_actions.TitleScreen.Start.performed -= OnStartPerformed;
+			_view.Hide();
+		}
+
+		private void OnStartPerformed(InputAction.CallbackContext context)
+		{
+			UnityEngine.Debug.Log("--- START GAME ---");
+			_signalBus.Fire(new GameStartedSignal());
+		}
 	}
 }

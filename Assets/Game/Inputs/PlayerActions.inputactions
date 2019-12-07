@@ -82,6 +82,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Title Screen",
+            "id": "e8acfae6-54aa-4bc4-a647-6fa12e19c1d0",
+            "actions": [
+                {
+                    "name": "Start",
+                    "type": "Button",
+                    "id": "dd408607-f2c7-49bf-94a5-35389685dc86",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "529f5ae1-6d3e-45ca-82ce-dc7b1ff641a9",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

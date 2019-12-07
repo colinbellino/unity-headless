@@ -38,7 +38,6 @@ namespace Greed.Core
 			await LoadAssets();
 			await InitializeScene();
 			ShowTitleScreen();
-			await StartGame();
 		}
 
 		private UniTask LoadAssets()
@@ -58,14 +57,6 @@ namespace Greed.Core
 		private void ShowTitleScreen()
 		{
 			_signalBus.Fire(new TitleScreenLoadedSignal());
-		}
-
-		private async UniTask StartGame()
-		{
-			// TODO: Use player input instead of this delay.
-			await UniTask.Delay(TimeSpan.FromSeconds(2));
-
-			_signalBus.Fire(new GameStartedSignal());
 		}
 	}
 

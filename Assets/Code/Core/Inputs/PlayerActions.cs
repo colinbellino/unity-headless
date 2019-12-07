@@ -97,6 +97,33 @@ namespace Greed.Core
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Title Screen"",
+            ""id"": ""e8acfae6-54aa-4bc4-a647-6fa12e19c1d0"",
+            ""actions"": [
+                {
+                    ""name"": ""Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd408607-f2c7-49bf-94a5-35389685dc86"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""529f5ae1-6d3e-45ca-82ce-dc7b1ff641a9"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -104,6 +131,9 @@ namespace Greed.Core
             // Default
             m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
             m_Default_Move = m_Default.FindAction("Move", throwIfNotFound: true);
+            // Title Screen
+            m_TitleScreen = asset.FindActionMap("Title Screen", throwIfNotFound: true);
+            m_TitleScreen_Start = m_TitleScreen.FindAction("Start", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -182,9 +212,46 @@ namespace Greed.Core
             }
         }
         public DefaultActions @Default => new DefaultActions(this);
+
+        // Title Screen
+        private readonly InputActionMap m_TitleScreen;
+        private ITitleScreenActions m_TitleScreenActionsCallbackInterface;
+        private readonly InputAction m_TitleScreen_Start;
+        public struct TitleScreenActions
+        {
+            private @PlayerActions m_Wrapper;
+            public TitleScreenActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Start => m_Wrapper.m_TitleScreen_Start;
+            public InputActionMap Get() { return m_Wrapper.m_TitleScreen; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(TitleScreenActions set) { return set.Get(); }
+            public void SetCallbacks(ITitleScreenActions instance)
+            {
+                if (m_Wrapper.m_TitleScreenActionsCallbackInterface != null)
+                {
+                    @Start.started -= m_Wrapper.m_TitleScreenActionsCallbackInterface.OnStart;
+                    @Start.performed -= m_Wrapper.m_TitleScreenActionsCallbackInterface.OnStart;
+                    @Start.canceled -= m_Wrapper.m_TitleScreenActionsCallbackInterface.OnStart;
+                }
+                m_Wrapper.m_TitleScreenActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Start.started += instance.OnStart;
+                    @Start.performed += instance.OnStart;
+                    @Start.canceled += instance.OnStart;
+                }
+            }
+        }
+        public TitleScreenActions @TitleScreen => new TitleScreenActions(this);
         public interface IDefaultActions
         {
             void OnMove(InputAction.CallbackContext context);
+        }
+        public interface ITitleScreenActions
+        {
+            void OnStart(InputAction.CallbackContext context);
         }
     }
 }
