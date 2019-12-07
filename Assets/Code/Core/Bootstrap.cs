@@ -6,17 +6,21 @@ namespace Greed.Core
 	{
 		private readonly ICameraRig _cameraRig;
 		private readonly IEntity _player;
+		private readonly IMainMenu _mainMenu;
 
-		public Bootstrap(ICameraRig cameraRig, IEntity player)
+		public Bootstrap(ICameraRig cameraRig, IEntity player, IMainMenu mainMenu)
 		{
 			_cameraRig = cameraRig;
 			_player = player;
+			_mainMenu = mainMenu;
 		}
 
 		public void Initialize()
 		{
-			UnityEngine.Debug.Log("_cameraRig => " + _cameraRig);
-			UnityEngine.Debug.Log("_player => " + _player);
+			// TODO: Position the player.
+			// TODO: Position the camera rig.
+
+			_mainMenu.Show();
 		}
 	}
 }

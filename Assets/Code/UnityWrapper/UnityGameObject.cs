@@ -16,5 +16,7 @@ namespace Greed.UnityWrapper
 		public void Destroy() => Object.Destroy(_gameObject);
 
 		public T GetComponent<T>() => _gameObject.GetComponent<T>();
+
+		public void SetActive(bool value) => _gameObject.SetActive(value);
 	}
 }

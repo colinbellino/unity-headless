@@ -5,5 +5,6 @@ namespace Greed.UnityWrapper
 		bool CompareTag(string tag);
 		T GetComponent<T>();
 		void Destroy();
+		void SetActive(bool value);
 	}
 }
