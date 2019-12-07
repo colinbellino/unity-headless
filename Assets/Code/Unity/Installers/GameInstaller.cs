@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using System.Linq;
 using Greed.Core;
 using Greed.UnityWrapper;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -11,6 +13,7 @@ namespace Greed.Unity
 	{
 		// [Inject] private CameraRigFacade _cameraRigPrefab;
 		[Inject] private EntityFacade _playerPrefab;
+		[Inject] private List<AssetReference> _loadedScenes;
 
 		public override void InstallBindings()
 		{
@@ -25,8 +28,10 @@ namespace Greed.Unity
 
 			// Bootstrap the game
 			Container.Bind<PlayerActions>().AsSingle();
+			Container.Bind<SceneLoader>().AsSingle();
 			// Container.BindInterfacesTo<TitleScreenHandler>().AsSingle().NonLazy();
-			Container.BindInterfacesTo<Bootstrap>().AsSingle().WithArguments(Wrappers.Wrap(_playerPrefab.gameObject)).NonLazy();
+			Container.BindInterfacesTo<Bootstrap>().AsSingle()
+				.WithArguments(Wrappers.Wrap(_playerPrefab.gameObject), _loadedScenes).NonLazy();
 		}
 
 		private void InstallFactories()

@@ -10,8 +10,8 @@ namespace Greed.Core
 
 		public TitleScreenHandler(SignalBus signalBus, IPanelView view)
 		{
-			_view = view;
 			_signalBus = signalBus;
+			_view = view;
 		}
 
 		public void Initialize()

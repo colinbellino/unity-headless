@@ -24,5 +24,5 @@ EditorBuildSettings:
     path: Assets/Game/Scenes/Victory.unity
     guid: 0e446a30e337a4799a54642648848283
   m_configObjects:
-    com.unity.addressableassets: {fileID: 11400000, guid: e11d8fd3c509241ff9114609d831fe4c,
+    com.unity.addressableassets: {fileID: 11400000, guid: 6f86398126bf3ca42bb264d2cb7b6124,
       type: 2}

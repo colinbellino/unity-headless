@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using Greed.UnityWrapper;
 using UniRx.Async;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace Greed.Core
@@ -10,15 +12,25 @@ namespace Greed.Core
 	{
 		private readonly SignalBus _signalBus;
 		private readonly EntityFactory _entityFactory;
+		private readonly SceneLoader _sceneLoader;
 		private readonly IGameObject _playerPrefab;
+		private readonly List<AssetReference> _scenesToLoad;
 
 		private readonly Vector3 _playerPosition = new Vector3(0f, -2f, 0f);
 
-		public Bootstrap(SignalBus signalBus, EntityFactory entityFactory, IGameObject playerPrefab)
+		public Bootstrap(
+			SignalBus signalBus,
+			EntityFactory entityFactory,
+			SceneLoader sceneLoader,
+			IGameObject playerPrefab,
+			List<AssetReference> scenesToLoad
+		)
 		{
 			_signalBus = signalBus;
 			_entityFactory = entityFactory;
+			_sceneLoader = sceneLoader;
 			_playerPrefab = playerPrefab;
+			_scenesToLoad = scenesToLoad;
 		}
 
 		public async void Initialize()
@@ -32,16 +44,14 @@ namespace Greed.Core
 		private UniTask LoadAssets()
 		{
 			// TODO: Show loader or something.
-			return UniTask.Delay(TimeSpan.FromSeconds(1));
+			return UniTask.Delay(TimeSpan.FromSeconds(0));
 		}
 
 		private async UniTask InitializeScene()
 		{
-			await UniTask.Delay(TimeSpan.FromSeconds(0));
+			await _sceneLoader.LoadScene(_scenesToLoad[0]);
 
 			// FIXME: Disable all inputs when the game isn't started.
-			// FIXME: Load level scene (additive).
-
 			var player = _entityFactory.Create(_playerPrefab.Original);
 			player.Place(_playerPosition);
 		}
@@ -61,5 +71,6 @@ namespace Greed.Core
 	}
 
 	public class TitleScreenLoadedSignal { }
+
 	public class GameStartedSignal { }
 }

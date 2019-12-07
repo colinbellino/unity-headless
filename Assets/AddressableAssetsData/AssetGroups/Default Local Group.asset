@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: d33f23ed9fd8463469676e48fa2b57fb
+  m_SerializeEntries:
+  - m_GUID: 2bae61bb4dfb94cf1ad6c32901a69508
+    m_Address: Assets/Game/Scenes/Levels/TestRoom.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c5ff92ed387132440927f8b104dd6a9b
+    m_Address: Assets/Game/Scenes/Levels
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6f259d267884ada44884917aee172f6d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 29f72ae332c9d2e4697fb40c9033ef3f, type: 2}
+    - {fileID: 11400000, guid: bc425f560e4e32f4ea244fbf1a29201b, type: 2}
