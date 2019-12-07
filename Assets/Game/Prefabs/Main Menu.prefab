@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8491541601560210455}
   - component: {fileID: 8491541601560210454}
   - component: {fileID: 8491541601560210449}
-  - component: {fileID: 8491541601560210453}
   - component: {fileID: 492666826}
   - component: {fileID: 492666825}
+  - component: {fileID: 5356155722513072816}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -104,18 +104,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8491541601560210453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8491541601560210448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1721979e1a936d4bbe60223c0acbd96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &492666826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +119,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 492666825}
+  - {fileID: 5356155722513072816}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
@@ -147,6 +136,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _root: {fileID: 8491541601560210448}
+--- !u!114 &5356155722513072816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8491541601560210448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbbcac44a052104cb1584c369049a00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8491541601729163999
 GameObject:
   m_ObjectHideFlags: 0

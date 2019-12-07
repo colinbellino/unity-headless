@@ -194,6 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 8283662777936467860}
   _transform: {fileID: 618877341359465107}
+  _moveSpeed: 5
 --- !u!1 &618877342254095563
 GameObject:
   m_ObjectHideFlags: 0

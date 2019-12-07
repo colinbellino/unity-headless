@@ -13,7 +13,6 @@ namespace Greed.Unity
 
 		public override void InstallBindings()
 		{
-
 			Container.Bind<EntityInputState>().AsSingle();
 			Container.BindInterfacesAndSelfTo<EntityView>().AsSingle()
 				.WithArguments(Wrappers.Wrap(_rigidbody), Wrappers.Wrap(_transform));
