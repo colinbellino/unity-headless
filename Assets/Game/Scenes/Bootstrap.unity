@@ -121,6 +121,32 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &524892012 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4717047800061019912, guid: 2213900a428d94fa9b683e4c00fdeb5c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1951207139}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &524892016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524892012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AssetsPPU: 16
+  m_RefResolutionX: 256
+  m_RefResolutionY: 144
+  m_UpscaleRT: 0
+  m_PixelSnapping: 0
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!1001 &544984343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -432,6 +458,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Camera Rig
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717047800061019909, guid: 2213900a428d94fa9b683e4c00fdeb5c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717047800061019914, guid: 2213900a428d94fa9b683e4c00fdeb5c,
+        type: 3}
+      propertyPath: orthographic size
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717047800061019914, guid: 2213900a428d94fa9b683e4c00fdeb5c,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717047800061019914, guid: 2213900a428d94fa9b683e4c00fdeb5c,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717047800061019914, guid: 2213900a428d94fa9b683e4c00fdeb5c,
+        type: 3}
+      propertyPath: m_ForceIntoRT
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2213900a428d94fa9b683e4c00fdeb5c, type: 3}
