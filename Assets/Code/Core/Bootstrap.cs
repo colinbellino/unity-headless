@@ -35,9 +35,17 @@ namespace Greed.Core
 
 		public async void Initialize()
 		{
-			await LoadAssets();
-			await InitializeScene();
-			ShowTitleScreen();
+			try
+			{
+				await LoadAssets();
+				await InitializeScene();
+				ShowTitleScreen();
+			}
+			catch
+			{
+				// TODO: Find a better way to handle this?
+				Debug.LogError("Couldn't initialize game.");
+			}
 		}
 
 		private UniTask LoadAssets()

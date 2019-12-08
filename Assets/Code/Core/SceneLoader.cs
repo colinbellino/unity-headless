@@ -9,14 +9,11 @@ namespace Greed.Core
 	{
 		public async UniTask LoadScene(AssetReference sceneAsset)
 		{
-			try
+			var sceneInstance = await Addressables.LoadSceneAsync(sceneAsset, LoadSceneMode.Additive).Task;
+
+			if (sceneInstance.Scene.isLoaded == false)
 			{
-				var sceneInstance = await Addressables.LoadSceneAsync(sceneAsset, LoadSceneMode.Additive).Task;
-				UnityEngine.Debug.Log("Scene loaded: " + sceneInstance.Scene.name);
-			}
-			catch (Exception e)
-			{
-				UnityEngine.Debug.LogError(e);
+				throw new Exception("Failed to load scene.");
 			}
 		}
 	}
