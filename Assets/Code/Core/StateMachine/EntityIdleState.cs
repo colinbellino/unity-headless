@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Zenject;
 
 namespace Greed.Core
 {
@@ -9,6 +10,7 @@ namespace Greed.Core
 		private readonly EntityPickUpHandler _pickUpHandler;
 		private readonly InteractiveObjectFinder _objectFinder;
 		private readonly EntityInputState _inputState;
+		private readonly LazyInject<StateMachine> _stateMachine;
 
 		private bool _isBusy;
 
@@ -17,6 +19,7 @@ namespace Greed.Core
 			EntityPickUpHandler pickUpHandler,
 			InteractiveObjectFinder objectFinder,
 			EntityInputState inputState,
+			LazyInject<StateMachine> stateMachine,
 			Dictionary<string, Type> transitions
 		) : base(transitions)
 		{
@@ -24,6 +27,7 @@ namespace Greed.Core
 			_pickUpHandler = pickUpHandler;
 			_objectFinder = objectFinder;
 			_inputState = inputState;
+			_stateMachine = stateMachine;
 		}
 
 		public override void Tick()
@@ -56,7 +60,7 @@ namespace Greed.Core
 			var wasSuccessful = await _pickUpHandler.TryPickUp(objectToPickUp);
 			if (wasSuccessful)
 			{
-				OnTransition("PickUp");
+				_stateMachine.Value.Transition("PickUp");
 			}
 
 			_isBusy = false;

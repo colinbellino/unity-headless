@@ -8,7 +8,6 @@ namespace Greed.Core
 		protected readonly Dictionary<string, Type> _transitions;
 
 		public Dictionary<string, Type> Transitions => _transitions;
-		public Action<string> OnTransition { get; set; }
 
 		public State(Dictionary<string, Type> transitions)
 		{

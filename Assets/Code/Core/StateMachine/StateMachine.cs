@@ -24,24 +24,7 @@ namespace Greed.Core
 			}
 		}
 
-		private void ChangeState(IState state)
-		{
-			if (_currentState != null)
-			{
-				_currentState.OnExit();
-				_currentState.OnTransition -= Transition;
-			}
-
-			_currentState = state;
-
-			if (_currentState != null)
-			{
-				_currentState.OnTransition += Transition;
-				_currentState.OnEnter();
-			}
-		}
-
-		private void Transition(string eventName)
+		public void Transition(string eventName)
 		{
 			_currentState.Transitions.TryGetValue(eventName, out var newState);
 			if (newState == null)
@@ -50,6 +33,21 @@ namespace Greed.Core
 			}
 
 			ChangeState(_availableStates[newState]);
+		}
+
+		private void ChangeState(IState state)
+		{
+			if (_currentState != null)
+			{
+				_currentState.OnExit();
+			}
+
+			_currentState = state;
+
+			if (_currentState != null)
+			{
+				_currentState.OnEnter();
+			}
 		}
 	}
 }
