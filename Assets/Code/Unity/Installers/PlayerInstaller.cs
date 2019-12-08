@@ -34,13 +34,16 @@ namespace Greed.Unity
 
 		private void InstallStateMachine()
 		{
-			var idleTransitions = new Dictionary<string, Type> { { "PickUp", typeof(EntityEncumberedState) } };
-			Container.BindInterfacesAndSelfTo<EntityIdleState>().AsSingle().WithArguments(idleTransitions);
+			Container.BindInterfacesAndSelfTo<EntityIdleState>().AsSingle();
+			Container.BindInterfacesAndSelfTo<EntityEncumberedState>().AsSingle();
 
-			var encumberedTransitions = new Dictionary<string, Type> { { "Throw", typeof(EntityIdleState) } };
-			Container.BindInterfacesAndSelfTo<EntityEncumberedState>().AsSingle().WithArguments(encumberedTransitions);
-
-			Container.BindInterfacesAndSelfTo<StateMachine>().AsSingle();
+			var transitions = new Dictionary<Type, StateMachine.Transitions>
+				{ //
+					{ typeof(EntityIdleState), new StateMachine.Transitions { { "PickUp", typeof(EntityEncumberedState) } } },
+					{ typeof(EntityEncumberedState), new StateMachine.Transitions { { "Throw", typeof(EntityIdleState) } } }
+				};
+			Container.BindInterfacesAndSelfTo<StateMachine>().AsSingle()
+				.WithArguments(transitions);
 		}
 	}
 }

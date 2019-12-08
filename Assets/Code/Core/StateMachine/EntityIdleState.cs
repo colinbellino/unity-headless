@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Zenject;
 
 namespace Greed.Core
@@ -19,9 +17,8 @@ namespace Greed.Core
 			EntityPickUpHandler pickUpHandler,
 			InteractiveObjectFinder objectFinder,
 			EntityInputState inputState,
-			LazyInject<StateMachine> stateMachine,
-			Dictionary<string, Type> transitions
-		) : base(transitions)
+			LazyInject<StateMachine> stateMachine
+		)
 		{
 			_view = view;
 			_pickUpHandler = pickUpHandler;

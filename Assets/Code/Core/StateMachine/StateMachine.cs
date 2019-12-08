@@ -7,47 +7,55 @@ namespace Greed.Core
 {
 	public class StateMachine : ITickable
 	{
-		private readonly Dictionary<Type, IState> _availableStates;
-		private IState _currentState;
+		private readonly Dictionary<Type, Transitions> _transitions;
+		private readonly Dictionary<Type, IState> _states;
 
-		public StateMachine(List<IState> availableStates)
+		private Type _currentType;
+		private IState CurrentState => _states[_currentType];
+
+		public StateMachine(Dictionary<Type, Transitions> transitions, List<IState> states)
 		{
-			_availableStates = availableStates.ToList().ToDictionary(item => item.GetType(), item => item);
-			ChangeState(availableStates.First());
+			_transitions = transitions;
+			_states = states.ToList().ToDictionary(item => item.GetType(), item => item);
+			_currentType = _transitions.Keys.First();
+
+			ChangeState(_states[_currentType]);
 		}
 
 		public void Tick()
 		{
-			if (_currentState != null)
+			if (CurrentState != null)
 			{
-				_currentState.Tick();
+				CurrentState.Tick();
 			}
 		}
 
 		public void Transition(string eventName)
 		{
-			_currentState.Transitions.TryGetValue(eventName, out var newState);
+			_transitions[_currentType].TryGetValue(eventName, out var newState);
 			if (newState == null)
 			{
 				throw new Exception("Invalid state transition => " + eventName);
 			}
 
-			ChangeState(_availableStates[newState]);
+			ChangeState(_states[newState]);
 		}
 
 		private void ChangeState(IState state)
 		{
-			if (_currentState != null)
+			if (CurrentState != null)
 			{
-				_currentState.OnExit();
+				CurrentState.OnExit();
 			}
 
-			_currentState = state;
+			_currentType = state.GetType();
 
-			if (_currentState != null)
+			if (CurrentState != null)
 			{
-				_currentState.OnEnter();
+				CurrentState.OnEnter();
 			}
 		}
+
+		public class Transitions : Dictionary<string, Type> { }
 	}
 }

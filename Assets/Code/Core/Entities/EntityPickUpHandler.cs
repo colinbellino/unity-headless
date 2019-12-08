@@ -15,6 +15,7 @@ namespace Greed.Core
 
 		public async UniTask<bool> TryPickUp(IEntity objectToPickUp)
 		{
+			// TODO: Prevent player input during animation.
 			if (!CanPickUpObject(objectToPickUp))
 			{
 				await _view.PlayAnimation("PickUpFail");
