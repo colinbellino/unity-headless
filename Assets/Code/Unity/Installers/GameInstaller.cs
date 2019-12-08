@@ -1,27 +1,26 @@
 using System.Collections.Generic;
-using System.Linq;
 using Greed.Core;
 using Greed.UnityWrapper;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Greed.Unity
 {
 	public class GameInstaller : MonoInstaller
 	{
-		// [Inject] private CameraRigFacade _cameraRigPrefab;
 		[Inject] private EntityFacade _playerPrefab;
 		[Inject] private List<AssetReference> _loadedScenes;
 
 		public override void InstallBindings()
 		{
-			// Use the CameraRig in the scene, or default to the injected prefab.
-			Container.Bind<ICameraRig>().FromComponentInHierarchy().When(ExistsInScene);
-			// Container.Bind<ICameraRig>().FromComponentInNewPrefab(_cameraRigPrefab).AsSingle().IfNotBound();
+			// Use the CameraRig in the scene.
+			Container.Bind<ICameraRig>().FromComponentInHierarchy().AsSingle();
 
 			Container.Bind<ITime>().To<UnityTime>().AsSingle();
+			Container.Bind<InteractiveObjectFinder>().AsSingle();
+			Container.Bind<PlayerActions>().AsSingle();
+			Container.Bind<SceneLoader>().AsSingle();
 
 			InstallFactories();
 			InstallSignals();
@@ -30,9 +29,6 @@ namespace Greed.Unity
 			Container.BindInterfacesTo<DebugMenuHandler>().AsSingle().NonLazy();
 
 			// Bootstrap the game
-			Container.Bind<PlayerActions>().AsSingle();
-			Container.Bind<SceneLoader>().AsSingle();
-			// Container.BindInterfacesTo<TitleScreenHandler>().AsSingle().NonLazy();
 			Container.BindInterfacesTo<Bootstrap>().AsSingle()
 				.WithArguments(Wrappers.Wrap(_playerPrefab.gameObject), _loadedScenes).NonLazy();
 		}
@@ -48,14 +44,6 @@ namespace Greed.Unity
 
 			Container.DeclareSignal<TitleScreenLoadedSignal>();
 			Container.DeclareSignal<GameStartedSignal>();
-		}
-
-		private bool ExistsInScene(InjectContext context)
-		{
-			return SceneManager.GetActiveScene().GetRootGameObjects()
-				.Select(x => x.GetComponentInChildren(context.MemberType, false))
-				.Where(x => x != null && !ReferenceEquals(x, context.ObjectInstance))
-				.FirstOrDefault();
 		}
 	}
 }

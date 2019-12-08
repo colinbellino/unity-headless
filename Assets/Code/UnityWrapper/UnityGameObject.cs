@@ -12,10 +12,19 @@ namespace Greed.UnityWrapper
 		}
 
 		public bool CompareTag(string tag) => _gameObject.CompareTag(tag);
+
 		public void Destroy() => Object.Destroy(_gameObject);
+
 		public T GetComponent<T>() => _gameObject.GetComponent<T>();
+
 		public void SetActive(bool value) => _gameObject.SetActive(value);
 
 		public GameObject Original => _gameObject;
+
+		public string Name
+		{
+			get => _gameObject.name;
+			set => _gameObject.name = value;
+		}
 	}
 }

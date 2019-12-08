@@ -12,14 +12,16 @@ namespace Greed.Tests
 
 		private IRigidbody2D _rigidbody;
 		private ITransform _transform;
+		private IAnimator _animator;
 
 		[SetUp]
 		public void SetUp()
 		{
 			_rigidbody = Substitute.For<IRigidbody2D>();
 			_transform = Substitute.For<ITransform>();
+			_animator = Substitute.For<IAnimator>();
 
-			_view = new EntityView(_rigidbody, _transform);
+			_view = new EntityView(_rigidbody, _transform, _animator);
 
 			ThenHasPosition(Vector3.zero);
 		}
@@ -36,6 +38,12 @@ namespace Greed.Tests
 		{
 			_view.Place(Vector3.right);
 			ThenHasPosition(Vector3.right);
+		}
+
+		[Test]
+		public void PlayAnimation_CallsPlayAndWait()
+		{
+			Assert.Fail("Not tested yet.");
 		}
 
 		private void ThenCallsMovePosition(Vector3 position)

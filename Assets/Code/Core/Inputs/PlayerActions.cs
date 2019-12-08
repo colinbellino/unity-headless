@@ -27,6 +27,14 @@ namespace Greed.Core
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""1762f729-0049-40e7-81cd-57ad0d8b0483"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -93,6 +101,28 @@ namespace Greed.Core
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0c24b0a-da80-4fb0-9269-2fd697c2c82f"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b55a717-fa50-4672-b70a-292b058d9fc7"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -180,6 +210,7 @@ namespace Greed.Core
             // Default
             m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
             m_Default_Move = m_Default.FindAction("Move", throwIfNotFound: true);
+            m_Default_Interact = m_Default.FindAction("Interact", throwIfNotFound: true);
             // Title Screen
             m_TitleScreen = asset.FindActionMap("Title Screen", throwIfNotFound: true);
             m_TitleScreen_Start = m_TitleScreen.FindAction("Start", throwIfNotFound: true);
@@ -236,11 +267,13 @@ namespace Greed.Core
         private readonly InputActionMap m_Default;
         private IDefaultActions m_DefaultActionsCallbackInterface;
         private readonly InputAction m_Default_Move;
+        private readonly InputAction m_Default_Interact;
         public struct DefaultActions
         {
             private @PlayerActions m_Wrapper;
             public DefaultActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Default_Move;
+            public InputAction @Interact => m_Wrapper.m_Default_Interact;
             public InputActionMap Get() { return m_Wrapper.m_Default; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -253,6 +286,9 @@ namespace Greed.Core
                     @Move.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMove;
+                    @Interact.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnInteract;
+                    @Interact.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnInteract;
+                    @Interact.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnInteract;
                 }
                 m_Wrapper.m_DefaultActionsCallbackInterface = instance;
                 if (instance != null)
@@ -260,6 +296,9 @@ namespace Greed.Core
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @Interact.started += instance.OnInteract;
+                    @Interact.performed += instance.OnInteract;
+                    @Interact.canceled += instance.OnInteract;
                 }
             }
         }
@@ -333,6 +372,7 @@ namespace Greed.Core
         public interface IDefaultActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnInteract(InputAction.CallbackContext context);
         }
         public interface ITitleScreenActions
         {

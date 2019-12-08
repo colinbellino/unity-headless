@@ -10,5 +10,6 @@ namespace Greed.UnityWrapper
 		void SetActive(bool value);
 
 		GameObject Original { get; }
+		string Name { get; set; }
 	}
 }

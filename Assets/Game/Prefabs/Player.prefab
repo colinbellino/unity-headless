@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 8283662777936467860}
   _transform: {fileID: 618877341359465107}
+  _animator: {fileID: 5038668061510412037}
   _moveSpeed: 5
 --- !u!1 &618877342254095563
 GameObject:
@@ -144,6 +145,7 @@ GameObject:
   - component: {fileID: 4780852990126684146}
   - component: {fileID: 3642270204792850980}
   - component: {fileID: 4384106832820606974}
+  - component: {fileID: 5038668061510412037}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -229,3 +231,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.5}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
+--- !u!95 &5038668061510412037
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011084086595405313}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

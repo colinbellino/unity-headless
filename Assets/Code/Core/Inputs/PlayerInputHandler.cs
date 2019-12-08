@@ -35,6 +35,7 @@ namespace Greed.Core
 		public void Tick()
 		{
 			_inputState.Move = _actions.Default.Move.ReadValue<Vector2>();
+			_inputState.Interact = _actions.Default.Interact.ReadValue<float>() > 0f;
 		}
 	}
 }

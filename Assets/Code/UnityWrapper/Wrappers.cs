@@ -18,5 +18,10 @@ namespace Greed.UnityWrapper
 		{
 			return new UnityTransform(transform);
 		}
+
+		public static IAnimator Wrap(Animator animator)
+		{
+			return new UnityAnimator(animator);
+		}
 	}
 }

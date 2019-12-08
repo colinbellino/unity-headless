@@ -41,10 +41,10 @@ namespace Greed.Core
 				await InitializeScene();
 				ShowTitleScreen();
 			}
-			catch
+			catch (Exception e)
 			{
 				// TODO: Find a better way to handle this?
-				Debug.LogError("Couldn't initialize game.");
+				Debug.LogError("Couldn't initialize game: " + e);
 			}
 		}
 

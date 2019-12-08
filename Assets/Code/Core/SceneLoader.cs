@@ -9,6 +9,11 @@ namespace Greed.Core
 	{
 		public async UniTask LoadScene(AssetReference sceneAsset)
 		{
+			if (SceneManager.sceneCount > 1)
+			{
+				return;
+			}
+
 			var sceneInstance = await Addressables.LoadSceneAsync(sceneAsset, LoadSceneMode.Additive).Task;
 
 			if (sceneInstance.Scene.isLoaded == false)
