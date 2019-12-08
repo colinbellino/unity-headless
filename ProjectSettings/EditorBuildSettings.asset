@@ -6,23 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Game/Scenes/Full.unity
-    guid: ff502e30e8d064d4c98e5e016b9feace
-  - enabled: 1
-    path: Assets/Game/Scenes/Title.unity
-    guid: 812cc8b12333aba40870c83464a0e973
-  - enabled: 1
-    path: Assets/Game/Scenes/Level.unity
-    guid: cae8892e066f845bab0b6604e18c1641
-  - enabled: 1
-    path: Assets/Game/Scenes/Shop.unity
-    guid: dc702252a5d723c4a9389ca90eab8c4b
-  - enabled: 1
-    path: Assets/Game/Scenes/Game Over.unity
-    guid: 413457bc5d10b1a48820398911680753
-  - enabled: 1
-    path: Assets/Game/Scenes/Victory.unity
-    guid: 0e446a30e337a4799a54642648848283
+    path: Assets/Game/Scenes/Bootstrap.unity
+    guid: 9ad4e2d776fa24615a07cc23ed18bd0d
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 6f86398126bf3ca42bb264d2cb7b6124,
       type: 2}
