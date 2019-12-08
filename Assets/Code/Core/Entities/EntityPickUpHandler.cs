@@ -1,4 +1,4 @@
-using System;
+using UniRx.Async;
 
 namespace Greed.Core
 {
@@ -13,25 +13,20 @@ namespace Greed.Core
 			_view = view;
 		}
 
-		public async void TryPickUp(IEntity objectToPickUp)
+		public async UniTask<bool> TryPickUp(IEntity objectToPickUp)
 		{
-			if (CanPickUpObject(objectToPickUp))
-			{
-				await _view.PlayAnimation("PickUp");
-				_cargo = objectToPickUp;
-				ChangeState("Encumbered");
-				UnityEngine.Debug.Log("Picked up => " + _cargo);
-			}
-			else
+			// TODO: Prevent player input during animation.
+			if (!CanPickUpObject(objectToPickUp))
 			{
 				await _view.PlayAnimation("PickUpFail");
 				UnityEngine.Debug.Log("Failed to pick up => " + objectToPickUp);
+				return false;
 			}
-		}
 
-		private void ChangeState(string stateName)
-		{
-			UnityEngine.Debug.Log("Changing state => " + stateName);
+			await _view.PlayAnimation("PickUp");
+			_cargo = objectToPickUp;
+			UnityEngine.Debug.Log("Picked up => " + _cargo);
+			return true;
 		}
 
 		private bool CanPickUpObject(IEntity objectToPickUp)

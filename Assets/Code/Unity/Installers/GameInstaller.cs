@@ -25,10 +25,10 @@ namespace Greed.Unity
 			InstallFactories();
 			InstallSignals();
 
-			// TODO: Enable this only in dev builds
+			// TODO: Enable this only in dev builds.
 			Container.BindInterfacesTo<DebugMenuHandler>().AsSingle().NonLazy();
 
-			// Bootstrap the game
+			// Load and bootstrap the game.
 			Container.BindInterfacesTo<Bootstrap>().AsSingle()
 				.WithArguments(Wrappers.Wrap(_playerPrefab.gameObject), _loadedScenes).NonLazy();
 		}
@@ -36,6 +36,7 @@ namespace Greed.Unity
 		private void InstallFactories()
 		{
 			Container.BindFactory<Object, IEntity, EntityFactory>().FromFactory<PrefabFactory<IEntity>>();
+			Container.BindFactory<IState, StateFactory>().To<State>();
 		}
 
 		private void InstallSignals()
