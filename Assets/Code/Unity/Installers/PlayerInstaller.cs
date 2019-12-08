@@ -25,7 +25,7 @@ namespace Greed.Unity
 
 			Container.Bind<EntityPickUpHandler>().AsSingle();
 
-			Container.BindInterfacesTo<PlayerStateMachineController>().AsSingle();
+			Container.BindInterfacesTo<PlayerController>().AsSingle();
 		}
 	}
 }
