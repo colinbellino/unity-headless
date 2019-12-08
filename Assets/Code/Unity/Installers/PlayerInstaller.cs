@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Greed.Core;
 using Greed.UnityWrapper;
 using UnityEngine;
@@ -25,7 +27,20 @@ namespace Greed.Unity
 
 			Container.Bind<EntityPickUpHandler>().AsSingle();
 
+			InstallStateMachine();
+
 			Container.BindInterfacesTo<PlayerController>().AsSingle();
+		}
+
+		private void InstallStateMachine()
+		{
+			var idleTransitions = new Dictionary<string, Type> { { "PickUp", typeof(EntityEncumberedState) } };
+			Container.BindInterfacesAndSelfTo<EntityIdleState>().AsSingle().WithArguments(idleTransitions);
+
+			var encumberedTransitions = new Dictionary<string, Type> { { "Throw", typeof(EntityIdleState) } };
+			Container.BindInterfacesAndSelfTo<EntityEncumberedState>().AsSingle().WithArguments(encumberedTransitions);
+
+			Container.BindInterfacesAndSelfTo<StateMachine>().AsSingle();
 		}
 	}
 }

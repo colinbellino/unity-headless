@@ -19,15 +19,15 @@ namespace Greed.Core
 
 		public void Initialize()
 		{
-			_signalBus.Subscribe<GameStartedSignal>(OnGameStartedSignal);
+			_signalBus.Subscribe<GameStartedSignal>(OnGameStarted);
 		}
 
 		public void Dispose()
 		{
-			_signalBus.Unsubscribe<GameStartedSignal>(OnGameStartedSignal);
+			_signalBus.Unsubscribe<GameStartedSignal>(OnGameStarted);
 		}
 
-		private void OnGameStartedSignal()
+		private void OnGameStarted()
 		{
 			_actions.Default.Enable();
 		}

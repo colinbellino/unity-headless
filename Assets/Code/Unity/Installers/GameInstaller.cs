@@ -36,6 +36,7 @@ namespace Greed.Unity
 		private void InstallFactories()
 		{
 			Container.BindFactory<Object, IEntity, EntityFactory>().FromFactory<PrefabFactory<IEntity>>();
+			Container.BindFactory<IState, StateFactory>().To<State>();
 		}
 
 		private void InstallSignals()
