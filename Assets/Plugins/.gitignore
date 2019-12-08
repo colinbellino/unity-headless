@@ -1,3 +1,7 @@
 RainbowAssets/*
 !RainbowAssets/RainbowFoldersRuleset
+!RainbowAssets/RainbowFoldersRuleset.meta
+
 StompyRobot/*
+!StompyRobot/StompyRobot.asmdef
+!StompyRobot/StompyRobot.asmdef.meta
