@@ -17,10 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: d33f23ed9fd8463469676e48fa2b57fb
   m_SerializeEntries:
-  - m_GUID: 2bae61bb4dfb94cf1ad6c32901a69508
-    m_Address: Assets/Game/Scenes/Levels/TestRoom.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: c5ff92ed387132440927f8b104dd6a9b
     m_Address: Assets/Game/Scenes/Levels
     m_ReadOnly: 0
