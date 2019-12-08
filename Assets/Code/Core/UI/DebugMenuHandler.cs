@@ -33,7 +33,7 @@ namespace Greed.Core
 			}
 			else
 			{
-				SRDebug.Instance.ShowDebugPanel();
+				SRDebug.Instance.ShowDebugPanel(SRDebugger.DefaultTabs.Console);
 			}
 		}
 	}
