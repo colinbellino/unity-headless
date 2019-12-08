@@ -28,8 +28,6 @@ namespace Greed.Unity
 			Container.Bind<EntityPickUpHandler>().AsSingle();
 
 			InstallStateMachine();
-
-			Container.BindInterfacesTo<PlayerController>().AsSingle();
 		}
 
 		private void InstallStateMachine()
