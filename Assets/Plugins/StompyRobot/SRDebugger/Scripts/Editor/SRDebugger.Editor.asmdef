@@ -1,0 +1,17 @@
+{
+    "name": "SRDebugger.Editor",
+    "references": [
+        "GUID:e128d54313257c54d9fb2943205c169c"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

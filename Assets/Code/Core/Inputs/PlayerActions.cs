@@ -135,6 +135,44 @@ namespace Greed.Core
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""3ce704b6-3898-4d03-a17f-292d864e4d0f"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""900045d0-1fe8-434a-ae87-aea0f80ac9c3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""4c1eb45a-42a1-4d00-8677-7b22d46f76ef"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad1c17f3-4e54-4485-9b33-70d7a44b0241"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -145,6 +183,9 @@ namespace Greed.Core
             // Title Screen
             m_TitleScreen = asset.FindActionMap("Title Screen", throwIfNotFound: true);
             m_TitleScreen_Start = m_TitleScreen.FindAction("Start", throwIfNotFound: true);
+            // Debug
+            m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+            m_Debug_ToggleMenu = m_Debug.FindAction("ToggleMenu", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -256,6 +297,39 @@ namespace Greed.Core
             }
         }
         public TitleScreenActions @TitleScreen => new TitleScreenActions(this);
+
+        // Debug
+        private readonly InputActionMap m_Debug;
+        private IDebugActions m_DebugActionsCallbackInterface;
+        private readonly InputAction m_Debug_ToggleMenu;
+        public struct DebugActions
+        {
+            private @PlayerActions m_Wrapper;
+            public DebugActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @ToggleMenu => m_Wrapper.m_Debug_ToggleMenu;
+            public InputActionMap Get() { return m_Wrapper.m_Debug; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+            public void SetCallbacks(IDebugActions instance)
+            {
+                if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+                {
+                    @ToggleMenu.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleMenu;
+                    @ToggleMenu.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleMenu;
+                    @ToggleMenu.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleMenu;
+                }
+                m_Wrapper.m_DebugActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @ToggleMenu.started += instance.OnToggleMenu;
+                    @ToggleMenu.performed += instance.OnToggleMenu;
+                    @ToggleMenu.canceled += instance.OnToggleMenu;
+                }
+            }
+        }
+        public DebugActions @Debug => new DebugActions(this);
         public interface IDefaultActions
         {
             void OnMove(InputAction.CallbackContext context);
@@ -263,6 +337,10 @@ namespace Greed.Core
         public interface ITitleScreenActions
         {
             void OnStart(InputAction.CallbackContext context);
+        }
+        public interface IDebugActions
+        {
+            void OnToggleMenu(InputAction.CallbackContext context);
         }
     }
 }

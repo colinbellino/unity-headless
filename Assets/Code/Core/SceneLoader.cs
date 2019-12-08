@@ -1,5 +1,4 @@
 using System;
-using Greed.UnityWrapper;
 using UniRx.Async;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -10,7 +9,15 @@ namespace Greed.Core
 	{
 		public async UniTask LoadScene(AssetReference sceneAsset)
 		{
-			var scene = await Addressables.LoadSceneAsync(sceneAsset, LoadSceneMode.Additive).Task;
+			try
+			{
+				var sceneInstance = await Addressables.LoadSceneAsync(sceneAsset, LoadSceneMode.Additive).Task;
+				UnityEngine.Debug.Log("Scene loaded: " + sceneInstance.Scene.name);
+			}
+			catch (Exception e)
+			{
+				UnityEngine.Debug.LogError(e);
+			}
 		}
 	}
 }

@@ -5,3 +5,7 @@ RainbowAssets/*
 StompyRobot/*
 !StompyRobot/StompyRobot.asmdef
 !StompyRobot/StompyRobot.asmdef.meta
+!StompyRobot/SRF/Scripts/UI/Editor/SRF.Editor.asmdef
+!StompyRobot/SRF/Scripts/UI/Editor/SRF.Editor.asmdef.meta
+!StompyRobot/SRDebugger/Scripts/Editor/SRDebugger.Editor.asmdef
+!StompyRobot/SRDebugger/Scripts/Editor/SRDebugger.Editor.asmdef.meta

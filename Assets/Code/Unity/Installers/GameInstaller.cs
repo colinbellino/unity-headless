@@ -26,6 +26,9 @@ namespace Greed.Unity
 			InstallFactories();
 			InstallSignals();
 
+			// TODO: Enable this only in dev builds
+			Container.BindInterfacesTo<DebugMenuHandler>().AsSingle().NonLazy();
+
 			// Bootstrap the game
 			Container.Bind<PlayerActions>().AsSingle();
 			Container.Bind<SceneLoader>().AsSingle();
