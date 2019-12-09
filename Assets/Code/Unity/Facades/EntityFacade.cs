@@ -8,6 +8,8 @@ namespace Greed.Unity
 	{
 		private IEntityView _view;
 
+		public string Name => gameObject.name;
+
 		[Inject]
 		public void Construct(IEntityView view)
 		{

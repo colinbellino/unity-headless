@@ -9,6 +9,7 @@ namespace Greed.Unity
 {
 	public class PlayerInstaller : MonoInstaller
 	{
+		[SerializeField] private EntityFacade _facade;
 		[SerializeField] private Rigidbody2D _rigidbody;
 		[SerializeField] private Transform _transform;
 		[SerializeField] private Animator _animator;
@@ -16,6 +17,7 @@ namespace Greed.Unity
 
 		public override void InstallBindings()
 		{
+			Container.Bind<IEntity>().FromInstance(_facade);
 			Container.Bind<EntityInputState>().AsSingle();
 			Container.BindInterfacesTo<PlayerInputHandler>().AsSingle();
 

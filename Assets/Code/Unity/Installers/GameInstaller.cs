@@ -45,6 +45,8 @@ namespace Greed.Unity
 
 			Container.DeclareSignal<TitleScreenLoadedSignal>();
 			Container.DeclareSignal<GameStartedSignal>();
+			Container.DeclareSignal<PickUpStartedSignal>();
+			Container.DeclareSignal<PickUpEndedSignal>();
 		}
 	}
 }
