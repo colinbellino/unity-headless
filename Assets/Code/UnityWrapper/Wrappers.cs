@@ -23,5 +23,10 @@ namespace Greed.UnityWrapper
 		{
 			return new UnityAnimator(animator);
 		}
+
+		public static ICollider2D Wrap(Collider2D collider)
+		{
+			return new UnityCollider2D(collider);
+		}
 	}
 }

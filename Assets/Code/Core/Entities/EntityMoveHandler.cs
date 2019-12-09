@@ -21,6 +21,11 @@ namespace Greed.Core
 
 		public void FixedTick()
 		{
+			if (_speed == 0)
+			{
+				return;
+			}
+
 			var move = new Vector3(_inputState.Move.x, _inputState.Move.y, 0f);
 			_view.MovePosition(_view.Position + move * _speed * _time.FixedDeltaTime);
 		}

@@ -11,6 +11,12 @@ namespace Greed.UnityWrapper
 			_rigidbody = rigidbody;
 		}
 
+		public RigidbodyType2D BodyType
+		{
+			get => _rigidbody.bodyType;
+			set => _rigidbody.bodyType = value;
+		}
+
 		public void MovePosition(Vector3 position)
 		{
 			_rigidbody.MovePosition(position);

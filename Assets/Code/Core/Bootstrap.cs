@@ -59,7 +59,7 @@ namespace Greed.Core
 			await _sceneLoader.LoadScene(_scenesToLoad[0]);
 
 			var player = _entityFactory.Create(_playerPrefab.Original);
-			player.Place(_playerPosition);
+			player.View.Place(_playerPosition);
 		}
 
 		private void ShowTitleScreen()

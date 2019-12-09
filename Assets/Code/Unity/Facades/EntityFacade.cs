@@ -1,5 +1,4 @@
 using Greed.Core;
-using Greed.UnityWrapper;
 using UnityEngine;
 using Zenject;
 
@@ -7,16 +6,15 @@ namespace Greed.Unity
 {
 	public class EntityFacade : MonoBehaviour, IEntity
 	{
-		private IEntityView _view;
-
 		public string Name => gameObject.name;
+		public IEntityView View { get; private set; }
 
 		[Inject]
 		public void Construct(IEntityView view)
 		{
-			_view = view;
+			View = view;
 		}
 
-		public void Place(Vector3 position) => _view.Place(position);
+		public void Place(Vector3 position) => View.Place(position);
 	}
 }

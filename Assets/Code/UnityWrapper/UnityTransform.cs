@@ -19,11 +19,16 @@ namespace Greed.UnityWrapper
 			set => _transform.position = value;
 		}
 
+		public Vector3 LocalPosition
+		{
+			get => _transform.localPosition;
+			set => _transform.localPosition = value;
+		}
+
 		public ITransform Parent
 		{
 			get => Wrappers.Wrap(_transform.parent);
 			set => _transform.parent = value.Original;
 		}
-
 	}
 }

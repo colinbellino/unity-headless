@@ -13,6 +13,7 @@ namespace Greed.Tests
 		private IRigidbody2D _rigidbody;
 		private ITransform _transform;
 		private IAnimator _animator;
+		private ICollider2D _physicsCollider;
 
 		[SetUp]
 		public void SetUp()
@@ -20,8 +21,9 @@ namespace Greed.Tests
 			_rigidbody = Substitute.For<IRigidbody2D>();
 			_transform = Substitute.For<ITransform>();
 			_animator = Substitute.For<IAnimator>();
+			_physicsCollider = Substitute.For<ICollider2D>();
 
-			_view = new EntityView(_rigidbody, _transform, _animator);
+			_view = new EntityView(_rigidbody, _transform, _animator, _physicsCollider);
 
 			ThenHasPosition(Vector3.zero);
 		}
@@ -42,6 +44,12 @@ namespace Greed.Tests
 
 		[Test]
 		public void PlayAnimation_CallsPlayAndWait()
+		{
+			Assert.Fail("Not tested yet.");
+		}
+
+		[Test]
+		public void AttachTo_AttachsToTarget()
 		{
 			Assert.Fail("Not tested yet.");
 		}

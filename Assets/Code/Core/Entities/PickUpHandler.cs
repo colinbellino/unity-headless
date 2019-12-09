@@ -7,11 +7,13 @@ namespace Greed.Core
 	{
 		private readonly SignalBus _signalBus;
 		private readonly IEntity _entity;
+		private readonly IEntityView _view;
 
-		public PickUpHandler(SignalBus signalBus, IEntity entity)
+		public PickUpHandler(SignalBus signalBus, IEntity entity, IEntityView view)
 		{
 			_signalBus = signalBus;
 			_entity = entity;
+			_view = view;
 		}
 
 		public void Initialize()
@@ -28,8 +30,7 @@ namespace Greed.Core
 		{
 			if (args.Target == _entity)
 			{
-				// TODO: Attach the entity to the actor.
-				UnityEngine.Debug.Log($"{args.Target.Name} picked up {args.Actor.Name}.");
+				_view.AttachTo(args.Picker);
 			}
 		}
 	}

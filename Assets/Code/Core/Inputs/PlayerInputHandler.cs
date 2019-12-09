@@ -41,7 +41,7 @@ namespace Greed.Core
 
 		private void PickUpStarted(PickUpStartedSignal args)
 		{
-			if (args.Actor == _entity)
+			if (args.Picker == _entity)
 			{
 				DisableDefaultActions();
 			}
@@ -49,7 +49,7 @@ namespace Greed.Core
 
 		private void PickUpEnded(PickUpEndedSignal args)
 		{
-			if (args.Actor == _entity)
+			if (args.Picker == _entity)
 			{
 				EnableDefaultActions();
 			}

@@ -21,11 +21,11 @@ namespace Greed.Core
 			var canPickUp = CanPickUpObject(entityToPickUp);
 			var animationName = canPickUp ? "PickUp" : "PickUpFail";
 
-			_signalBus.Fire(new PickUpStartedSignal { Actor = _entity, Target = entityToPickUp });
+			_signalBus.Fire(new PickUpStartedSignal { Picker = _entity, Target = entityToPickUp });
 
 			await _view.PlayAnimation(animationName);
 
-			_signalBus.Fire(new PickUpEndedSignal { Actor = _entity, Target = entityToPickUp });
+			_signalBus.Fire(new PickUpEndedSignal { Picker = _entity, Target = entityToPickUp });
 
 			return canPickUp;
 		}
@@ -38,13 +38,13 @@ namespace Greed.Core
 
 	public class PickUpStartedSignal
 	{
-		public IEntity Actor;
+		public IEntity Picker;
 		public IEntity Target;
 	}
 
 	public class PickUpEndedSignal
 	{
-		public IEntity Actor;
+		public IEntity Picker;
 		public IEntity Target;
 	}
 }
