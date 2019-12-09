@@ -6,6 +6,8 @@ namespace Greed.UnityWrapper
 	{
 		private readonly Transform _transform;
 
+		public Transform Original => _transform;
+
 		public UnityTransform(Transform transform)
 		{
 			_transform = transform;
@@ -16,5 +18,12 @@ namespace Greed.UnityWrapper
 			get => _transform.position;
 			set => _transform.position = value;
 		}
+
+		public ITransform Parent
+		{
+			get => Wrappers.Wrap(_transform.parent);
+			set => _transform.parent = value.Original;
+		}
+
 	}
 }

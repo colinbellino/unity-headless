@@ -3,37 +3,34 @@ using Zenject;
 
 namespace Greed.Core
 {
-	public class EntityPickUpHandler
+	public class PickerHandler
 	{
-		private readonly IEntityView _view;
 		private readonly IEntity _entity;
+		private readonly IEntityView _view;
 		private readonly SignalBus _signalBus;
 
-		private IEntity _cargo;
-
-		public EntityPickUpHandler(SignalBus signalBus, IEntity entity, IEntityView view)
+		public PickerHandler(SignalBus signalBus, IEntity entity, IEntityView view)
 		{
 			_signalBus = signalBus;
 			_entity = entity;
 			_view = view;
 		}
 
-		public async UniTask<bool> TryPickUp(IEntity objectToPickUp)
+		public async UniTask<bool> TryPickUp(IEntity entityToPickUp)
 		{
-			var canPickUp = CanPickUpObject(objectToPickUp);
+			var canPickUp = CanPickUpObject(entityToPickUp);
 			var animationName = canPickUp ? "PickUp" : "PickUpFail";
 
-			_signalBus.Fire(new PickUpStartedSignal { Actor = _entity, Target = objectToPickUp });
+			_signalBus.Fire(new PickUpStartedSignal { Actor = _entity, Target = entityToPickUp });
 
 			await _view.PlayAnimation(animationName);
 
-			_cargo = objectToPickUp;
-			_signalBus.Fire(new PickUpEndedSignal { Actor = _entity, Target = objectToPickUp });
+			_signalBus.Fire(new PickUpEndedSignal { Actor = _entity, Target = entityToPickUp });
 
 			return canPickUp;
 		}
 
-		private bool CanPickUpObject(IEntity objectToPickUp)
+		private bool CanPickUpObject(IEntity entityToPickUp)
 		{
 			return true;
 		}

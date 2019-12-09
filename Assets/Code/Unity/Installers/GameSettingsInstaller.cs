@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
-public class GameSettingsInstaller : MonoInstaller<GameSettingsInstaller>
+public class GameSettingsInstaller : MonoInstaller
 {
 	[SerializeField] private CameraRigFacade _cameraRigPrefab;
 	[SerializeField] private EntityFacade _playerPrefab;

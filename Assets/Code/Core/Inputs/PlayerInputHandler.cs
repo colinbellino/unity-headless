@@ -26,6 +26,19 @@ namespace Greed.Core
 			_signalBus.Subscribe<PickUpEndedSignal>(PickUpEnded);
 		}
 
+		public void Tick()
+		{
+			_inputState.Move = _actions.Default.Move.ReadValue<Vector2>();
+			_inputState.Interact = _actions.Default.Interact.ReadValue<float>() > 0f;
+		}
+
+		public void Dispose()
+		{
+			_signalBus.Unsubscribe<GameStartedSignal>(EnableDefaultActions);
+			_signalBus.Unsubscribe<PickUpStartedSignal>(PickUpStarted);
+			_signalBus.Unsubscribe<PickUpEndedSignal>(PickUpEnded);
+		}
+
 		private void PickUpStarted(PickUpStartedSignal args)
 		{
 			if (args.Actor == _entity)
@@ -42,20 +55,8 @@ namespace Greed.Core
 			}
 		}
 
-		public void Dispose()
-		{
-			_signalBus.Unsubscribe<GameStartedSignal>(EnableDefaultActions);
-			_signalBus.Unsubscribe<PickUpStartedSignal>(PickUpStarted);
-			_signalBus.Unsubscribe<PickUpEndedSignal>(PickUpEnded);
-		}
-
 		private void EnableDefaultActions() => _actions.Default.Enable();
-		private void DisableDefaultActions() => _actions.Default.Disable();
 
-		public void Tick()
-		{
-			_inputState.Move = _actions.Default.Move.ReadValue<Vector2>();
-			_inputState.Interact = _actions.Default.Interact.ReadValue<float>() > 0f;
-		}
+		private void DisableDefaultActions() => _actions.Default.Disable();
 	}
 }

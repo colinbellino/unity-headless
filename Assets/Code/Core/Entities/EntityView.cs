@@ -28,7 +28,7 @@ namespace Greed.Core
 			_animator.Play(stateName, layer, normalizedTime);
 
 			// FIXME: Actually wait for the animation to be over.
-			return UniTask.Delay(System.TimeSpan.FromSeconds(1));
+			return UniTask.Delay(System.TimeSpan.FromMilliseconds(300));
 		}
 	}
 }

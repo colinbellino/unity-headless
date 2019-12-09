@@ -15,7 +15,6 @@ namespace Greed.Core
 			}
 
 			var sceneInstance = await Addressables.LoadSceneAsync(sceneAsset, LoadSceneMode.Additive).Task;
-
 			if (sceneInstance.Scene.isLoaded == false)
 			{
 				throw new Exception("Failed to load scene.");

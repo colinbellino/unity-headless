@@ -5,7 +5,7 @@ namespace Greed.Core
 	public class EntityIdleState : State
 	{
 		private readonly IEntityView _view;
-		private readonly EntityPickUpHandler _pickUpHandler;
+		private readonly PickerHandler _pickUpHandler;
 		private readonly InteractiveObjectFinder _objectFinder;
 		private readonly EntityInputState _inputState;
 		private readonly LazyInject<StateMachine> _stateMachine;
@@ -14,7 +14,7 @@ namespace Greed.Core
 
 		public EntityIdleState(
 			IEntityView view,
-			EntityPickUpHandler pickUpHandler,
+			PickerHandler pickUpHandler,
 			InteractiveObjectFinder objectFinder,
 			EntityInputState inputState,
 			LazyInject<StateMachine> stateMachine
