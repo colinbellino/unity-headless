@@ -18,5 +18,7 @@ public class SceneInstaller : MonoInstaller
 		Container.DeclareSignal<GameStartedSignal>();
 		Container.DeclareSignal<PickUpStartedSignal>();
 		Container.DeclareSignal<PickUpEndedSignal>();
+		Container.DeclareSignal<ThrowStartedSignal>();
+		Container.DeclareSignal<ThrowEndedSignal>();
 	}
 }

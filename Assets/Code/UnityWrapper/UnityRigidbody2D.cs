@@ -17,9 +17,21 @@ namespace Greed.UnityWrapper
 			set => _rigidbody.bodyType = value;
 		}
 
+		public Vector2 Velocity
+		{
+			get => _rigidbody.velocity;
+			set => _rigidbody.velocity = value;
+		}
+
 		public void MovePosition(Vector3 position)
 		{
 			_rigidbody.MovePosition(position);
+		}
+
+		public void AddForce(Vector2 force, ForceMode2D mode)
+		{
+			UnityEngine.Debug.Log("AddForce " + force + " => " + mode);
+			_rigidbody.AddForce(force, mode);
 		}
 	}
 }

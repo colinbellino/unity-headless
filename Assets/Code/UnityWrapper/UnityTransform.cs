@@ -28,7 +28,7 @@ namespace Greed.UnityWrapper
 		public ITransform Parent
 		{
 			get => Wrappers.Wrap(_transform.parent);
-			set => _transform.parent = value.Original;
+			set => _transform.parent = value?.Original;
 		}
 	}
 }

@@ -23,11 +23,6 @@ namespace Greed.Core
 
 		public void Tick()
 		{
-			if (_speed == 0)
-			{
-				return;
-			}
-
 			_move = new Vector3(_inputState.Move.x, _inputState.Move.y, 0f);
 
 			// TODO: Maybe we shouldn't do this in this file?
@@ -40,6 +35,11 @@ namespace Greed.Core
 
 		public void FixedTick()
 		{
+			if (_speed == 0)
+			{
+				return;
+			}
+
 			_view.MovePosition(_view.Position + _move * _speed * _time.FixedDeltaTime);
 		}
 	}

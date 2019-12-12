@@ -34,6 +34,12 @@ namespace Greed.Core
 			set => _transform.LocalPosition = value;
 		}
 
+		public Vector2 Velocity
+		{
+			get => _rigidbody.Velocity;
+			set => _rigidbody.Velocity = value;
+		}
+
 		public void MovePosition(Vector3 destination) => _rigidbody.MovePosition(destination);
 
 		public void Place(Vector3 destination) => _transform.Position = destination;
@@ -46,6 +52,18 @@ namespace Greed.Core
 			_physicsCollider.Enabled = false;
 		}
 
+		public void Detach()
+		{
+			_transform.Parent = null;
+			_rigidbody.BodyType = RigidbodyType2D.Dynamic;
+			_physicsCollider.Enabled = true;
+		}
+
+		public void AddForce(Vector2 force, ForceMode2D mode = ForceMode2D.Force)
+		{
+			_rigidbody.AddForce(force, mode);
+		}
+
 		public UniTask PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity)
 		{
 			_animator.Play(stateName, layer, normalizedTime);
@@ -53,6 +71,7 @@ namespace Greed.Core
 		}
 
 		public void SetAnimationFloat(string name, float value) => _animator.SetFloat(name, value);
+
 		public void SetAnimationTrigger(string name) => _animator.SetTrigger(name);
 	}
 }
