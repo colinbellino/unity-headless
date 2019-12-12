@@ -38,9 +38,10 @@ namespace Greed.Core
 
 		public void Place(Vector3 destination) => _transform.Position = destination;
 
-		public void AttachTo(IEntity target)
+		public void AttachTo(ITransform target)
 		{
-			_transform.Parent = target.View.Transform;
+			_transform.Parent = target;
+			_transform.LocalPosition = Vector3.zero;
 			_rigidbody.BodyType = RigidbodyType2D.Kinematic;
 			_physicsCollider.Enabled = false;
 		}

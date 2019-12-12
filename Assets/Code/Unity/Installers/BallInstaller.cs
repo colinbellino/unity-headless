@@ -7,7 +7,7 @@ namespace Greed.Unity
 	{
 		public override void InstallBindings()
 		{
-			Container.BindInterfacesTo<PickUpHandler>().AsSingle();
+
 		}
 	}
 }

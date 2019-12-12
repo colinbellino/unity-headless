@@ -12,7 +12,7 @@ namespace Greed.Core
 
 		void MovePosition(Vector3 position);
 		void Place(Vector3 position);
-		void AttachTo(IEntity target);
+		void AttachTo(ITransform target);
 
 		UniTask PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity);
 		void SetAnimationFloat(string name, float value);
