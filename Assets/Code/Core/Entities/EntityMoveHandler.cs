@@ -28,6 +28,12 @@ namespace Greed.Core
 
 			var move = new Vector3(_inputState.Move.x, _inputState.Move.y, 0f);
 			_view.MovePosition(_view.Position + move * _speed * _time.FixedDeltaTime);
+
+			if (move.magnitude > 0f)
+			{
+				_view.SetAnimationFloat("MoveX", move.x);
+				_view.SetAnimationFloat("MoveY", move.y);
+			}
 		}
 	}
 }

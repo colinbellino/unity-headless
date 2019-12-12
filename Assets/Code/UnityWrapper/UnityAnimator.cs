@@ -15,5 +15,10 @@ namespace Greed.UnityWrapper
 		{
 			_animator.Play(stateName, layer, normalizedTime);
 		}
+
+		public void SetFloat(string stateName, float value)
+		{
+			_animator.SetFloat(stateName, value);
+		}
 	}
 }

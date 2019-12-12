@@ -52,5 +52,7 @@ namespace Greed.Core
 			// FIXME: Actually wait for the animation to be over.
 			return UniTask.Delay(System.TimeSpan.FromMilliseconds(300));
 		}
+
+		public void SetAnimationFloat(string stateName, float value) => _animator.SetFloat(stateName, value);
 	}
 }
