@@ -45,12 +45,10 @@ namespace Greed.Core
 			_physicsCollider.Enabled = false;
 		}
 
-		public UniTask PlayAnimation(string stateName, int layer = -1, float normalizedTime = float.NegativeInfinity)
+		public UniTask PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity)
 		{
 			_animator.Play(stateName, layer, normalizedTime);
-
-			// FIXME: Actually wait for the animation to be over.
-			return UniTask.Delay(System.TimeSpan.FromMilliseconds(300));
+			return UniTask.WaitWhile(() => _animator.GetCurrentAnimatorStateInfo(layer).IsName(stateName));
 		}
 
 		public void SetAnimationFloat(string stateName, float value) => _animator.SetFloat(stateName, value);

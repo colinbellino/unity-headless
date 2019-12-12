@@ -14,7 +14,7 @@ namespace Greed.Core
 		void Place(Vector3 position);
 		void AttachTo(IEntity target);
 
-		UniTask PlayAnimation(string stateName, int layer = -1, float normalizedTime = float.NegativeInfinity);
+		UniTask PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity);
 		void SetAnimationFloat(string stateName, float value);
 	}
 }

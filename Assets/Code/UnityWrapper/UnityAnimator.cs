@@ -20,5 +20,10 @@ namespace Greed.UnityWrapper
 		{
 			_animator.SetFloat(stateName, value);
 		}
+
+		public AnimatorStateInfo GetCurrentAnimatorStateInfo(int layer)
+		{
+			return _animator.GetCurrentAnimatorStateInfo(layer);
+		}
 	}
 }
