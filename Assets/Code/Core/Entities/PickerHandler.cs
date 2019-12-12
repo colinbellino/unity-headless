@@ -9,6 +9,8 @@ namespace Greed.Core
 		private readonly IEntityView _view;
 		private readonly SignalBus _signalBus;
 
+		private const string _pickUpAnimationState = "Pick Up";
+
 		public PickerHandler(SignalBus signalBus, IEntity entity, IEntityView view)
 		{
 			_signalBus = signalBus;
@@ -16,23 +18,13 @@ namespace Greed.Core
 			_view = view;
 		}
 
-		public async UniTask<bool> TryPickUp(IEntity entityToPickUp)
+		public async UniTask TryPickUp(IEntity entityToPickUp)
 		{
-			var canPickUp = CanPickUpObject(entityToPickUp);
-			var animationName = canPickUp ? "PickUp" : "PickUpFail";
-
 			_signalBus.Fire(new PickUpStartedSignal { Picker = _entity, Target = entityToPickUp });
 
-			await _view.PlayAnimation(animationName);
+			await _view.PlayAnimation(_pickUpAnimationState);
 
 			_signalBus.Fire(new PickUpEndedSignal { Picker = _entity, Target = entityToPickUp });
-
-			return canPickUp;
-		}
-
-		private bool CanPickUpObject(IEntity entityToPickUp)
-		{
-			return true;
 		}
 	}
 

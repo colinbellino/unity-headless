@@ -16,9 +16,14 @@ namespace Greed.UnityWrapper
 			_animator.Play(stateName, layer, normalizedTime);
 		}
 
-		public void SetFloat(string stateName, float value)
+		public void SetFloat(string name, float value)
 		{
-			_animator.SetFloat(stateName, value);
+			_animator.SetFloat(name, value);
+		}
+
+		public void SetTrigger(string name)
+		{
+			_animator.SetTrigger(name);
 		}
 
 		public AnimatorStateInfo GetCurrentAnimatorStateInfo(int layer)

@@ -51,6 +51,7 @@ namespace Greed.Core
 			return UniTask.WaitWhile(() => _animator.GetCurrentAnimatorStateInfo(layer).IsName(stateName));
 		}
 
-		public void SetAnimationFloat(string stateName, float value) => _animator.SetFloat(stateName, value);
+		public void SetAnimationFloat(string name, float value) => _animator.SetFloat(name, value);
+		public void SetAnimationTrigger(string name) => _animator.SetTrigger(name);
 	}
 }

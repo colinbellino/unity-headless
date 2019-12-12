@@ -54,11 +54,8 @@ namespace Greed.Core
 		{
 			_isBusy = true;
 
-			var wasSuccessful = await _pickUpHandler.TryPickUp(objectToPickUp);
-			if (wasSuccessful)
-			{
-				_stateMachine.Value.Transition("PickUp");
-			}
+			await _pickUpHandler.TryPickUp(objectToPickUp);
+			_stateMachine.Value.Transition("PickUp");
 
 			_isBusy = false;
 		}
