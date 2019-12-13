@@ -22,7 +22,7 @@ namespace Greed.Core
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""3d1ea2ab-4d16-48a7-9f83-578e1db4e826"",
                     ""expectedControlType"": """",
                     ""processors"": """",

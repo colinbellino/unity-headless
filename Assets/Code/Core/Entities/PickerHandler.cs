@@ -1,3 +1,4 @@
+using System;
 using Greed.UnityWrapper;
 using UniRx.Async;
 using UnityEngine;
@@ -22,7 +23,6 @@ namespace Greed.Core
 			_signalBus = signalBus;
 			_entity = entity;
 			_view = view;
-			qq
 			_pickupSlot = carrySlot;
 		}
 
@@ -31,6 +31,7 @@ namespace Greed.Core
 			_signalBus.Fire(new PickUpStartedSignal { Picker = _entity, Target = entityToPickUp });
 
 			await _view.PlayAnimation(_pickUpAnimationName);
+
 			entityToPickUp.View.AttachTo(_pickupSlot);
 			_currentPickup = entityToPickUp;
 
@@ -42,9 +43,12 @@ namespace Greed.Core
 			_signalBus.Fire(new ThrowStartedSignal { Picker = _entity, Target = _currentPickup });
 
 			_currentPickup.View.Detach();
+			_currentPickup.View.Velocity = Vector2.zero;
 			_currentPickup.View.AddForce(force, ForceMode2D.Impulse);
 			_currentPickup = null;
-			await _view.PlayAnimation(_throwAnimationName);
+
+			_view.PlayAnimation(_throwAnimationName);
+			await UniTask.Delay(TimeSpan.FromMilliseconds(200));
 
 			_signalBus.Fire(new ThrowEndedSignal { Picker = _entity, Target = _currentPickup });
 		}

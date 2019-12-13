@@ -19,6 +19,9 @@ namespace Greed.Unity
 			Container.Bind<IEntity>().FromInstance(_facade);
 			Container.Bind<EntityInputState>().AsSingle();
 
+			Container.BindInterfacesAndSelfTo<EntityMoveHandler>().AsSingle()
+				.WithArguments(_moveSpeed);
+
 			Container.BindInterfacesAndSelfTo<EntityView>().AsSingle()
 				.WithArguments(
 					Wrappers.Wrap(_rigidbody),
@@ -26,9 +29,6 @@ namespace Greed.Unity
 					Wrappers.Wrap(_animator),
 					Wrappers.Wrap(_physicsCollider)
 				);
-
-			Container.BindInterfacesTo<EntityMoveHandler>().AsSingle()
-				.WithArguments(_moveSpeed);
 		}
 	}
 }

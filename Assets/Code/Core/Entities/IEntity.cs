@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Greed.Core
 {
 	public interface IEntity

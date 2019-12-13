@@ -11,6 +11,7 @@ namespace Greed.Core
 		private readonly ITime _time;
 		private readonly int _speed;
 
+		public Vector3 MoveDirection;
 		private Vector3 _move;
 
 		public EntityMoveHandler(EntityInputState inputState, IEntityView view, ITime time, int speed)
@@ -25,11 +26,13 @@ namespace Greed.Core
 		{
 			_move = new Vector3(_inputState.Move.x, _inputState.Move.y, 0f);
 
-			// TODO: Maybe we shouldn't do this in this file?
+			// TODO: Maybe we shouldn't do this in this class?
 			if (_move.magnitude > 0f)
 			{
 				_view.SetAnimationFloat("MoveX", _move.x);
 				_view.SetAnimationFloat("MoveY", _move.y);
+
+				MoveDirection = _move.normalized;
 			}
 		}
 

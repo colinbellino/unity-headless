@@ -30,7 +30,6 @@ namespace Greed.UnityWrapper
 
 		public void AddForce(Vector2 force, ForceMode2D mode)
 		{
-			UnityEngine.Debug.Log("AddForce " + force + " => " + mode);
 			_rigidbody.AddForce(force, mode);
 		}
 	}
