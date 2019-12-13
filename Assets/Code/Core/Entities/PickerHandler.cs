@@ -22,6 +22,7 @@ namespace Greed.Core
 			_signalBus = signalBus;
 			_entity = entity;
 			_view = view;
+			qq
 			_pickupSlot = carrySlot;
 		}
 
@@ -47,30 +48,5 @@ namespace Greed.Core
 
 			_signalBus.Fire(new ThrowEndedSignal { Picker = _entity, Target = _currentPickup });
 		}
-	}
-
-	// TODO: Move to Signals/
-	public class PickUpStartedSignal
-	{
-		public IEntity Picker;
-		public IEntity Target;
-	}
-
-	public class PickUpEndedSignal
-	{
-		public IEntity Picker;
-		public IEntity Target;
-	}
-
-	public class ThrowStartedSignal
-	{
-		public IEntity Picker;
-		public IEntity Target;
-	}
-
-	public class ThrowEndedSignal
-	{
-		public IEntity Picker;
-		public IEntity Target;
 	}
 }
