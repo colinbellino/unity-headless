@@ -17,7 +17,6 @@ namespace Greed.Unity
 			// Use the CameraRig in the scene.
 			Container.Bind<ICameraRig>().FromComponentInHierarchy().AsSingle();
 
-			Container.Bind<InteractiveObjectFinder>().AsSingle();
 			Container.Bind<PlayerActions>().AsSingle();
 			Container.Bind<SceneLoader>().AsSingle();
 

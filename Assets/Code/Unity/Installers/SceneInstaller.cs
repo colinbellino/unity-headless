@@ -6,7 +6,10 @@ public class SceneInstaller : MonoInstaller
 {
 	public override void InstallBindings()
 	{
+		Container.BindInterfacesAndSelfTo<EffectsManager>().AsSingle();
 		Container.Bind<ITime>().To<UnityTime>().AsSingle();
+		Container.Bind<InteractiveObjectFinder>().AsSingle();
+
 		InstallSignals();
 	}
 

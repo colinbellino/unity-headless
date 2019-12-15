@@ -1,6 +1,7 @@
 using Greed.Core;
 using Greed.UnityWrapper;
 using UnityEngine;
+using UnityEngine.VFX;
 using Zenject;
 
 namespace Greed.Unity
@@ -13,6 +14,7 @@ namespace Greed.Unity
 		[SerializeField] private Animator _animator;
 		[SerializeField] private Collider2D _physicsCollider;
 		[SerializeField] private Transform _pickupSlot;
+		[SerializeField] private VisualEffect _impactEffect;
 
 		[SerializeField] private int _moveSpeed;
 		[SerializeField] private float _throwForce = 20f;
@@ -21,9 +23,9 @@ namespace Greed.Unity
 		{
 			Container.BindInterfacesAndSelfTo<PickerHandler>().AsSingle()
 				.WithArguments(Wrappers.Wrap(_pickupSlot), _throwForce);
-
+			Container.BindInterfacesAndSelfTo<ImpactHandler>().AsSingle()
+				.WithArguments(_impactEffect);
 			Container.BindInterfacesAndSelfTo<PickupHandler>().AsSingle();
-
 			Container.BindInterfacesAndSelfTo<MoveHandler>().AsSingle()
 				.WithArguments(_moveSpeed);
 
