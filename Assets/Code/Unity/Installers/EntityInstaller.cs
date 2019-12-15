@@ -15,15 +15,16 @@ namespace Greed.Unity
 		[SerializeField] private Transform _pickupSlot;
 
 		[SerializeField] private int _moveSpeed;
+		[SerializeField] private float _throwForce = 20f;
 
 		public override void InstallBindings()
 		{
 			Container.BindInterfacesAndSelfTo<PickerHandler>().AsSingle()
-				.WithArguments(Wrappers.Wrap(_pickupSlot));
+				.WithArguments(Wrappers.Wrap(_pickupSlot), _throwForce);
 
 			Container.BindInterfacesAndSelfTo<PickupHandler>().AsSingle();
 
-			Container.BindInterfacesAndSelfTo<EntityMoveHandler>().AsSingle()
+			Container.BindInterfacesAndSelfTo<MoveHandler>().AsSingle()
 				.WithArguments(_moveSpeed);
 
 			Container.BindInterfacesAndSelfTo<EntityView>().AsSingle()

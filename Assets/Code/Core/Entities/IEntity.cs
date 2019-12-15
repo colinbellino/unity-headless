@@ -1,4 +1,5 @@
 using Greed.UnityWrapper;
+using UnityEngine;
 
 namespace Greed.Core
 {
@@ -7,5 +8,6 @@ namespace Greed.Core
 		string Name { get; }
 		IEntityView View { get; }
 		ITransform PickupSlot { get; }
+		Vector3 MoveDirection { get; }
 	}
 }

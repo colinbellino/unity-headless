@@ -109,6 +109,7 @@ MonoBehaviour:
   _physicsCollider: {fileID: 8601473818802745829}
   _pickupSlot: {fileID: 2396761187902932465}
   _moveSpeed: 6
+  _throwForce: 750
 --- !u!114 &8502000720143163144
 MonoBehaviour:
   m_ObjectHideFlags: 0

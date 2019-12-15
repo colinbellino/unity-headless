@@ -6,9 +6,9 @@ using UnityEngine;
 
 namespace Greed.Tests
 {
-	public class EntityMoveHandlerTests
+	public class MoveHandlerTests
 	{
-		private EntityMoveHandler _handler;
+		private MoveHandler _handler;
 
 		private EntityInputState _inputState;
 		private IEntityView _view;
@@ -83,7 +83,7 @@ namespace Greed.Tests
 
 		private void FixedTick()
 		{
-			_handler = new EntityMoveHandler(_inputState, _view, _time, _speed);
+			_handler = new MoveHandler(_inputState, _view, _time, _speed);
 			_handler.FixedTick();
 		}
 

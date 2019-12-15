@@ -35,6 +35,7 @@ namespace Greed.Core
 			}
 
 			_entity.View.AttachTo(args.Picker.PickupSlot);
+			_entity.View.Velocity = Vector2.zero;
 		}
 
 		private void ThrowStarted(ThrowStartedSignal args)
@@ -46,7 +47,9 @@ namespace Greed.Core
 
 			_entity.View.Detach();
 			_entity.View.Velocity = Vector2.zero;
-			_entity.View.AddForce(args.Force, ForceMode2D.Impulse);
+
+			var force = args.Force;
+			_entity.View.AddForce(force, ForceMode2D.Impulse);
 		}
 	}
 }

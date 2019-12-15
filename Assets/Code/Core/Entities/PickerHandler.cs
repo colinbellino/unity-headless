@@ -1,7 +1,6 @@
 using System;
 using Greed.UnityWrapper;
 using UniRx.Async;
-using UnityEngine;
 using Zenject;
 
 namespace Greed.Core
@@ -11,20 +10,29 @@ namespace Greed.Core
 		private readonly SignalBus _signalBus;
 		private readonly IEntity _entity;
 		private readonly IEntityView _view;
+		private readonly ITransform _pickupSlot;
+		private readonly float _throwForce;
 
 		private const string _pickUpAnimationName = "Pick Up";
 		private const string _throwAnimationName = "Throw";
 
 		private IEntity _currentPickup;
 
-		public ITransform PickupSlot;
+		public ITransform PickupSlot => _pickupSlot;
 
-		public PickerHandler(SignalBus signalBus, IEntity entity, IEntityView view, ITransform pickupSlot)
+		public PickerHandler(
+			SignalBus signalBus,
+			IEntity entity,
+			IEntityView view,
+			ITransform pickupSlot,
+			float throwForce
+		)
 		{
 			_signalBus = signalBus;
 			_entity = entity;
 			_view = view;
-			PickupSlot = pickupSlot;
+			_pickupSlot = pickupSlot;
+			_throwForce = throwForce;
 		}
 
 		public async UniTask PickUp(IEntity entityToPickUp)
@@ -37,8 +45,9 @@ namespace Greed.Core
 			_signalBus.Fire(new PickUpEndedSignal { Picker = _entity, Target = entityToPickUp });
 		}
 
-		public async UniTask Throw(Vector3 force)
+		public async UniTask Throw()
 		{
+			var force = _entity.MoveDirection * _throwForce;
 			_signalBus.Fire(new ThrowStartedSignal { Picker = _entity, Target = _currentPickup, Force = force });
 
 			_currentPickup = null;

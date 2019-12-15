@@ -4,17 +4,17 @@ using Zenject;
 
 namespace Greed.Core
 {
-	public class EntityMoveHandler : ITickable, IFixedTickable
+	public class MoveHandler : ITickable, IFixedTickable, IMoveDirection
 	{
 		private readonly EntityInputState _inputState;
 		private readonly IEntityView _view;
 		private readonly ITime _time;
 		private readonly int _speed;
 
-		public Vector3 MoveDirection;
+		public Vector3 MoveDirection { get; private set; }
 		private Vector3 _move;
 
-		public EntityMoveHandler(EntityInputState inputState, IEntityView view, ITime time, int speed)
+		public MoveHandler(EntityInputState inputState, IEntityView view, ITime time, int speed)
 		{
 			_inputState = inputState;
 			_view = view;
