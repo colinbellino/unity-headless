@@ -107,6 +107,7 @@ MonoBehaviour:
   _transform: {fileID: 618877341359465107}
   _animator: {fileID: 1425542916803428832}
   _physicsCollider: {fileID: 8601473818802745829}
+  _pickupSlot: {fileID: 2396761187902932465}
   _moveSpeed: 6
 --- !u!114 &8502000720143163144
 MonoBehaviour:
@@ -120,7 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5ef9cf17e954d26ae25795d4f8085f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pickupSlot: {fileID: 2396761187902932465}
 --- !u!1 &618877342254095563
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,3 @@
-using Greed.Core;
 using Zenject;
 
 namespace Greed.Unity

@@ -1,22 +1,15 @@
 using System;
 using System.Collections.Generic;
 using Greed.Core;
-using Greed.UnityWrapper;
-using UnityEngine;
 using Zenject;
 
 namespace Greed.Unity
 {
 	public class PlayerInstaller : MonoInstaller
 	{
-		[SerializeField] private Transform _pickupSlot;
-
 		public override void InstallBindings()
 		{
 			Container.BindInterfacesTo<PlayerInputHandler>().AsSingle();
-
-			Container.Bind<PickerHandler>().AsSingle()
-				.WithArguments(Wrappers.Wrap(_pickupSlot));
 
 			InstallStateMachine();
 		}

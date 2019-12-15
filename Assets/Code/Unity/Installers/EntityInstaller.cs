@@ -12,12 +12,16 @@ namespace Greed.Unity
 		[SerializeField] private Transform _transform;
 		[SerializeField] private Animator _animator;
 		[SerializeField] private Collider2D _physicsCollider;
+		[SerializeField] private Transform _pickupSlot;
+
 		[SerializeField] private int _moveSpeed;
 
 		public override void InstallBindings()
 		{
-			Container.Bind<IEntity>().FromInstance(_facade);
-			Container.Bind<EntityInputState>().AsSingle();
+			Container.BindInterfacesAndSelfTo<PickerHandler>().AsSingle()
+				.WithArguments(Wrappers.Wrap(_pickupSlot));
+
+			Container.BindInterfacesAndSelfTo<PickupHandler>().AsSingle();
 
 			Container.BindInterfacesAndSelfTo<EntityMoveHandler>().AsSingle()
 				.WithArguments(_moveSpeed);
@@ -29,6 +33,9 @@ namespace Greed.Unity
 					Wrappers.Wrap(_animator),
 					Wrappers.Wrap(_physicsCollider)
 				);
+
+			Container.Bind<IEntity>().FromInstance(_facade);
+			Container.Bind<EntityInputState>().AsSingle();
 		}
 	}
 }
