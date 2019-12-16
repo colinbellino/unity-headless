@@ -240,12 +240,12 @@ GameObject:
   - component: {fileID: 1377630318}
   - component: {fileID: 1377630317}
   - component: {fileID: 1377630319}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1377630316
 Transform:

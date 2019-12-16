@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.VFX;
 using Zenject;
 
@@ -26,23 +27,23 @@ namespace Greed.Core
 
 		public void Initialize()
 		{
-			// _signalBus.Subscribe<ThrowStartedSignal>(ThrowStarted);
+			_signalBus.Subscribe<CollisionHitSignal>(ThrowStarted);
 		}
 
 		public void Dispose()
 		{
-			// _signalBus.Unsubscribe<ThrowStartedSignal>(ThrowStarted);
+			_signalBus.Unsubscribe<CollisionHitSignal>(ThrowStarted);
 		}
 
 		// TODO: check for collision and trigger this on hit with a wall
-		private void ThrowStarted(ThrowStartedSignal args)
+		private void ThrowStarted(CollisionHitSignal args)
 		{
-			if (args.Target != _entity)
+			if (args.Origin != _entity)
 			{
 				return;
 			}
 
-			_effectsManager.Spawn(_impactEffect);
+			_effectsManager.Spawn(_impactEffect, _entity.View.Position, Quaternion.identity);
 		}
 	}
 }

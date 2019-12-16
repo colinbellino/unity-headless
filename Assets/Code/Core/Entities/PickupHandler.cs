@@ -1,13 +1,19 @@
 using System;
+using Greed.UnityWrapper;
 using UnityEngine;
 using Zenject;
 
 namespace Greed.Core
 {
-	public class PickupHandler : IInitializable, IDisposable
+	public class PickupHandler : IInitializable, ITickable, IDisposable
 	{
 		private readonly SignalBus _signalBus;
 		private readonly IEntity _entity;
+
+		// FIXME: This is just here so we don't crash unity...
+		// Replace with with a way to keep track of our collisions and trigger only enter/exit.
+		// Maybe the monobehaviour enter/exit is better for this ?
+		private bool _hitSomething;
 
 		public PickupHandler(SignalBus signalBus, IEntity entity)
 		{
@@ -25,6 +31,37 @@ namespace Greed.Core
 		{
 			_signalBus.Unsubscribe<PickUpStartedSignal>(PickUpStarted);
 			_signalBus.Unsubscribe<ThrowStartedSignal>(ThrowStarted);
+		}
+
+		public void Tick()
+		{
+			CheckForCollisions();
+		}
+
+		private void CheckForCollisions()
+		{
+			if (_hitSomething)
+			{
+				return;
+			}
+
+			var hits = GetStaticCollidersInRange();
+			foreach (var hit in hits)
+			{
+				_signalBus.Fire(new CollisionHitSignal { Origin = _entity, Collider = Wrappers.Wrap(hit.collider) });
+				_hitSomething = true;
+			}
+		}
+
+		private RaycastHit2D[] GetStaticCollidersInRange()
+		{
+			var origin = _entity.View.Position;
+			var radius = 1f;
+			var direction = _entity.MoveDirection;
+			var distance = 1f;
+			var layerMask = LayerMask.GetMask("Static");
+
+			return Physics2D.CircleCastAll(origin, radius, direction, distance, layerMask);
 		}
 
 		private void PickUpStarted(PickUpStartedSignal args)
