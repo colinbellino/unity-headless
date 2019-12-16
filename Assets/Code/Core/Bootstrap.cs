@@ -4,6 +4,7 @@ using Greed.UnityWrapper;
 using UniRx.Async;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Greed.Core
@@ -12,7 +13,7 @@ namespace Greed.Core
 	{
 		private readonly SignalBus _signalBus;
 		private readonly EntityFactory _entityFactory;
-		private readonly SceneLoader _sceneLoader;
+		private readonly ISceneLoader _sceneLoader;
 		private readonly IGameObject _playerPrefab;
 		private readonly List<AssetReference> _scenesToLoad;
 
@@ -21,7 +22,7 @@ namespace Greed.Core
 		public Bootstrap(
 			SignalBus signalBus,
 			EntityFactory entityFactory,
-			SceneLoader sceneLoader,
+			ISceneLoader sceneLoader,
 			IGameObject playerPrefab,
 			List<AssetReference> scenesToLoad
 		)
@@ -56,7 +57,11 @@ namespace Greed.Core
 
 		private async UniTask InitializeScene()
 		{
-			await _sceneLoader.LoadScene(_scenesToLoad[0]);
+			var levelUnloaded = SceneManager.sceneCount == 0;
+			if (levelUnloaded)
+			{
+				await _sceneLoader.LoadSceneAsync(_scenesToLoad[0], LoadSceneMode.Additive);
+			}
 
 			var player = _entityFactory.Create(_playerPrefab.Original);
 			player.View.Place(_playerPosition);

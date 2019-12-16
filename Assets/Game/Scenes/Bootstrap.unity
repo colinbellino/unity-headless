@@ -373,7 +373,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _parentNewObjectsUnderSceneContext: 0
-  _contractNames: []
+  _contractNames:
+  - Bootstrap
   _parentContractNames: []
 --- !u!4 &1119440954
 Transform:

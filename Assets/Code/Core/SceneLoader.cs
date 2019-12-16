@@ -1,24 +1,24 @@
 using System;
-using UniRx.Async;
+using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 
 namespace Greed.Core
 {
-	public class SceneLoader
+	public class SceneLoader : ISceneLoader
 	{
-		public async UniTask LoadScene(AssetReference sceneAsset)
+		public async Task<Scene> LoadSceneAsync(AssetReference sceneAsset, LoadSceneMode loadMode = LoadSceneMode.Single)
 		{
-			if (SceneManager.sceneCount > 1)
-			{
-				return;
-			}
-
-			var sceneInstance = await Addressables.LoadSceneAsync(sceneAsset, LoadSceneMode.Additive).Task;
+			var sceneInstance = await Addressables.LoadSceneAsync(sceneAsset, loadMode).Task;
 			if (sceneInstance.Scene.isLoaded == false)
 			{
 				throw new Exception("Failed to load scene.");
 			}
+
+			Debug.Log("Loaded scene: " + sceneInstance.Scene.name);
+
+			return sceneInstance.Scene;
 		}
 	}
 }

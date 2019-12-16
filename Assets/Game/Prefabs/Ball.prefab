@@ -108,6 +108,8 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _physicsCollider: {fileID: 8213456230611986729}
   _pickupSlot: {fileID: 0}
+  _impactEffect: {fileID: 6568392411287347776, guid: 0c5e8914ed0d33c4c917c31d0d0ae792,
+    type: 3}
   _moveSpeed: 0
   _throwForce: 0
 --- !u!114 &8213456230136508407
