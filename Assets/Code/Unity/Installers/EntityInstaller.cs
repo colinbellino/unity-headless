@@ -1,7 +1,6 @@
 using Greed.Core;
 using Greed.UnityWrapper;
 using UnityEngine;
-using UnityEngine.VFX;
 using Zenject;
 
 namespace Greed.Unity
@@ -14,12 +13,16 @@ namespace Greed.Unity
 		[SerializeField] private Animator _animator;
 		[SerializeField] private Collider2D _physicsCollider;
 		[SerializeField] private Transform _pickupSlot;
+		[SerializeField] private AudioSource _audioSource;
 
 		[SerializeField] private int _moveSpeed;
 		[SerializeField] private float _throwForce = 20f;
 
 		public override void InstallBindings()
 		{
+			Container.Bind<AudioPlayer>().AsSingle()
+				.WithArguments(_audioSource);
+
 			Container.BindInterfacesAndSelfTo<PickerHandler>().AsSingle()
 				.WithArguments(Wrappers.Wrap(_pickupSlot), _throwForce);
 			Container.BindInterfacesAndSelfTo<MoveHandler>().AsSingle()

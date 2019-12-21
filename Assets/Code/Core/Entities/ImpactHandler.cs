@@ -11,19 +11,25 @@ namespace Greed.Core
 		private readonly SignalBus _signalBus;
 		private readonly IEntity _entity;
 		private readonly VisualEffectsSpawner _effectsManager;
+		private readonly AudioPlayer _audioPlayer;
 		private readonly VisualEffect _impactEffect;
+		private readonly AudioClip _impactClip;
 
 		public ImpactHandler(
 			SignalBus signalBus,
 			IEntity entity,
 			VisualEffectsSpawner effectsManager,
-			VisualEffect impactEffect
+			AudioPlayer audioPlayer,
+			VisualEffect impactEffect,
+			AudioClip impactClip
 		)
 		{
 			_signalBus = signalBus;
 			_entity = entity;
 			_effectsManager = effectsManager;
 			_impactEffect = impactEffect;
+			_audioPlayer = audioPlayer;
+			_impactClip = impactClip;
 		}
 
 		public void Initialize()
@@ -45,14 +51,16 @@ namespace Greed.Core
 				return;
 			}
 
-			if (_impactEffect == null)
+			if (_impactEffect)
 			{
-				Debug.LogWarning($"Missing impact effect for {_entity.Name}");
-				return;
+				var pointOfImpact = collider.ClosestPoint(origin.View.Position);
+				_effectsManager.Create(_impactEffect, pointOfImpact, Quaternion.identity);
 			}
 
-			var pointOfImpact = collider.ClosestPoint(origin.View.Position);
-			_effectsManager.Create(_impactEffect, pointOfImpact, Quaternion.identity);
+			if (_impactClip)
+			{
+				_audioPlayer.PlayOneShot(_impactClip);
+			}
 		}
 
 		private bool CanImpact(ICollider2D collider)
