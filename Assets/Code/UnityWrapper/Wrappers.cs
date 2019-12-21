@@ -28,5 +28,10 @@ namespace Greed.UnityWrapper
 		{
 			return new UnityCollider2D(collider);
 		}
+
+		public static IRaycastHit2D Wrap(RaycastHit2D hit)
+		{
+			return new UnityRaycastHit2D(hit);
+		}
 	}
 }

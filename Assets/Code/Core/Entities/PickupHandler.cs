@@ -10,11 +10,6 @@ namespace Greed.Core
 		private readonly SignalBus _signalBus;
 		private readonly IEntity _entity;
 
-		// FIXME: This is just here so we don't crash unity...
-		// Replace with with a way to keep track of our collisions and trigger only enter/exit.
-		// Maybe the monobehaviour enter/exit is better for this ?
-		private bool _hitSomething;
-
 		public PickupHandler(SignalBus signalBus, IEntity entity)
 		{
 			_signalBus = signalBus;
@@ -40,16 +35,11 @@ namespace Greed.Core
 
 		private void CheckForCollisions()
 		{
-			if (_hitSomething)
-			{
-				return;
-			}
-
 			var hits = GetStaticCollidersInRange();
 			foreach (var hit in hits)
 			{
-				_signalBus.Fire(new CollisionHitSignal { Origin = _entity, Collider = Wrappers.Wrap(hit.collider) });
-				_hitSomething = true;
+				var signal = new CollisionHitSignal { Origin = _entity, Hit = Wrappers.Wrap(hit) };
+				_signalBus.Fire(signal);
 			}
 		}
 

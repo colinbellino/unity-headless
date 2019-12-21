@@ -21,7 +21,7 @@ namespace Greed.Unity
 			Container.Bind<ZenjectSceneLoaderAddressables>().AsSingle();
 			Container.BindInterfacesAndSelfTo<SceneLoader>().AsSingle();
 
-			Container.BindInterfacesAndSelfTo<EffectsManager>().AsSingle();
+			Container.BindInterfacesAndSelfTo<VisualEffectsSpawner>().AsSingle();
 			Container.Bind<ITime>().To<UnityTime>().AsSingle();
 			Container.Bind<InteractiveObjectFinder>().AsSingle();
 			Container.Bind<PlayerActions>().AsSingle();

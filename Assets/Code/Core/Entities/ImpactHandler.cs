@@ -9,13 +9,13 @@ namespace Greed.Core
 	{
 		private readonly SignalBus _signalBus;
 		private readonly IEntity _entity;
-		private readonly EffectsManager _effectsManager;
+		private readonly VisualEffectsSpawner _effectsManager;
 		private readonly VisualEffect _impactEffect;
 
 		public ImpactHandler(
 			SignalBus signalBus,
 			IEntity entity,
-			EffectsManager effectsManager,
+			VisualEffectsSpawner effectsManager,
 			VisualEffect impactEffect
 		)
 		{
@@ -27,23 +27,27 @@ namespace Greed.Core
 
 		public void Initialize()
 		{
-			_signalBus.Subscribe<CollisionHitSignal>(ThrowStarted);
+			_signalBus.Subscribe<CollisionHitSignal>(CollisionHit);
 		}
 
 		public void Dispose()
 		{
-			_signalBus.Unsubscribe<CollisionHitSignal>(ThrowStarted);
+			_signalBus.Unsubscribe<CollisionHitSignal>(CollisionHit);
 		}
 
-		// TODO: check for collision and trigger this on hit with a wall
-		private void ThrowStarted(CollisionHitSignal args)
+		private void CollisionHit(CollisionHitSignal args)
 		{
 			if (args.Origin != _entity)
 			{
 				return;
 			}
 
-			_effectsManager.Spawn(_impactEffect, _entity.View.Position, Quaternion.identity);
+			if (_impactEffect == null)
+			{
+				return;
+			}
+
+			_effectsManager.Create(_impactEffect, args.Hit.Point, Quaternion.identity);
 		}
 	}
 }
