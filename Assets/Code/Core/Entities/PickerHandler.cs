@@ -1,4 +1,3 @@
-using System;
 using Greed.UnityWrapper;
 using UniRx.Async;
 using Zenject;
@@ -51,8 +50,7 @@ namespace Greed.Core
 			_signalBus.Fire(new ThrowStartedSignal { Picker = _entity, Target = _currentPickup, Force = force });
 
 			_currentPickup = null;
-			_view.PlayAnimation(_throwAnimationName);
-			await UniTask.Delay(TimeSpan.FromMilliseconds(200));
+			await _view.PlayAnimation(_throwAnimationName);
 
 			_signalBus.Fire(new ThrowEndedSignal { Picker = _entity, Target = _currentPickup });
 		}

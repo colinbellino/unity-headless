@@ -24,8 +24,6 @@ namespace Greed.Core
 			_signalBus.Subscribe<GameStartedSignal>(EnableDefaultActions);
 			_signalBus.Subscribe<PickUpStartedSignal>(PickUpStarted);
 			_signalBus.Subscribe<PickUpEndedSignal>(PickUpEnded);
-			_signalBus.Subscribe<ThrowStartedSignal>(ThrowStarted);
-			_signalBus.Subscribe<ThrowEndedSignal>(ThrowEnded);
 		}
 
 		public void Tick()
@@ -39,8 +37,6 @@ namespace Greed.Core
 			_signalBus.Unsubscribe<GameStartedSignal>(EnableDefaultActions);
 			_signalBus.Unsubscribe<PickUpStartedSignal>(PickUpStarted);
 			_signalBus.Unsubscribe<PickUpEndedSignal>(PickUpEnded);
-			_signalBus.Unsubscribe<ThrowStartedSignal>(ThrowStarted);
-			_signalBus.Unsubscribe<ThrowEndedSignal>(ThrowEnded);
 		}
 
 		private void PickUpStarted(PickUpStartedSignal args)
@@ -52,22 +48,6 @@ namespace Greed.Core
 		}
 
 		private void PickUpEnded(PickUpEndedSignal args)
-		{
-			if (args.Picker == _entity)
-			{
-				EnableDefaultActions();
-			}
-		}
-
-		private void ThrowStarted(ThrowStartedSignal args)
-		{
-			if (args.Picker == _entity)
-			{
-				DisableDefaultActions();
-			}
-		}
-
-		private void ThrowEnded(ThrowEndedSignal args)
 		{
 			if (args.Picker == _entity)
 			{
