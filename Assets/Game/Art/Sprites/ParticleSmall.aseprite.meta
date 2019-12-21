@@ -11,8 +11,8 @@ ScriptedImporter:
   pixelsPerUnit: 100
   spriteAtlas: {instanceID: 0}
   frameRate: 60
-  sortingLayerName: 
-  sortingOrder: 0
+  sortingLayerName: Visual Effects
+  sortingOrder: 9
   animatorCullingMode: 0
   animatorController: {instanceID: 0}
   errors: []

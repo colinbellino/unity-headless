@@ -26,5 +26,7 @@ namespace Greed.UnityWrapper
 			get => _gameObject.name;
 			set => _gameObject.name = value;
 		}
+
+		public bool IsStatic => _gameObject.isStatic;
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using Greed.UnityWrapper;
 using UnityEngine;
 
@@ -9,5 +10,8 @@ namespace Greed.Core
 		IEntityView View { get; }
 		ITransform PickupSlot { get; }
 		Vector3 MoveDirection { get; }
+
+		Action<ICollider2D> TriggerEntered { get; set; }
+		Action<ICollider2D> TriggerExited { get; set; }
 	}
 }

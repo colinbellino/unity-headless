@@ -5,6 +5,12 @@ namespace Greed.Core
 	public class CollisionHitSignal
 	{
 		public IEntity Origin;
-		public IRaycastHit2D Hit;
+		public ICollider2D Collider;
+
+		public void Deconstruct(out IEntity origin, out ICollider2D collider)
+		{
+			origin = Origin;
+			collider = Collider;
+		}
 	}
 }

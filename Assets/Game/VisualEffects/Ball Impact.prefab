@@ -47,20 +47,26 @@ VisualEffect:
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 2
+        m_Name: Lifetime
+        m_Overridden: 0
     m_Vector2f:
       m_Array: []
     m_Vector3f:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 0.048171833, y: 0.048171833, z: 0.17464745, w: 1}
+      - m_Value: {x: 0.5, y: 0.5, z: 0.5, w: 0}
         m_Name: Color
         m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 800
+        m_Name: Count
+        m_Overridden: 0
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
@@ -68,7 +74,10 @@ VisualEffect:
     m_Gradient:
       m_Array: []
     m_NamedObject:
-      m_Array: []
+      m_Array:
+      - m_Value: {fileID: 0}
+        m_Name: Particle
+        m_Overridden: 0
     m_Bool:
       m_Array: []
 --- !u!73398921 &6568392411287347777
@@ -88,8 +97,7 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

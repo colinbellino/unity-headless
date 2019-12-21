@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Greed.Core
 {
-	public class PickupHandler : IInitializable, ITickable, IDisposable
+	public class PickupHandler : IInitializable, IDisposable
 	{
 		private readonly SignalBus _signalBus;
 		private readonly IEntity _entity;
@@ -18,40 +18,22 @@ namespace Greed.Core
 
 		public void Initialize()
 		{
+			_entity.TriggerEntered += TriggerEntered;
 			_signalBus.Subscribe<PickUpStartedSignal>(PickUpStarted);
 			_signalBus.Subscribe<ThrowStartedSignal>(ThrowStarted);
 		}
 
 		public void Dispose()
 		{
+			_entity.TriggerEntered -= TriggerEntered;
 			_signalBus.Unsubscribe<PickUpStartedSignal>(PickUpStarted);
 			_signalBus.Unsubscribe<ThrowStartedSignal>(ThrowStarted);
 		}
 
-		public void Tick()
+		private void TriggerEntered(ICollider2D collider)
 		{
-			CheckForCollisions();
-		}
-
-		private void CheckForCollisions()
-		{
-			var hits = GetStaticCollidersInRange();
-			foreach (var hit in hits)
-			{
-				var signal = new CollisionHitSignal { Origin = _entity, Hit = Wrappers.Wrap(hit) };
-				_signalBus.Fire(signal);
-			}
-		}
-
-		private RaycastHit2D[] GetStaticCollidersInRange()
-		{
-			var origin = _entity.View.Position;
-			var radius = 1f;
-			var direction = _entity.MoveDirection;
-			var distance = 1f;
-			var layerMask = LayerMask.GetMask("Static");
-
-			return Physics2D.CircleCastAll(origin, radius, direction, distance, layerMask);
+			var signal = new CollisionHitSignal { Origin = _entity, Collider = collider };
+			_signalBus.Fire(signal);
 		}
 
 		private void PickUpStarted(PickUpStartedSignal args)

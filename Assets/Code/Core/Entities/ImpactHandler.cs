@@ -1,4 +1,5 @@
 using System;
+using Greed.UnityWrapper;
 using UnityEngine;
 using UnityEngine.VFX;
 using Zenject;
@@ -37,17 +38,26 @@ namespace Greed.Core
 
 		private void CollisionHit(CollisionHitSignal args)
 		{
-			if (args.Origin != _entity)
+			(var origin, var collider) = args;
+
+			if (!CanImpact(collider))
 			{
 				return;
 			}
 
 			if (_impactEffect == null)
 			{
+				Debug.LogWarning($"Missing impact effect for {_entity.Name}");
 				return;
 			}
 
-			_effectsManager.Create(_impactEffect, args.Hit.Point, Quaternion.identity);
+			var pointOfImpact = collider.ClosestPoint(origin.View.Position);
+			_effectsManager.Create(_impactEffect, pointOfImpact, Quaternion.identity);
+		}
+
+		private bool CanImpact(ICollider2D collider)
+		{
+			return collider != _entity && collider.GameObject.IsStatic;
 		}
 	}
 }

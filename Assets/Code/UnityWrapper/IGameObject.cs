@@ -11,5 +11,6 @@ namespace Greed.UnityWrapper
 
 		GameObject Original { get; }
 		string Name { get; set; }
+		bool IsStatic { get; }
 	}
 }
