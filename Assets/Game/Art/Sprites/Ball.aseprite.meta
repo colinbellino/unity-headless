@@ -11,7 +11,7 @@ ScriptedImporter:
   pixelsPerUnit: 16
   spriteAtlas: {instanceID: 0}
   frameRate: 60
-  sortingLayerName: 
+  sortingLayerName: Entities
   sortingOrder: 0
   animatorCullingMode: 0
   animatorController: {instanceID: 0}
