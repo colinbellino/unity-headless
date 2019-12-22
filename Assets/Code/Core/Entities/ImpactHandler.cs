@@ -45,8 +45,14 @@ namespace Greed.Core
 		private void CollisionHit(CollisionHitSignal args)
 		{
 			(var origin, var collider) = args;
+			if (collider == _entity)
+			{
+				return;
+			}
 
-			if (!CanImpact(collider))
+			var canTriggerImpact = collider.GameObject.IsStatic;
+
+			if (canTriggerImpact == false)
 			{
 				return;
 			}
@@ -61,11 +67,6 @@ namespace Greed.Core
 			{
 				_audioPlayer.PlayOneShot(_impactClip);
 			}
-		}
-
-		private bool CanImpact(ICollider2D collider)
-		{
-			return collider != _entity && collider.GameObject.IsStatic;
 		}
 	}
 }

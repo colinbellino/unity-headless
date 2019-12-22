@@ -13,6 +13,7 @@ namespace Greed.UnityWrapper
 			set => _collider.enabled = value;
 		}
 
+		public bool IsTrigger => _collider.isTrigger;
 		public IGameObject GameObject => _gameObject;
 
 		public UnityCollider2D(Collider2D collider)
