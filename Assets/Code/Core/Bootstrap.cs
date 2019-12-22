@@ -57,7 +57,7 @@ namespace Greed.Core
 
 		private async UniTask InitializeScene()
 		{
-			var levelUnloaded = SceneManager.sceneCount == 0;
+			var levelUnloaded = SceneManager.sceneCount == 1;
 			if (levelUnloaded)
 			{
 				await _sceneLoader.LoadSceneAsync(_scenesToLoad[0], LoadSceneMode.Additive);
