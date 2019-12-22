@@ -10,6 +10,7 @@ namespace Greed.Core
 		Vector3 LocalPosition { get; set; }
 		Vector2 Velocity { get; set; }
 		ITransform Transform { get; }
+		ICollider2D PhysicsCollider { get; }
 
 		void MovePosition(Vector3 position);
 		void Place(Vector3 position);

@@ -26,5 +26,15 @@ namespace Greed.UnityWrapper
 		{
 			return _collider.ClosestPoint(position);
 		}
+
+		public bool Equals(ICollider2D other)
+		{
+			return GetHashCode() == other.GetHashCode();
+		}
+
+		public override int GetHashCode()
+		{
+			return _collider.GetHashCode();
+		}
 	}
 }

@@ -10779,6 +10779,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2183002636229933166, guid: 882d19aab705d4c9f9685151beb102b3,
+        type: 3}
+      propertyPath: m_Name
+      value: Physics Collider (Crystal)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 882d19aab705d4c9f9685151beb102b3, type: 3}
 --- !u!1001 &8213456230215189408
@@ -10847,6 +10852,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8213456230611986727, guid: 0c3b956ea95e1b34baca57cbba0e4dc0,
+        type: 3}
+      propertyPath: m_Name
+      value: Physics Collider (Ball)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c3b956ea95e1b34baca57cbba0e4dc0, type: 3}

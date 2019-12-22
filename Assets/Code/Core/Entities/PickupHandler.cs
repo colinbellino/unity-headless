@@ -32,7 +32,7 @@ namespace Greed.Core
 
 		private void TriggerEntered(ICollider2D collider)
 		{
-			var signal = new CollisionHitSignal { Origin = _entity, Collider = collider };
+			var signal = new CollisionHitSignal { Origin = _entity, Other = collider };
 			_signalBus.Fire(signal);
 		}
 

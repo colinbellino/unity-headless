@@ -24,8 +24,8 @@ namespace Greed.Core
 			_physicsCollider = physicsCollider;
 		}
 
+		public ICollider2D PhysicsCollider => _physicsCollider;
 		public Vector3 Position => _transform.Position;
-
 		public ITransform Transform => _transform;
 
 		public Vector3 LocalPosition

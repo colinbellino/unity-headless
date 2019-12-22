@@ -1,5 +1,4 @@
 using System;
-using Greed.UnityWrapper;
 using UnityEngine;
 using UnityEngine.VFX;
 using Zenject;
@@ -44,13 +43,13 @@ namespace Greed.Core
 
 		private void CollisionHit(CollisionHitSignal args)
 		{
-			(var origin, var collider) = args;
-			if (collider == _entity)
+			(var origin, var other) = args;
+			if (other == _entity)
 			{
 				return;
 			}
 
-			var canTriggerImpact = collider.GameObject.IsStatic;
+			var canTriggerImpact = other.GameObject.IsStatic;
 
 			if (canTriggerImpact == false)
 			{
@@ -59,7 +58,7 @@ namespace Greed.Core
 
 			if (_impactEffect)
 			{
-				var pointOfImpact = collider.ClosestPoint(origin.View.Position);
+				var pointOfImpact = other.ClosestPoint(origin.View.Position);
 				_effectsManager.Create(_impactEffect, pointOfImpact, Quaternion.identity);
 			}
 

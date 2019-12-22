@@ -15,7 +15,6 @@ namespace Greed.Unity
 			Container.BindInterfacesAndSelfTo<ImpactHandler>().AsSingle()
 				.WithArguments(_impactEffect, _impactClip);
 			Container.BindInterfacesAndSelfTo<PickupHandler>().AsSingle();
-
 		}
 	}
 }
