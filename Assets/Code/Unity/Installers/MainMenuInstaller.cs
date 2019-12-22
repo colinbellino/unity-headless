@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Greed.Unity
 {
-	public class TitleScreenInstaller : MonoInstaller
+	public class MainMenuInstaller : MonoInstaller
 	{
 		public override void InstallBindings()
 		{
