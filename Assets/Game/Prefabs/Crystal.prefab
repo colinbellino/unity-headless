@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7680998193000599486}
   - component: {fileID: 6177751063302281036}
+  - component: {fileID: 595665728640724980}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -82,6 +83,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &595665728640724980
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967625203473831446}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 14d1360f134af4afeb1d3f6864c1af7b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2183002634554719930
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +303,7 @@ MonoBehaviour:
   _facade: {fileID: 2183002634554719935}
   _rigidbody: {fileID: 2183002634554719932}
   _transform: {fileID: 2183002634554719933}
-  _animator: {fileID: 0}
+  _animator: {fileID: 595665728640724980}
   _physicsCollider: {fileID: 2198962599167503279}
   _pickupSlot: {fileID: 0}
   _audioSource: {fileID: 8664648215588796955}

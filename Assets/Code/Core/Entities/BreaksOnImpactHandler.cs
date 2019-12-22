@@ -44,20 +44,8 @@ namespace Greed.Core
 				return;
 			}
 
-			// FIXME: do a real check please
-			var isBall = origin.Name == "Ball";
-			if (!isBall)
-			{
-				return;
-			}
-
-			UnityEngine.Debug.Log("break !");
-
-			// if (_impactEffect)
-			// {
-			// 	var pointOfImpact = collider.ClosestPoint(origin.View.Position);
-			// 	_effectsManager.Create(_impactEffect, pointOfImpact, Quaternion.identity);
-			// }
+			_entity.View.SetAnimationTrigger("Break");
+			// TODO: Spawn the shards
 
 			if (_breakClip)
 			{
