@@ -11,22 +11,26 @@ namespace Greed.Unity
 		[SerializeField] private Rigidbody2D _rigidbody;
 		[SerializeField] private Transform _transform;
 		[SerializeField] private Animator _animator;
-		[SerializeField] private Collider2D _physicsCollider;
-		[SerializeField] private Transform _pickupSlot;
 		[SerializeField] private AudioSource _audioSource;
+		[SerializeField] private Collider2D _physicsCollider;
 
-		[SerializeField] private int _moveSpeed;
-		[SerializeField] private float _throwForce = 20f;
+		[Header("Picker")]
+		[SerializeField] private Transform _pickupSlot;
+
+		[Header("Stats")]
+		[SerializeField] private Stats _stats;
 
 		public override void InstallBindings()
 		{
+			Container.Bind<IStats>().FromInstance(_stats);
+
 			Container.Bind<AudioPlayer>().AsSingle()
 				.WithArguments(_audioSource);
 
 			Container.BindInterfacesAndSelfTo<PickerHandler>().AsSingle()
-				.WithArguments(Wrappers.Wrap(_pickupSlot), _throwForce);
+				.WithArguments(Wrappers.Wrap(_pickupSlot), _stats.ThrowForce);
 			Container.BindInterfacesAndSelfTo<MoveHandler>().AsSingle()
-				.WithArguments(_moveSpeed);
+				.WithArguments(_stats.MoveSpeed);
 
 			Container.BindInterfacesAndSelfTo<EntityView>().AsSingle()
 				.WithArguments(

@@ -7,6 +7,12 @@ namespace Greed.UnityWrapper
 		private readonly Collider2D _collider;
 		private readonly IGameObject _gameObject;
 
+		public UnityCollider2D(Collider2D collider)
+		{
+			_collider = collider;
+			_gameObject = Wrappers.Wrap(_collider.gameObject);
+		}
+
 		public bool Enabled
 		{
 			get => _collider.enabled;
@@ -15,12 +21,6 @@ namespace Greed.UnityWrapper
 
 		public bool IsTrigger => _collider.isTrigger;
 		public IGameObject GameObject => _gameObject;
-
-		public UnityCollider2D(Collider2D collider)
-		{
-			_collider = collider;
-			_gameObject = Wrappers.Wrap(_collider.gameObject);
-		}
 
 		public Vector2 ClosestPoint(Vector2 position)
 		{

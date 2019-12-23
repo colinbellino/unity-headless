@@ -10,7 +10,7 @@ namespace Greed.Core
 		private readonly IEntity _entity;
 		private readonly IEntityView _view;
 		private readonly ITransform _pickupSlot;
-		private readonly float _throwForce;
+		private readonly int _throwForce;
 
 		private const string _pickUpAnimationName = "Pick Up";
 		private const string _throwAnimationName = "Throw";
@@ -24,7 +24,7 @@ namespace Greed.Core
 			IEntity entity,
 			IEntityView view,
 			ITransform pickupSlot,
-			float throwForce
+			int throwForce
 		)
 		{
 			_signalBus = signalBus;

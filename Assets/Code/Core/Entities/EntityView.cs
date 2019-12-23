@@ -64,6 +64,11 @@ namespace Greed.Core
 			_rigidbody.AddForce(force, mode);
 		}
 
+		public void MoveTowards(Vector3 destination, float step)
+		{
+			_transform.Position = Vector3.MoveTowards(_transform.Position, destination, step);
+		}
+
 		public UniTask PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity)
 		{
 			_animator.Play(stateName, layer, normalizedTime);

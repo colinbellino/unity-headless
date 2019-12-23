@@ -6,6 +6,7 @@ using Zenject;
 
 namespace Greed.Unity
 {
+	[SelectionBase]
 	public class EntityFacade : MonoBehaviour, IEntity
 	{
 		private IEntityView _view;

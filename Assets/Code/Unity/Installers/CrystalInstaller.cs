@@ -1,6 +1,5 @@
 using Greed.Core;
 using UnityEngine;
-using UnityEngine.VFX;
 using Zenject;
 
 namespace Greed.Unity

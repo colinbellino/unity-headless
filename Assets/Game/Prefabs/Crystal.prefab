@@ -304,11 +304,10 @@ MonoBehaviour:
   _rigidbody: {fileID: 2183002634554719932}
   _transform: {fileID: 2183002634554719933}
   _animator: {fileID: 595665728640724980}
+  _audioSource: {fileID: 8664648215588796955}
   _physicsCollider: {fileID: 2198962599167503279}
   _pickupSlot: {fileID: 0}
-  _audioSource: {fileID: 8664648215588796955}
-  _moveSpeed: 0
-  _throwForce: 0
+  _stats: {fileID: 11400000, guid: 2426aa07dc08448d7895f394363c0506, type: 2}
 --- !u!114 &510380187919421826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +332,7 @@ GameObject:
   - component: {fileID: 2183002636229933153}
   - component: {fileID: 2198962599167503279}
   m_Layer: 0
-  m_Name: Physics Collider
+  m_Name: Physics Collider (Crystal)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
