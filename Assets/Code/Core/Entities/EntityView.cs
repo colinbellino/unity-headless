@@ -69,6 +69,11 @@ namespace Greed.Core
 			_transform.Position = Vector3.MoveTowards(_transform.Position, destination, step);
 		}
 
+		public void RotateAround(Vector3 target, Vector3 axis, float angle)
+		{
+			_transform.RotateAround(target, axis, angle);
+		}
+
 		public UniTask PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity)
 		{
 			_animator.Play(stateName, layer, normalizedTime);

@@ -8,5 +8,7 @@ namespace Greed.UnityWrapper
 		Vector3 LocalPosition { get; set; }
 		ITransform Parent { get; set; }
 		Transform Original { get; }
+
+		void RotateAround(Vector3 target, Vector3 axis, float angle);
 	}
 }

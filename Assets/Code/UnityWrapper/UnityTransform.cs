@@ -30,5 +30,10 @@ namespace Greed.UnityWrapper
 			get => Wrappers.Wrap(_transform.parent);
 			set => _transform.parent = value?.Original;
 		}
+
+		public void RotateAround(Vector3 target, Vector3 axis, float angle)
+		{
+			_transform.RotateAround(target, axis, angle);
+		}
 	}
 }
