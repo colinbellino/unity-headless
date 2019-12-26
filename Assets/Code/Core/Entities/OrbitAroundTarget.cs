@@ -1,11 +1,10 @@
-using System;
 using Greed.UnityWrapper;
 using UnityEngine;
 using Zenject;
 
 namespace Greed.Core
 {
-	public class OrbitAroundTarget : ITickable
+	public class OrbitAroundTarget : IInitializable, ITickable
 	{
 		private readonly IEntityView _view;
 		private readonly IEntity _target;
@@ -30,23 +29,26 @@ namespace Greed.Core
 			_rotationSpeed = rotationSpeed;
 		}
 
-		public void Start()
+		public void Initialize()
 		{
-			Activate();
+			// _entity.TriggerEntered += TriggerEntered;
+		}
+
+		public void Dispose()
+		{
+			// _entity.TriggerEntered -= TriggerEntered;
 		}
 
 		public void Tick()
 		{
-			Orbit();
+			if (_active)
+			{
+				Orbit();
+			}
 		}
 
 		private void Orbit()
 		{
-			if (_active)
-			{
-				return;
-			}
-
 			var angle = _rotationSpeed * _time.DeltaTime;
 			_view.RotateAround(_target.View.Position, Vector3.forward, angle);
 

@@ -9,11 +9,13 @@ namespace Greed.Core
 	{
 		private readonly SignalBus _signalBus;
 		private readonly IEntity _entity;
+		private readonly string _impactColliderTag;
 
-		public PickupHandler(SignalBus signalBus, IEntity entity)
+		public PickupHandler(SignalBus signalBus, IEntity entity, string impactColliderTag)
 		{
 			_signalBus = signalBus;
 			_entity = entity;
+			_impactColliderTag = impactColliderTag;
 		}
 
 		public void Initialize()
@@ -32,8 +34,11 @@ namespace Greed.Core
 
 		private void TriggerEntered(ICollider2D collider)
 		{
-			var signal = new CollisionHitSignal { Origin = _entity, Other = collider };
-			_signalBus.Fire(signal);
+			if (collider.CompareTag(_impactColliderTag))
+			{
+				var signal = new ImpactHitSignal { Origin = _entity, Other = collider };
+				_signalBus.Fire(signal);
+			}
 		}
 
 		private void PickUpStarted(PickUpStartedSignal args)
@@ -43,7 +48,7 @@ namespace Greed.Core
 				return;
 			}
 
-			_entity.View.AttachTo(args.Picker.PickupSlot);
+			_entity.View.AttachTo(args.Slot);
 			_entity.View.Velocity = Vector2.zero;
 		}
 

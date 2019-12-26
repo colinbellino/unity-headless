@@ -27,6 +27,11 @@ namespace Greed.UnityWrapper
 			return _collider.ClosestPoint(position);
 		}
 
+		public bool CompareTag(string tag)
+		{
+			return _collider.CompareTag(tag);
+		}
+
 		public bool Equals(ICollider2D other)
 		{
 			return GetHashCode() == other.GetHashCode();

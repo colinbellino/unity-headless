@@ -2,6 +2,7 @@ using Greed.Core;
 using Greed.UnityWrapper;
 using NSubstitute;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace Greed.Tests
 {

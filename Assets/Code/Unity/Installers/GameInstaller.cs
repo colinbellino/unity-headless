@@ -54,7 +54,7 @@ namespace Greed.Unity
 			Container.DeclareSignal<PickUpEndedSignal>();
 			Container.DeclareSignal<ThrowStartedSignal>();
 			Container.DeclareSignal<ThrowEndedSignal>();
-			Container.DeclareSignal<CollisionHitSignal>();
+			Container.DeclareSignal<ImpactHitSignal>();
 		}
 	}
 }

@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - FxTemporaire
+  - CollectCollider
+  - InteractCollider
+  - ImpactCollider
   layers:
   - Default
   - TransparentFX

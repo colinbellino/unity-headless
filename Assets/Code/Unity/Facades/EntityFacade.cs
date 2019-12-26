@@ -9,23 +9,19 @@ namespace Greed.Unity
 	[SelectionBase]
 	public class EntityFacade : MonoBehaviour, IEntity
 	{
-		private IEntityView _view;
-		private PickerHandler _pickerHandler;
 		private IMoveDirection _moveHandler;
 
 		public string Name => gameObject.name;
-		public IEntityView View => _view;
-		public ITransform PickupSlot => _pickerHandler.PickupSlot;
+		public IEntityView View { get; private set; }
 		public Vector3 MoveDirection => _moveHandler.MoveDirection;
 
 		public Action<ICollider2D> TriggerEntered { get; set; } = delegate { };
 		public Action<ICollider2D> TriggerExited { get; set; } = delegate { };
 
 		[Inject]
-		public void Construct(IEntityView view, PickerHandler pickerHandler, IMoveDirection moveHandler)
+		public void Construct(IEntityView view, IMoveDirection moveHandler)
 		{
-			_view = view;
-			_pickerHandler = pickerHandler;
+			View = view;
 			_moveHandler = moveHandler;
 		}
 

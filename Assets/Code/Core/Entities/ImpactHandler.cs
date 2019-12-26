@@ -33,15 +33,15 @@ namespace Greed.Core
 
 		public void Initialize()
 		{
-			_signalBus.Subscribe<CollisionHitSignal>(CollisionHit);
+			_signalBus.Subscribe<ImpactHitSignal>(CollisionHit);
 		}
 
 		public void Dispose()
 		{
-			_signalBus.Unsubscribe<CollisionHitSignal>(CollisionHit);
+			_signalBus.Unsubscribe<ImpactHitSignal>(CollisionHit);
 		}
 
-		private void CollisionHit(CollisionHitSignal args)
+		private void CollisionHit(ImpactHitSignal args)
 		{
 			(var origin, var other) = args;
 			if (other == _entity)

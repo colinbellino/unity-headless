@@ -14,9 +14,6 @@ namespace Greed.Unity
 		[SerializeField] private AudioSource _audioSource;
 		[SerializeField] private Collider2D _physicsCollider;
 
-		[Header("Picker")]
-		[SerializeField] private Transform _pickupSlot;
-
 		[Header("Stats")]
 		[SerializeField] private Stats _stats;
 
@@ -27,8 +24,6 @@ namespace Greed.Unity
 			Container.Bind<AudioPlayer>().AsSingle()
 				.WithArguments(_audioSource);
 
-			Container.BindInterfacesAndSelfTo<PickerHandler>().AsSingle()
-				.WithArguments(Wrappers.Wrap(_pickupSlot), _stats.ThrowForce);
 			Container.BindInterfacesAndSelfTo<MoveHandler>().AsSingle()
 				.WithArguments(_stats.MoveSpeed);
 

@@ -38,7 +38,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1633049296}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -65,7 +65,7 @@ GameObject:
   m_Layer: 0
   m_Name: Shard
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -252,7 +252,6 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _audioSource: {fileID: 8636708308646424197}
   _physicsCollider: {fileID: 1633049297}
-  _pickupSlot: {fileID: 0}
   _stats: {fileID: 11400000, guid: 10a47d5cdd8954e8db4c5dd79a541203, type: 2}
 --- !u!114 &1145255537501033945
 MonoBehaviour:
@@ -309,7 +308,7 @@ GameObject:
   - component: {fileID: 7236691281217236737}
   m_Layer: 0
   m_Name: Collect Collider
-  m_TagString: Untagged
+  m_TagString: CollectCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -413,7 +412,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1163913309
   m_SortingLayer: -1
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 5189374788339020242, guid: b5b49fa47f5c94a919ba9a389f5e0dd9,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

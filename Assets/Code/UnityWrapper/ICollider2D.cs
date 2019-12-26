@@ -10,5 +10,6 @@ namespace Greed.UnityWrapper
 		IGameObject GameObject { get; }
 
 		Vector2 ClosestPoint(Vector2 position);
+		bool CompareTag(string tag);
 	}
 }

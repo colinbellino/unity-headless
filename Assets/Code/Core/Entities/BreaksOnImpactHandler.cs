@@ -1,4 +1,5 @@
 using System;
+using Greed.UnityWrapper;
 using UnityEngine;
 using Zenject;
 
@@ -10,36 +11,36 @@ namespace Greed.Core
 		private readonly IEntity _entity;
 		private readonly AudioPlayer _audioPlayer;
 		private readonly AudioClip _breakClip;
+		private readonly ICollider2D _impactCollider;
 
 		public BreaksOnImpactHandler(
 			SignalBus signalBus,
 			IEntity entity,
 			AudioPlayer audioPlayer,
-			AudioClip breakClip
+			AudioClip breakClip,
+			ICollider2D impactCollider
 		)
 		{
 			_signalBus = signalBus;
 			_entity = entity;
 			_audioPlayer = audioPlayer;
 			_breakClip = breakClip;
+			_impactCollider = impactCollider;
 		}
 
 		public void Initialize()
 		{
-			_signalBus.Subscribe<CollisionHitSignal>(CollisionHit);
+			_signalBus.Subscribe<ImpactHitSignal>(ImpactHit);
 		}
 
 		public void Dispose()
 		{
-			_signalBus.Unsubscribe<CollisionHitSignal>(CollisionHit);
+			_signalBus.Unsubscribe<ImpactHitSignal>(ImpactHit);
 		}
 
-		private void CollisionHit(CollisionHitSignal args)
+		private void ImpactHit(ImpactHitSignal args)
 		{
-			(var origin, var other) = args;
-
-			var wasPhysicsCollider = other.Equals(_entity.View.PhysicsCollider);
-			if (!wasPhysicsCollider)
+			if (args.Other.Equals(_impactCollider) == false)
 			{
 				return;
 			}

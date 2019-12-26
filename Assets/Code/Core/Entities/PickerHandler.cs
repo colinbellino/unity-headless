@@ -36,7 +36,7 @@ namespace Greed.Core
 
 		public async UniTask PickUp(IEntity entityToPickUp)
 		{
-			_signalBus.Fire(new PickUpStartedSignal { Picker = _entity, Target = entityToPickUp });
+			_signalBus.Fire(new PickUpStartedSignal { Picker = _entity, Slot = _pickupSlot, Target = entityToPickUp });
 
 			_currentPickup = entityToPickUp;
 			await _view.PlayAnimation(_pickUpAnimationName);
