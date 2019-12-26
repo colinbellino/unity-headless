@@ -6,7 +6,6 @@ namespace Greed.Unity
 {
 	public class ShardInstaller : MonoInstaller
 	{
-		[Inject] private IEntity _entity;
 		[Inject] private IStats _stats;
 
 		public override void InstallBindings()
@@ -15,7 +14,7 @@ namespace Greed.Unity
 			var target = GameObject.Find("Player").GetComponent<IEntity>();
 
 			Container.BindInterfacesTo<MoveTowardsTarget>().AsSingle()
-				.WithArguments(_entity, target, _stats.MoveSpeed);
+				.WithArguments(target, _stats.MoveSpeed);
 		}
 	}
 }

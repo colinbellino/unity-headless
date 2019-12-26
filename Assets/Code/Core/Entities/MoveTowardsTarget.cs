@@ -5,22 +5,19 @@ namespace Greed.Core
 {
 	public class MoveTowardsTarget : ITickable
 	{
-		private readonly SignalBus _signalBus;
-		private readonly IEntity _entity;
+		private readonly IEntityView _view;
 		private readonly IEntity _target;
 		private readonly ITime _time;
 		private readonly int _moveSpeed;
 
 		public MoveTowardsTarget(
-			SignalBus signalBus,
-			IEntity entity,
+			IEntityView view,
 			IEntity target,
 			ITime time,
 			int moveSpeed
 		)
 		{
-			_signalBus = signalBus;
-			_entity = entity;
+			_view = view;
 			_target = target;
 			_time = time;
 			_moveSpeed = moveSpeed;
@@ -29,7 +26,7 @@ namespace Greed.Core
 		public void Tick()
 		{
 			var step = _moveSpeed * _time.DeltaTime;
-			_entity.View.MoveTowards(_target.View.Position, step);
+			_view.MoveTowards(_target.View.Position, step);
 		}
 	}
 }
