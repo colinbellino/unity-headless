@@ -31,8 +31,9 @@ namespace Greed.Core
 		{
 			if (collider.CompareTag(_collectColliderTag))
 			{
-				// TODO: Fire CollectSignal
-				UnityEngine.Debug.Log("collect");
+				var collectable = collider.GameObject.GetComponentInParent<IEntity>();
+				var signal = new CollectedSignal { Collector = _entity, Collectable = collectable };
+				_signalBus.Fire(signal);
 			}
 		}
 	}

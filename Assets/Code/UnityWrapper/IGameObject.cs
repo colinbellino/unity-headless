@@ -6,11 +6,13 @@ namespace Greed.UnityWrapper
 	{
 		bool CompareTag(string tag);
 		T GetComponent<T>();
+		T GetComponentInParent<T>();
 		void Destroy();
 		void SetActive(bool value);
 
 		GameObject Original { get; }
 		string Name { get; set; }
 		bool IsStatic { get; }
+
 	}
 }

@@ -17,6 +17,8 @@ namespace Greed.UnityWrapper
 
 		public T GetComponent<T>() => _gameObject.GetComponent<T>();
 
+		public T GetComponentInParent<T>() => _gameObject.GetComponentInParent<T>();
+
 		public void SetActive(bool value) => _gameObject.SetActive(value);
 
 		public GameObject Original => _gameObject;
