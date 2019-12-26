@@ -14,7 +14,7 @@ namespace Greed.Core
 
 		void MovePosition(Vector3 position);
 		void Place(Vector3 position);
-		void AttachTo(ITransform target);
+		void AttachTo(ITransform target, bool resetLocalPosition = true);
 		void Detach();
 
 		void AddForce(Vector2 force, ForceMode2D mode = ForceMode2D.Force);

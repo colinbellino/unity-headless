@@ -36,7 +36,8 @@ namespace Greed.Core
 				return;
 			}
 
-			_orbitHandler.Activate(args.Collector.View.Transform);
+			var view = args.Collector.View;
+			_orbitHandler.Activate(view.Transform);
 			_collectCollider.Enabled = false;
 		}
 	}

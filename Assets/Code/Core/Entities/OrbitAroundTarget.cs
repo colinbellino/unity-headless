@@ -31,8 +31,7 @@ namespace Greed.Core
 		{
 			_target = target;
 
-			_view.AttachTo(target);
-			_view.LocalPosition = Vector2.up * 2f;
+			_view.AttachTo(_target, false);
 			_active = true;
 		}
 

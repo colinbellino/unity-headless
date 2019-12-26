@@ -44,12 +44,16 @@ namespace Greed.Core
 
 		public void Place(Vector3 destination) => _transform.Position = destination;
 
-		public void AttachTo(ITransform target)
+		public void AttachTo(ITransform target, bool resetLocalPosition = true)
 		{
 			_transform.Parent = target;
-			_transform.LocalPosition = Vector3.zero;
 			_rigidbody.BodyType = RigidbodyType2D.Kinematic;
 			_physicsCollider.Enabled = false;
+
+			if (resetLocalPosition)
+			{
+				_transform.LocalPosition = Vector3.zero;
+			}
 		}
 
 		public void Detach()
