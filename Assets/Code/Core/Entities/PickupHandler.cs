@@ -34,7 +34,7 @@ namespace Greed.Core
 
 		private void TriggerEntered(ICollider2D collider)
 		{
-			if (collider.CompareTag(_impactColliderTag))
+			if (collider.CompareTag(_impactColliderTag) || collider.GameObject.IsStatic)
 			{
 				var signal = new ImpactHitSignal { Origin = _entity, Other = collider };
 				_signalBus.Fire(signal);

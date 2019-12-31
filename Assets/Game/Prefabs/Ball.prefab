@@ -218,8 +218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d722183ccaeaf4098d129d71b530d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impactEffect: {fileID: 6568392411287347776, guid: 0c5e8914ed0d33c4c917c31d0d0ae792,
-    type: 3}
+  _impactEffect:
+    m_AssetGUID: 0c5e8914ed0d33c4c917c31d0d0ae792
+    m_SubObjectName: 
   _impactClip: {fileID: 8300000, guid: 803359660c1f1fd4083c53ba3b003a7a, type: 3}
 --- !u!1 &8213456230611986727
 GameObject:

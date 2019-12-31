@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.VFX;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace Greed.Core
@@ -11,7 +11,7 @@ namespace Greed.Core
 		private readonly IEntity _entity;
 		private readonly VisualEffectsSpawner _effectsManager;
 		private readonly AudioPlayer _audioPlayer;
-		private readonly VisualEffect _impactEffect;
+		private readonly AssetReference _impactEffect;
 		private readonly AudioClip _impactClip;
 
 		public ImpactHandler(
@@ -19,7 +19,7 @@ namespace Greed.Core
 			IEntity entity,
 			VisualEffectsSpawner effectsManager,
 			AudioPlayer audioPlayer,
-			VisualEffect impactEffect,
+			AssetReference impactEffect,
 			AudioClip impactClip
 		)
 		{
@@ -33,15 +33,15 @@ namespace Greed.Core
 
 		public void Initialize()
 		{
-			_signalBus.Subscribe<ImpactHitSignal>(CollisionHit);
+			_signalBus.Subscribe<ImpactHitSignal>(OnImpactHit);
 		}
 
 		public void Dispose()
 		{
-			_signalBus.Unsubscribe<ImpactHitSignal>(CollisionHit);
+			_signalBus.Unsubscribe<ImpactHitSignal>(OnImpactHit);
 		}
 
-		private void CollisionHit(ImpactHitSignal args)
+		private void OnImpactHit(ImpactHitSignal args)
 		{
 			(var origin, var other) = args;
 			if (other == _entity)
@@ -49,14 +49,7 @@ namespace Greed.Core
 				return;
 			}
 
-			var canTriggerImpact = other.GameObject.IsStatic;
-
-			if (canTriggerImpact == false)
-			{
-				return;
-			}
-
-			if (_impactEffect)
+			if (_impactEffect != null)
 			{
 				var pointOfImpact = other.ClosestPoint(origin.View.Position);
 				_effectsManager.Create(_impactEffect, pointOfImpact, Quaternion.identity);

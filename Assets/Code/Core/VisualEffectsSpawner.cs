@@ -1,13 +1,15 @@
+using System;
 using UnityEngine;
-using UnityEngine.VFX;
+using UnityEngine.AddressableAssets;
 
 namespace Greed.Core
 {
 	public class VisualEffectsSpawner
 	{
-		public void Create(VisualEffect effect, Vector3 position, Quaternion rotation)
+		// FIXME: Don't spawn load/instantiate every time this is called, load assets beforehand and cache/poll stuff.
+		public async void Create(AssetReference asset, Vector3 position, Quaternion rotation)
 		{
-			Object.Instantiate(effect, position, rotation);
+			await asset.InstantiateAsync(position, rotation, null).Task;
 		}
 	}
 }

@@ -21,6 +21,10 @@ MonoBehaviour:
     m_Address: Assets/Game/Scenes/Levels
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: c76c4a50602abf84e97f84a1a1760147
+    m_Address: Assets/Game/Visual Effects
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6f259d267884ada44884917aee172f6d, type: 2}
   m_SchemaSet:
