@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1728395064241030306}
   - component: {fileID: 8040313416467315715}
   - component: {fileID: 1994578449924143179}
+  - component: {fileID: -4425772510686604449}
   m_Layer: 0
   m_Name: Ball Impact
   m_TagString: Untagged
@@ -4813,3 +4814,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-4425772510686604449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5948907482383727822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba49974a6810954dae619014317b461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyInSeconds: 1
