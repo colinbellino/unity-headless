@@ -14,6 +14,8 @@ namespace Greed.Unity
 
 		public override void InstallBindings()
 		{
+			Container.Bind<AsyncProcessor>().FromNewComponentOnNewGameObject().AsSingle();
+
 			// Use the CameraRig in the scene.
 			Container.Bind<ICameraRig>().FromComponentInHierarchy().AsSingle();
 

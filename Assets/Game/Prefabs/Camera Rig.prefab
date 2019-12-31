@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4717047798246281941}
   - component: {fileID: 4489078249642691433}
+  - component: {fileID: 693599455}
+  - component: {fileID: 693599456}
   m_Layer: 0
   m_Name: Camera Rig
   m_TagString: Untagged
@@ -44,6 +46,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10538cd689b10423ebb5926fbca288ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &693599455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4717047798246281946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6fd760df2396a4cac80cb5b5b7cc10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rig: {fileID: 4717047798246281941}
+--- !u!114 &693599456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4717047798246281946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 693599455}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!1 &4717047800061019912
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,7 +138,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9
+  orthographic size: 11.25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -172,10 +205,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 16
-  m_RefResolutionX: 512
-  m_RefResolutionY: 288
-  m_UpscaleRT: 1
+  m_AssetsPPU: 6
+  m_RefResolutionX: 192
+  m_RefResolutionY: 108
+  m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 0
   m_CropFrameY: 0
