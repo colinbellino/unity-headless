@@ -12,6 +12,8 @@ namespace Greed.Unity
 
 		public override void InstallBindings()
 		{
+			Container.BindInterfacesTo<PlayerInputHandler>().AsSingle();
+
 			Container.BindInterfacesAndSelfTo<ImpactHandler>().AsSingle()
 				.WithArguments(_impactEffect, _impactClip);
 
