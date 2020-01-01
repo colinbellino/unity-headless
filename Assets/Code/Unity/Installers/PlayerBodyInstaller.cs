@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Greed.Core;
+using Greed.Core.StateMachines.PlayerBody;
 using Greed.UnityWrapper;
 using UnityEngine;
 using Zenject;
@@ -17,8 +18,6 @@ namespace Greed.Unity
 
 		public override void InstallBindings()
 		{
-			Container.BindInterfacesTo<PlayerInputHandler>().AsSingle();
-
 			var collectColliderTag = "CollectCollider";
 			Container.BindInterfacesTo<CollectorHandler>().AsSingle()
 				.WithArguments(collectColliderTag);
@@ -44,7 +43,7 @@ namespace Greed.Unity
 					{ typeof(InactiveState), new Transitions { { "Activate", typeof(IdleState) } } },
 					{ typeof(IdleState), new Transitions { { "StartMoving", typeof(MoveState) }, { "Throw", typeof(ThrowState) } } },
 					{ typeof(MoveState), new Transitions { { "StopMoving", typeof(IdleState) }, { "Throw", typeof(ThrowState) } } },
-					{ typeof(ThrowState), new Transitions { { "Done", typeof(InactiveState) } } }
+					{ typeof(ThrowState), new Transitions { { "Done", typeof(InactiveState) } } },
 				};
 			Container.BindInterfacesAndSelfTo<StateMachine>().AsSingle()
 				.WithArguments(transitions);

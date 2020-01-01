@@ -26,9 +26,10 @@ namespace Greed.Unity
 			Container.BindInterfacesAndSelfTo<VisualEffectsSpawner>().AsSingle();
 			Container.Bind<ITime>().To<UnityTime>().AsSingle();
 			Container.Bind<InteractiveObjectFinder>().AsSingle();
-			Container.Bind<PlayerActions>().AsSingle();
 
 			InstallFactories();
+			InstallSignals();
+			InstallPlayer();
 
 			// TODO: Enable this only in dev builds.
 			Container.BindInterfacesTo<DebugMenuHandler>().AsSingle().NonLazy();
@@ -36,8 +37,13 @@ namespace Greed.Unity
 			// Load and bootstrap the game.
 			Container.BindInterfacesTo<Bootstrap>().AsSingle()
 				.WithArguments(Wrappers.Wrap(_playerPrefab.gameObject), _loadedScenes).NonLazy();
+		}
 
-			InstallSignals();
+		private void InstallPlayer()
+		{
+			Container.Bind<PlayerActions>().AsSingle();
+			Container.Bind<EntityInputState>().AsSingle();
+			Container.BindInterfacesTo<PlayerInputHandler>().AsSingle();
 		}
 
 		private void InstallFactories()
@@ -60,6 +66,8 @@ namespace Greed.Unity
 
 			Container.DeclareSignal<PlayerInputsEnabledSignal>();
 			Container.DeclareSignal<PlayerInputsDisabledSignal>();
+			Container.DeclareSignal<PlayerHeadRecalledSignal>();
+			Container.DeclareSignal<PlayerHeadThrownSignal>();
 		}
 	}
 }

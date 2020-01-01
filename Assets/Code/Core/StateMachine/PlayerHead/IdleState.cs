@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace Greed.Core.StateMachines.PlayerBody
+namespace Greed.Core.StateMachines.PlayerHead
 {
 	public class IdleState : State
 	{
@@ -24,18 +24,20 @@ namespace Greed.Core.StateMachines.PlayerBody
 			_signalBus.Fire<PlayerInputsEnabledSignal>();
 		}
 
+		// TODO: Play idle animation after x seconds
 		public override void Tick()
 		{
 			if (_inputState.Interact)
 			{
-				_stateMachine.Value.Transition("Throw");
+				_stateMachine.Value.Transition("Recall");
 			}
 
-			// TODO: Play idle animation after x seconds
 			if (_inputState.Move.magnitude > 0f)
 			{
 				_stateMachine.Value.Transition("StartMoving");
 			}
+
+			base.Tick();
 		}
 	}
 }

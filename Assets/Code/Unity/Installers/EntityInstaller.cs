@@ -36,7 +36,6 @@ namespace Greed.Unity
 				);
 
 			Container.Bind<IEntity>().FromInstance(_facade);
-			Container.Bind<EntityInputState>().AsSingle();
 		}
 	}
 }
