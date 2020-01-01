@@ -8,7 +8,7 @@ namespace Greed.Core
 	{
 		string Name { get; }
 		IEntityView View { get; }
-		Vector3 MoveDirection { get; }
+		Vector3 MoveDirection { get; set; }
 
 		Action<ICollider2D> TriggerEntered { get; set; }
 		Action<ICollider2D> TriggerExited { get; set; }

@@ -4,6 +4,7 @@ using Greed.Core;
 using Greed.UnityWrapper;
 using UnityEngine;
 using Zenject;
+using static Greed.Core.StateMachine;
 
 namespace Greed.Unity
 {
@@ -30,13 +31,17 @@ namespace Greed.Unity
 
 		private void InstallStateMachine()
 		{
-			Container.BindInterfacesAndSelfTo<EntityIdleState>().AsSingle();
-			Container.BindInterfacesAndSelfTo<EntityEncumberedState>().AsSingle();
+			Container.BindInterfacesAndSelfTo<InactiveState>().AsSingle();
+			Container.BindInterfacesAndSelfTo<IdleState>().AsSingle();
+			Container.BindInterfacesAndSelfTo<MoveState>().AsSingle();
+			Container.BindInterfacesAndSelfTo<ThrowState>().AsSingle();
 
-			var transitions = new Dictionary<Type, StateMachine.Transitions>
+			var transitions = new Dictionary<Type, Transitions>
 				{ //
-					{ typeof(EntityIdleState), new StateMachine.Transitions { { "PickUp", typeof(EntityEncumberedState) } } },
-					{ typeof(EntityEncumberedState), new StateMachine.Transitions { { "Throw", typeof(EntityIdleState) } } }
+					{ typeof(InactiveState), new Transitions { { "Activate", typeof(IdleState) } } },
+					{ typeof(IdleState), new Transitions { { "StartMoving", typeof(MoveState) }, { "Throw", typeof(ThrowState) } } },
+					{ typeof(MoveState), new Transitions { { "StopMoving", typeof(IdleState) }, { "Throw", typeof(ThrowState) } } },
+					{ typeof(ThrowState), new Transitions { { "Done", typeof(IdleState) } } }
 				};
 			Container.BindInterfacesAndSelfTo<StateMachine>().AsSingle()
 				.WithArguments(transitions);

@@ -35,7 +35,7 @@ namespace Greed.Core
 			_transitions[_currentType].TryGetValue(eventName, out var newState);
 			if (newState == null)
 			{
-				throw new Exception("Invalid state transition => " + eventName);
+				throw new Exception($"Invalid state transition: {_currentType} => {eventName}");
 			}
 
 			ChangeState(_states[newState]);

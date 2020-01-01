@@ -9,20 +9,17 @@ namespace Greed.Unity
 	[SelectionBase]
 	public class EntityFacade : MonoBehaviour, IEntity
 	{
-		private IMoveDirection _moveHandler;
-
 		public string Name => gameObject.name;
 		public IEntityView View { get; private set; }
-		public Vector3 MoveDirection => _moveHandler.MoveDirection;
+		public Vector3 MoveDirection { get; set; }
 
 		public Action<ICollider2D> TriggerEntered { get; set; } = delegate { };
 		public Action<ICollider2D> TriggerExited { get; set; } = delegate { };
 
 		[Inject]
-		public void Construct(IEntityView view, IMoveDirection moveHandler)
+		public void Construct(IEntityView view)
 		{
 			View = view;
-			_moveHandler = moveHandler;
 		}
 
 		public void Place(Vector3 position) => View.Place(position);
