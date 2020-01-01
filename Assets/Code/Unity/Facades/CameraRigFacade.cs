@@ -21,6 +21,7 @@ namespace Greed.Unity
 		}
 	}
 
+	// FIXME: Delete this once we have the room transitions working.
 	[CustomEditor(typeof(CameraRigFacade))]
 	public class CameraRigFacadeEditor : Editor
 	{
