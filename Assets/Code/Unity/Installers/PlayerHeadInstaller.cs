@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Greed.Unity
 {
-	public class BallInstaller : MonoInstaller
+	public class PlayerHeadInstaller : MonoInstaller
 	{
 		[SerializeField] private AssetReference _impactEffect;
 		[SerializeField] private AudioClip _impactClip;

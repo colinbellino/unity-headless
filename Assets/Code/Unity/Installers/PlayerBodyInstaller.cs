@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Greed.Unity
 {
-	public class PlayerInstaller : MonoInstaller
+	public class PlayerBodyInstaller : MonoInstaller
 	{
 		[Inject] private IStats _stats;
 
