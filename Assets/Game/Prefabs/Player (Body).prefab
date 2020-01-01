@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7599901542118691008}
   - component: {fileID: 8502000720143163144}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player (Body)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,6 +206,7 @@ MonoBehaviour:
   _audioSource: {fileID: 6102293313728564602}
   _physicsCollider: {fileID: 8601473818802745829}
   _stats: {fileID: 11400000, guid: 2f8c0259734d545109a6dc6f782cd557, type: 2}
+  _pickupSlot: {fileID: 2396761187902932465}
 --- !u!114 &8502000720143163144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6fe91debf5e3e44ab834f387d33688f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pickupSlot: {fileID: 2396761187902932465}
 --- !u!1 &618877342254095563
 GameObject:
   m_ObjectHideFlags: 0

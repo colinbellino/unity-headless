@@ -34,6 +34,7 @@ namespace Greed.Core.StateMachines.PlayerBody
 
 		private async void OnHeadRecalled()
 		{
+			// TODO: Find a better way to get the player head.
 			var head = GameObject.Find("Player (Head)").GetComponent<IEntity>(); // Gross
 			await _pickUpHandler.PickUp(head);
 			_stateMachine.Value.Transition("Activate");

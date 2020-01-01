@@ -15,5 +15,6 @@ namespace Greed.Core
 		// TODO: Find a better way to store this.
 		Vector3 MoveDirection { get; set; }
 		IEntity CurrentPickup { get; set; }
+		ITransform PickupSlot { get; }
 	}
 }

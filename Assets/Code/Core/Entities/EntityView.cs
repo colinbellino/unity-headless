@@ -1,3 +1,4 @@
+using System.Collections;
 using Greed.UnityWrapper;
 using UniRx.Async;
 using UnityEngine;
@@ -71,6 +72,18 @@ namespace Greed.Core
 		public void MoveTowards(Vector3 destination, float step)
 		{
 			_transform.Position = Vector3.MoveTowards(_transform.Position, destination, step);
+		}
+
+		public IEnumerator MoveToPosition(Vector3 position, float durationInSeconds)
+		{
+			var currentPosition = _transform.Position;
+			var currentTime = 0f;
+			while (currentTime < 1f)
+			{
+				currentTime += Time.deltaTime / durationInSeconds;
+				_transform.Position = Vector3.Lerp(currentPosition, position, currentTime);
+				yield return null;
+			}
 		}
 
 		public void RotateAround(Vector3 target, Vector3 axis, float angle)
