@@ -2,7 +2,7 @@ using UniRx.Async;
 
 namespace Greed.Core
 {
-	public interface IPickerHandler
+	public interface IPickUpHandler
 	{
 		UniTask PickUp(IEntity entityToPickUp);
 	}

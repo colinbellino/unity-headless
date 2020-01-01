@@ -23,8 +23,11 @@ namespace Greed.Unity
 			Container.BindInterfacesTo<CollectorHandler>().AsSingle()
 				.WithArguments(collectColliderTag);
 
-			Container.BindInterfacesAndSelfTo<PickerHandler>().AsSingle()
+			Container.BindInterfacesTo<PickUpHandler>().AsSingle()
 				.WithArguments(Wrappers.Wrap(_pickupSlot));
+
+			Container.BindInterfacesTo<ThrowHandler>().AsSingle()
+				.WithArguments(_stats.ThrowForce);
 
 			InstallStateMachine();
 		}

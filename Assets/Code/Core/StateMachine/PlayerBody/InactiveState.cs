@@ -6,20 +6,21 @@ namespace Greed.Core
 	public class InactiveState : State
 	{
 		private readonly SignalBus _signalBus;
-		private readonly IPickerHandler _pickerHandler;
+		private readonly IPickUpHandler _pickUpHandler;
 		private readonly PlayerActions _playerActions;
 		private readonly LazyInject<StateMachine> _stateMachine;
+
 		private bool _activating;
 
 		public InactiveState(
 			SignalBus signalBus,
-			IPickerHandler pickerHandler,
+			IPickUpHandler pickerHandler,
 			PlayerActions playerActions,
 			LazyInject<StateMachine> stateMachine
 		)
 		{
 			_signalBus = signalBus;
-			_pickerHandler = pickerHandler;
+			_pickUpHandler = pickerHandler;
 			_playerActions = playerActions;
 			_stateMachine = stateMachine;
 		}
@@ -38,7 +39,7 @@ namespace Greed.Core
 			}
 		}
 
-		public override async void OnExit()
+		public override void OnExit()
 		{
 			_activating = false;
 
@@ -47,9 +48,9 @@ namespace Greed.Core
 
 		private async void PickUpHeadAndActivate()
 		{
-			UnityEngine.Debug.Log("Attaching player head to body.");
-			var head = GameObject.Find("Player (Head)").GetComponent<IEntity>();
-			await _pickerHandler.PickUp(head);
+			var head = GameObject.Find("Player (Head)").GetComponent<IEntity>(); // Gross
+
+			await _pickUpHandler.PickUp(head);
 
 			_stateMachine.Value.Transition("Activate");
 		}

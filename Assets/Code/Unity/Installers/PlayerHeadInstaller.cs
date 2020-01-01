@@ -18,7 +18,7 @@ namespace Greed.Unity
 				.WithArguments(_impactEffect, _impactClip);
 
 			var impactColliderTag = "ImpactCollider";
-			Container.BindInterfacesAndSelfTo<PickupHandler>().AsSingle()
+			Container.BindInterfacesAndSelfTo<PickupImpact>().AsSingle()
 				.WithArguments(impactColliderTag);
 		}
 	}
