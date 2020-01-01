@@ -15,6 +15,7 @@ namespace Greed.Unity
 
 		public Action<ICollider2D> TriggerEntered { get; set; } = delegate { };
 		public Action<ICollider2D> TriggerExited { get; set; } = delegate { };
+		public IEntity CurrentPickup { get; set; }
 
 		[Inject]
 		public void Construct(IEntityView view)

@@ -48,6 +48,7 @@ namespace Greed.Core
 				CurrentState.OnExit();
 			}
 
+			UnityEngine.Debug.Log($"{_currentType} => {state.GetType()}");
 			_currentType = state.GetType();
 
 			if (CurrentState != null)

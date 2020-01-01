@@ -23,25 +23,25 @@ namespace Greed.Core
 
 		public override void Tick()
 		{
-			if (_inputState.Interact)
-			{
-				ThrowPickup();
-			}
+			// if (_inputState.Interact)
+			// {
+			// 	ThrowPickup();
+			// }
 		}
 
-		private async void ThrowPickup()
-		{
-			if (_isBusy)
-			{
-				return;
-			}
+		// private async void ThrowPickup()
+		// {
+		// 	if (_isBusy)
+		// 	{
+		// 		return;
+		// 	}
 
-			_isBusy = true;
+		// 	_isBusy = true;
 
-			await _pickUpHandler.Throw();
-			_stateMachine.Value.Transition("Throw");
+		// 	await _pickUpHandler.Throw();
+		// 	_stateMachine.Value.Transition("Throw");
 
-			_isBusy = false;
-		}
+		// 	_isBusy = false;
+		// }
 	}
 }

@@ -8,9 +8,12 @@ namespace Greed.Core
 	{
 		string Name { get; }
 		IEntityView View { get; }
-		Vector3 MoveDirection { get; set; }
 
 		Action<ICollider2D> TriggerEntered { get; set; }
 		Action<ICollider2D> TriggerExited { get; set; }
+
+		// TODO: Find a better way to store this.
+		Vector3 MoveDirection { get; set; }
+		IEntity CurrentPickup { get; set; }
 	}
 }

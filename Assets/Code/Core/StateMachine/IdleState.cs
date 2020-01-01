@@ -26,6 +26,11 @@ namespace Greed.Core
 
 		public override void Tick()
 		{
+			if (_inputState.Interact)
+			{
+				_stateMachine.Value.Transition("Throw");
+			}
+
 			// TODO: Play idle animation after x seconds
 			if (_inputState.Move.magnitude > 0f)
 			{

@@ -24,7 +24,7 @@ namespace Greed.Unity
 				.WithArguments(collectColliderTag);
 
 			Container.BindInterfacesAndSelfTo<PickerHandler>().AsSingle()
-				.WithArguments(Wrappers.Wrap(_pickupSlot), _stats.ThrowForce);
+				.WithArguments(Wrappers.Wrap(_pickupSlot));
 
 			InstallStateMachine();
 		}
@@ -41,7 +41,7 @@ namespace Greed.Unity
 					{ typeof(InactiveState), new Transitions { { "Activate", typeof(IdleState) } } },
 					{ typeof(IdleState), new Transitions { { "StartMoving", typeof(MoveState) }, { "Throw", typeof(ThrowState) } } },
 					{ typeof(MoveState), new Transitions { { "StopMoving", typeof(IdleState) }, { "Throw", typeof(ThrowState) } } },
-					{ typeof(ThrowState), new Transitions { { "Done", typeof(IdleState) } } }
+					{ typeof(ThrowState), new Transitions { { "Done", typeof(InactiveState) } } }
 				};
 			Container.BindInterfacesAndSelfTo<StateMachine>().AsSingle()
 				.WithArguments(transitions);

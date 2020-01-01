@@ -24,6 +24,11 @@ namespace Greed.Core
 
 		public override void Tick()
 		{
+			if (_inputState.Interact)
+			{
+				_stateMachine.Value.Transition("Throw");
+			}
+
 			var move = _inputState.Move;
 			if (move.magnitude > 0f)
 			{

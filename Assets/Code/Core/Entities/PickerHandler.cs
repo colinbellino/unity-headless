@@ -4,18 +4,14 @@ using Zenject;
 
 namespace Greed.Core
 {
-	public class PickerHandler
+	public class PickerHandler : IPickerHandler
 	{
 		private readonly SignalBus _signalBus;
 		private readonly IEntity _entity;
 		private readonly IEntityView _view;
 		private readonly ITransform _pickupSlot;
-		private readonly int _throwForce;
 
 		private const string _pickUpAnimationName = "Pick Up";
-		private const string _throwAnimationName = "Throw";
-
-		private IEntity _currentPickup;
 
 		public ITransform PickupSlot => _pickupSlot;
 
@@ -23,36 +19,22 @@ namespace Greed.Core
 			SignalBus signalBus,
 			IEntity entity,
 			IEntityView view,
-			ITransform pickupSlot,
-			int throwForce
+			ITransform pickupSlot
 		)
 		{
 			_signalBus = signalBus;
 			_entity = entity;
 			_view = view;
 			_pickupSlot = pickupSlot;
-			_throwForce = throwForce;
 		}
 
 		public async UniTask PickUp(IEntity entityToPickUp)
 		{
+			_entity.CurrentPickup = entityToPickUp;
+
 			_signalBus.Fire(new PickUpStartedSignal { Picker = _entity, Slot = _pickupSlot, Target = entityToPickUp });
 
-			_currentPickup = entityToPickUp;
 			await _view.PlayAnimation(_pickUpAnimationName);
-
-			_signalBus.Fire(new PickUpEndedSignal { Picker = _entity, Target = entityToPickUp });
-		}
-
-		public async UniTask Throw()
-		{
-			var force = _entity.MoveDirection * _throwForce;
-			_signalBus.Fire(new ThrowStartedSignal { Picker = _entity, Target = _currentPickup, Force = force });
-
-			_currentPickup = null;
-			await _view.PlayAnimation(_throwAnimationName);
-
-			_signalBus.Fire(new ThrowEndedSignal { Picker = _entity, Target = _currentPickup });
 		}
 	}
 }
