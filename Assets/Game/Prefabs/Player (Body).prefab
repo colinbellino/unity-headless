@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6629364188596024130}
   - component: {fileID: 7599901542118691008}
   - component: {fileID: 8502000720143163144}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Player (Body)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6fe91debf5e3e44ab834f387d33688f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pickupSlot: {fileID: 0}
 --- !u!1 &618877342254095563
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 618877342254095564}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2986634002844118115}
   - component: {fileID: 8601473818802745829}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Physics Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +309,7 @@ GameObject:
   - component: {fileID: 6234304784185790114}
   - component: {fileID: 1361912220476808382}
   - component: {fileID: 1425542916803428832}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2396761187902932465}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Pickup Slot
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}

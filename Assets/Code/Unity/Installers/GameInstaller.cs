@@ -12,6 +12,9 @@ namespace Greed.Unity
 		[Inject] private EntityFacade _playerPrefab;
 		[Inject] private List<AssetReference> _loadedScenes;
 
+		[SerializeField] private EntityFacade _playerHead;
+		[SerializeField] private EntityFacade _playerBody;
+
 		public override void InstallBindings()
 		{
 			Container.Bind<AsyncProcessor>().FromNewComponentOnNewGameObject().AsSingle();
@@ -41,6 +44,9 @@ namespace Greed.Unity
 
 		private void InstallPlayer()
 		{
+			Container.Bind<IPlayer>().To<PlayerFacade>().AsSingle()
+				.WithArguments(_playerHead, _playerBody);
+
 			Container.Bind<PlayerActions>().AsSingle();
 			Container.Bind<EntityInputState>().AsSingle();
 			Container.BindInterfacesTo<PlayerInputHandler>().AsSingle();

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Greed.Core;
 using Greed.Core.StateMachines.PlayerBody;
-using Greed.UnityWrapper;
 using UnityEngine;
 using Zenject;
 using static Greed.Core.StateMachine;
@@ -13,7 +12,6 @@ namespace Greed.Unity
 	{
 		[Inject] private IStats _stats;
 
-		[Header("Picker")]
 		[SerializeField] private Transform _pickupSlot;
 
 		public override void InstallBindings()

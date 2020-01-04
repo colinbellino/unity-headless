@@ -6,26 +6,26 @@ namespace Greed.Core.StateMachines.PlayerHead
 	public class RecalledState : State
 	{
 		private readonly SignalBus _signalBus;
-		private readonly IEntity _entity;
+		private readonly IEntityView _view;
+		private readonly IPlayer _player;
 		private readonly LazyInject<StateMachine> _stateMachine;
 
 		public RecalledState(
 			SignalBus signalBus,
-			IEntity entity,
+			IEntityView view,
+			IPlayer player,
 			LazyInject<StateMachine> stateMachine
 		)
 		{
 			_signalBus = signalBus;
-			_entity = entity;
+			_view = view;
+			_player = player;
 			_stateMachine = stateMachine;
 		}
 
 		public override async void OnEnter()
 		{
-			// TODO: Find a better way to get the player body.
-			var body = UnityEngine.GameObject.Find("Player (Body)").GetComponent<IEntity>(); // Gross
-			_entity.View.AttachTo(body.PickupSlot, false);
-			await _entity.View.MoveToPosition(body.PickupSlot.Position, 0.3f);
+			await _view.MoveToPosition(_player.Body.PickupSlot.Position, 0.3f);
 
 			_signalBus.Fire<PlayerHeadRecalledSignal>();
 

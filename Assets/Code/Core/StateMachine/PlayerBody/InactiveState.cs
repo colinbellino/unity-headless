@@ -6,16 +6,19 @@ namespace Greed.Core.StateMachines.PlayerBody
 	public class InactiveState : State
 	{
 		private readonly SignalBus _signalBus;
+		private readonly IPlayer _player;
 		private readonly IPickUpHandler _pickUpHandler;
 		private readonly LazyInject<StateMachine> _stateMachine;
 
 		public InactiveState(
 			SignalBus signalBus,
+			IPlayer player,
 			IPickUpHandler pickerHandler,
 			LazyInject<StateMachine> stateMachine
 		)
 		{
 			_signalBus = signalBus;
+			_player = player;
 			_pickUpHandler = pickerHandler;
 			_stateMachine = stateMachine;
 		}
@@ -34,9 +37,7 @@ namespace Greed.Core.StateMachines.PlayerBody
 
 		private async void OnHeadRecalled()
 		{
-			// TODO: Find a better way to get the player head.
-			var head = GameObject.Find("Player (Head)").GetComponent<IEntity>(); // Gross
-			await _pickUpHandler.PickUp(head);
+			await _pickUpHandler.PickUp(_player.Head);
 			_stateMachine.Value.Transition("Activate");
 		}
 	}

@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 8213456230136508408}
   - component: {fileID: 8213456230136508409}
   - component: {fileID: 8213456230136508407}
-  m_Layer: 0
-  m_Name: Ball
+  m_Layer: 11
+  m_Name: Player (Head)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,6 +206,7 @@ MonoBehaviour:
   _audioSource: {fileID: 1695772511066991442}
   _physicsCollider: {fileID: 8213456230611986729}
   _stats: {fileID: 11400000, guid: d3ac7b3e618f443029c7b6c208058ac0, type: 2}
+  _pickupSlot: {fileID: 0}
 --- !u!114 &8213456230136508407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8213456230611986728}
   - component: {fileID: 8213456230611986729}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Physics Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +279,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8213456230686861287}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8213456230751547668}
   - component: {fileID: 8213456230751547669}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Interact Collider
   m_TagString: InteractCollider
   m_Icon: {fileID: 0}
@@ -357,7 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 373790595779829495}
   - component: {fileID: 4182819739712472581}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
