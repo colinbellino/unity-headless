@@ -1,4 +1,3 @@
-using UnityEngine;
 using Zenject;
 
 namespace Greed.Core.StateMachines.PlayerBody
@@ -37,7 +36,7 @@ namespace Greed.Core.StateMachines.PlayerBody
 
 		private async void OnHeadRecalled()
 		{
-			await _pickUpHandler.PickUp(_player.Head);
+			_pickUpHandler.PickUp(_player.Head);
 			_stateMachine.Value.Transition("Activate");
 		}
 	}
