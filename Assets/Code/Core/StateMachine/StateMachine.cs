@@ -53,7 +53,7 @@ namespace Greed.Core
 				CurrentState.OnExit();
 			}
 
-			// UnityEngine.Debug.Log($"{_debugName}: {_currentType?.Name} => {state.GetType().Name}");
+			UnityEngine.Debug.Log($"{_debugName}: {_currentType?.Name} => {state.GetType().Name}");
 			_currentType = state.GetType();
 
 			if (CurrentState != null)

@@ -29,12 +29,14 @@ namespace Greed.Core.StateMachines.PlayerBody
 			if (_inputState.Interact)
 			{
 				_stateMachine.Value.Transition("Throw");
+				return;
 			}
 
 			// TODO: Play idle animation after x seconds
 			if (_inputState.Move.magnitude > 0f)
 			{
 				_stateMachine.Value.Transition("StartMoving");
+				return;
 			}
 		}
 	}

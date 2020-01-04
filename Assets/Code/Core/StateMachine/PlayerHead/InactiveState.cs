@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using Zenject;
 
 namespace Greed.Core.StateMachines.PlayerHead
@@ -26,8 +28,10 @@ namespace Greed.Core.StateMachines.PlayerHead
 			_signalBus.Unsubscribe<PlayerHeadThrownSignal>(OnThrown);
 		}
 
-		private void OnThrown()
+		private async void OnThrown()
 		{
+			await Task.Delay(TimeSpan.FromMilliseconds(300));
+
 			// TODO: play activate animation?
 			_stateMachine.Value.Transition("Throw");
 		}

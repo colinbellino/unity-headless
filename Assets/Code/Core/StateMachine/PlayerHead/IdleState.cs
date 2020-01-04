@@ -30,11 +30,13 @@ namespace Greed.Core.StateMachines.PlayerHead
 			if (_inputState.Interact)
 			{
 				_stateMachine.Value.Transition("Recall");
+				return;
 			}
 
 			if (_inputState.Move.magnitude > 0f)
 			{
 				_stateMachine.Value.Transition("StartMoving");
+				return;
 			}
 
 			base.Tick();
