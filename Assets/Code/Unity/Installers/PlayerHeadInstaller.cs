@@ -32,13 +32,17 @@ namespace Greed.Unity
 			Container.BindInterfacesAndSelfTo<MoveState>().AsSingle();
 			Container.BindInterfacesAndSelfTo<RecalledState>().AsSingle();
 			Container.BindInterfacesAndSelfTo<InactiveState>().AsSingle();
+			Container.BindInterfacesAndSelfTo<ThrownState>().AsSingle();
+			Container.BindInterfacesAndSelfTo<FallState>().AsSingle();
 
 			var transitions = new Dictionary<Type, Transitions>
 				{ //
-					{ typeof(IdleState), new Transitions { { "StartMoving", typeof(MoveState) }, { "Recall", typeof(RecalledState) } } },
-					{ typeof(MoveState), new Transitions { { "StopMoving", typeof(IdleState) }, { "Recall", typeof(RecalledState) } } },
+					{ typeof(IdleState), new Transitions { { "StartMoving", typeof(MoveState) }, { "Recall", typeof(RecalledState) }, { "Fall", typeof(FallState) } } },
+					{ typeof(MoveState), new Transitions { { "StopMoving", typeof(IdleState) }, { "Recall", typeof(RecalledState) }, { "Fall", typeof(FallState) } } },
 					{ typeof(RecalledState), new Transitions { { "Done", typeof(InactiveState) } } },
-					{ typeof(InactiveState), new Transitions { { "Throw", typeof(IdleState) } } },
+					{ typeof(FallState), new Transitions { { "Done", typeof(IdleState) } } },
+					{ typeof(ThrownState), new Transitions { { "Done", typeof(IdleState) } } },
+					{ typeof(InactiveState), new Transitions { { "Throw", typeof(ThrownState) }, { "Fall", typeof(FallState) } } },
 				};
 			Container.BindInterfacesAndSelfTo<StateMachine>().AsSingle()
 				.WithArguments(transitions);

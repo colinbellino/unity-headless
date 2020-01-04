@@ -41,6 +41,7 @@ namespace Greed.Core.StateMachines.PlayerBody
 			else
 			{
 				_stateMachine.Value.Transition("StopMoving");
+				return;
 			}
 
 			_moveHandler.Move(move);

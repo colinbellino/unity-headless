@@ -202,7 +202,7 @@ MonoBehaviour:
   _facade: {fileID: 8213456230136508406}
   _rigidbody: {fileID: 8213456230136508405}
   _transform: {fileID: 8213456230136508404}
-  _animator: {fileID: 0}
+  _animator: {fileID: 727904416932427072}
   _audioSource: {fileID: 1695772511066991442}
   _physicsCollider: {fileID: 8213456230611986729}
   _stats: {fileID: 11400000, guid: d3ac7b3e618f443029c7b6c208058ac0, type: 2}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 8213456230611986729}
   m_Layer: 11
   m_Name: Physics Collider
-  m_TagString: Untagged
+  m_TagString: PhysicsCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -358,6 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 373790595779829495}
   - component: {fileID: 4182819739712472581}
+  - component: {fileID: 727904416932427072}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -430,3 +431,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &727904416932427072
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8429035404959188831}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52cae5a752ad9c44d9ee0f5db472a0c5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

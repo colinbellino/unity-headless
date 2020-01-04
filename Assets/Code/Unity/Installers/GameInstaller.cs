@@ -69,6 +69,7 @@ namespace Greed.Unity
 			Container.DeclareSignal<ThrowStartedSignal>();
 			Container.DeclareSignal<ImpactHitSignal>();
 			Container.DeclareSignal<CollectedSignal>();
+			Container.DeclareSignal<FellSignal>().OptionalSubscriber();
 
 			Container.DeclareSignal<PlayerInputsEnabledSignal>();
 			Container.DeclareSignal<PlayerInputsDisabledSignal>();

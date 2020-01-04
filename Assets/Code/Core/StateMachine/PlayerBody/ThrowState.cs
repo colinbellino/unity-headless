@@ -24,10 +24,9 @@ namespace Greed.Core.StateMachines.PlayerBody
 
 		public override async void OnEnter()
 		{
-			_signalBus.Fire<PlayerInputsDisabledSignal>();
+			_signalBus.Fire<PlayerHeadThrownSignal>();
 
 			await _throwHandler.Throw(_entity.CurrentPickup, _entity.MoveDirection);
-			_signalBus.Fire<PlayerHeadThrownSignal>();
 
 			_stateMachine.Value.Transition("Done");
 		}
