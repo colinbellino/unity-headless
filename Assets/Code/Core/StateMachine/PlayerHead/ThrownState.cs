@@ -6,6 +6,7 @@ namespace Greed.Core.StateMachines.PlayerHead
 	{
 		private readonly SignalBus _signalBus;
 		private readonly IEntity _entity;
+		private readonly ImpactHandler _impactHandler;
 		private readonly LazyInject<StateMachine> _stateMachine;
 
 		private const float _immobileThreshold = 1f;
@@ -13,16 +14,19 @@ namespace Greed.Core.StateMachines.PlayerHead
 		public ThrownState(
 			SignalBus signalBus,
 			IEntity entity,
+			ImpactHandler impactHandler,
 			LazyInject<StateMachine> stateMachine
 		)
 		{
 			_signalBus = signalBus;
 			_entity = entity;
+			_impactHandler = impactHandler;
 			_stateMachine = stateMachine;
 		}
 
 		public override void OnEnter()
 		{
+			_impactHandler.Enable();
 			_signalBus.Subscribe<ImpactHitSignal>(OnImpactHit);
 		}
 
@@ -36,6 +40,7 @@ namespace Greed.Core.StateMachines.PlayerHead
 
 		public override void OnExit()
 		{
+			_impactHandler.Disable();
 			_signalBus.Unsubscribe<ImpactHitSignal>(OnImpactHit);
 		}
 

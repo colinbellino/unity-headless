@@ -67,7 +67,7 @@ namespace Greed.Unity
 			Container.DeclareSignal<PickUpStartedSignal>();
 			Container.DeclareSignal<PickUpEndedSignal>();
 			Container.DeclareSignal<ThrowStartedSignal>();
-			Container.DeclareSignal<ImpactHitSignal>();
+			Container.DeclareSignal<ImpactHitSignal>().OptionalSubscriber();
 			Container.DeclareSignal<CollectedSignal>();
 			Container.DeclareSignal<FellSignal>().OptionalSubscriber();
 
