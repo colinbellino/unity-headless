@@ -17,7 +17,7 @@ namespace Greed.Unity
 		public override void InstallBindings()
 		{
 			Container.BindInterfacesAndSelfTo<PressureActivation>().AsSingle()
-				.WithArguments(_activateClip, _deactivateClip, _activationColliderTag);
+				.WithArguments(_activationColliderTag);
 
 			InstallStateMachine();
 		}
