@@ -91,10 +91,16 @@ namespace Greed.Core
 			_transform.RotateAround(target, axis, angle);
 		}
 
-		public UniTask PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity)
+		public UniTask PlayAnimationTask(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity)
 		{
 			_animator.Play(stateName, layer, normalizedTime);
 			return UniTask.WaitWhile(() => _animator.GetCurrentAnimatorStateInfo(layer).IsName(stateName));
+		}
+
+		public void PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity)
+		{
+			_animator.Play(stateName, layer, normalizedTime);
+			_animator.GetCurrentAnimatorStateInfo(layer).IsName(stateName);
 		}
 
 		public void SetAnimationFloat(string name, float value) => _animator?.SetFloat(name, value);

@@ -24,7 +24,6 @@ namespace Greed.Core.StateMachines.PlayerBody
 
 		public override void OnEnter()
 		{
-			_signalBus.Fire<PlayerInputsDisabledSignal>();
 			_signalBus.Subscribe<PlayerHeadRecalledSignal>(OnHeadRecalled);
 		}
 

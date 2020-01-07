@@ -23,7 +23,8 @@ namespace Greed.Core
 		void RotateAround(Vector3 target, Vector3 axis, float angle);
 		IEnumerator MoveToPosition(Vector3 position, float durationInSeconds);
 
-		UniTask PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity);
+		UniTask PlayAnimationTask(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity);
+		void PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity);
 		void SetAnimationFloat(string name, float value);
 		void SetAnimationTrigger(string name);
 	}

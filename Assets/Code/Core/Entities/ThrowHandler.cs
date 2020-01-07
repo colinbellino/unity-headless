@@ -24,7 +24,7 @@ namespace Greed.Core
 
 			_entity.CurrentPickup = null;
 
-			await _entity.View.PlayAnimation(_throwAnimationName);
+			await _entity.View.PlayAnimationTask(_throwAnimationName);
 		}
 	}
 }

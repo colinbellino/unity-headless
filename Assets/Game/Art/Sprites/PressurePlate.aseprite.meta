@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9aa108ad58e38764f98838b026507aaf
+guid: 083291f2183a9294b9fc67202ecdaf6f
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -12,7 +12,7 @@ ScriptedImporter:
   spriteAtlas: {instanceID: 0}
   frameRate: 60
   sortingLayerName: Entities
-  sortingOrder: 1
+  sortingOrder: 0
   animatorCullingMode: 0
   animatorController: {instanceID: 0}
   errors: []

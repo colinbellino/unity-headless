@@ -21,7 +21,7 @@ namespace Greed.Core
 
 			_entity.CurrentPickup = entityToPickUp;
 
-			await _entity.View.PlayAnimation(_pickUpAnimationName);
+			await _entity.View.PlayAnimationTask(_pickUpAnimationName);
 		}
 	}
 }
