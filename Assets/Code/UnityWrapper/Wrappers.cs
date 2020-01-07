@@ -19,7 +19,7 @@ namespace Greed.UnityWrapper
 		{
 			if (rigidbody == null)
 			{
-				Debug.LogWarning("Didn't wrap Rigidbody2D because it was null.");
+				// Debug.LogWarning("Didn't wrap Rigidbody2D because it was null.");
 				return null;
 			}
 
@@ -30,7 +30,7 @@ namespace Greed.UnityWrapper
 		{
 			if (transform == null)
 			{
-				Debug.LogWarning("Didn't wrap Transform because it was null.");
+				// Debug.LogWarning("Didn't wrap Transform because it was null.");
 				return null;
 			}
 
@@ -41,7 +41,7 @@ namespace Greed.UnityWrapper
 		{
 			if (animator == null)
 			{
-				Debug.LogWarning("Didn't wrap Animator because it was null.");
+				// Debug.LogWarning("Didn't wrap Animator because it was null.");
 				return null;
 			}
 
@@ -52,7 +52,7 @@ namespace Greed.UnityWrapper
 		{
 			if (collider == null)
 			{
-				Debug.LogWarning("Didn't wrap Collider2D because it was null.");
+				// Debug.LogWarning("Didn't wrap Collider2D because it was null.");
 				return null;
 			}
 

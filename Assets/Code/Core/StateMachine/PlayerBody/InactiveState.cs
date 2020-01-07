@@ -30,12 +30,12 @@ namespace Greed.Core.StateMachines.PlayerBody
 
 		public override void OnExit()
 		{
-			_signalBus.Fire<PlayerInputsDisabledSignal>();
 			_signalBus.Unsubscribe<PlayerHeadRecalledSignal>(OnHeadRecalled);
 		}
 
-		private async void OnHeadRecalled()
+		private void OnHeadRecalled()
 		{
+			// TODO: Wait for animation
 			_pickUpHandler.PickUp(_player.Head);
 			_stateMachine.Value.Transition("Activate");
 		}

@@ -20,7 +20,7 @@ namespace Greed.Core
 		public void Initialize()
 		{
 			_signalBus.Subscribe<PlayerInputsEnabledSignal>(EnableDefaultActions);
-			_signalBus.Subscribe<PlayerInputsDisabledSignal>(EnableDefaultActions);
+			_signalBus.Subscribe<PlayerInputsDisabledSignal>(DisableDefaultActions);
 		}
 
 		public void Tick()
