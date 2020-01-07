@@ -28,6 +28,7 @@ namespace Greed.Core.StateMachines.PlayerBody
 			if (_inputState.Interact)
 			{
 				_stateMachine.Value.Transition("Throw");
+				return;
 			}
 
 			var move = _inputState.Move;

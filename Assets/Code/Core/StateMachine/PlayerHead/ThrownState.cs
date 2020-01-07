@@ -8,7 +8,7 @@ namespace Greed.Core.StateMachines.PlayerHead
 		private readonly IEntity _entity;
 		private readonly LazyInject<StateMachine> _stateMachine;
 
-		private const float _immobileThreshold = 0.1f;
+		private const float _immobileThreshold = 1f;
 
 		public ThrownState(
 			SignalBus signalBus,

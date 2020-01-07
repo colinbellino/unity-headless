@@ -35,6 +35,7 @@ namespace Greed.Core.StateMachines.PlayerHead
 			if (_inputState.Interact)
 			{
 				_stateMachine.Value.Transition("Recall");
+				return;
 			}
 
 			var move = _inputState.Move;
@@ -48,6 +49,7 @@ namespace Greed.Core.StateMachines.PlayerHead
 			else
 			{
 				_stateMachine.Value.Transition("StopMoving");
+				return;
 			}
 
 			_moveHandler.Move(move);
