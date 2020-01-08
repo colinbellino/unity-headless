@@ -5,15 +5,16 @@ using Zenject;
 
 namespace Greed.Core
 {
-	public class PressureActivation : IInitializable, IDisposable
+	public class PressureActivation : IInitializable, IDisposable, IActivable
 	{
 		private readonly SignalBus _signalBus;
 		private readonly IEntity _entity;
 		private readonly string _colliderTag;
 		private readonly int _requiredActivators = 1;
 
+		public bool IsActive { get; private set; }
+
 		private readonly List<IEntity> _activators = new List<IEntity>();
-		private bool _activated = false;
 
 		public PressureActivation(
 			SignalBus signalBus,
@@ -65,13 +66,18 @@ namespace Greed.Core
 		private void TrySendToggleSignal()
 		{
 			var activated = _activators.Count >= _requiredActivators;
-			if (_activated != activated)
+			if (IsActive != activated)
 			{
 				var signal = new ButtonToggledSignal { Target = _entity };
 				_signalBus.Fire(signal);
 
-				_activated = activated;
+				IsActive = activated;
 			}
 		}
+	}
+
+	public interface IActivable
+	{
+		bool IsActive { get; }
 	}
 }

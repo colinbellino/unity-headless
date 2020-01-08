@@ -72,6 +72,8 @@ GameObject:
   - component: {fileID: 4105874382419439148}
   - component: {fileID: 4105874382419439149}
   - component: {fileID: 4105874382419439142}
+  - component: {fileID: 4638387925681604378}
+  - component: {fileID: 6184176994388788969}
   m_Layer: 0
   m_Name: Pressure Plate
   m_TagString: Untagged
@@ -275,9 +277,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f1c1e4020f6ee46ba5ff14fe563152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activateClip: {fileID: 0}
-  _deactivateClip: {fileID: 0}
   _activationColliderTag: PhysicsCollider
+--- !u!114 &4638387925681604378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4105874382419439143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398f53a6ac1ea1048aa539d9c70070c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6184176994388788969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4105874382419439143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9afd1a077f45d294f9c46d861cdf8f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4105874382674650674
 GameObject:
   m_ObjectHideFlags: 0

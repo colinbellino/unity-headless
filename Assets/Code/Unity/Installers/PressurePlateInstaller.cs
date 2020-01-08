@@ -10,8 +10,6 @@ namespace Greed.Unity
 {
 	public class PressurePlateInstaller : MonoInstaller
 	{
-		[SerializeField] private AudioClip _activateClip;
-		[SerializeField] private AudioClip _deactivateClip;
 		[SerializeField] private string _activationColliderTag = "PhysicsCollider";
 
 		public override void InstallBindings()
