@@ -32,11 +32,13 @@ namespace Greed.Core
 
 		public void Enable()
 		{
+			_entity.View.PhysicsCollider.Enabled = false;
 			_signalBus.Subscribe<ImpactHitSignal>(OnImpactHit);
 		}
 
 		public void Disable()
 		{
+			_entity.View.PhysicsCollider.Enabled = true;
 			_signalBus.Unsubscribe<ImpactHitSignal>(OnImpactHit);
 		}
 

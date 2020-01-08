@@ -1,6 +1,5 @@
 using System;
 using Greed.UnityWrapper;
-using UnityEngine;
 using Zenject;
 
 namespace Greed.Core
@@ -39,7 +38,7 @@ namespace Greed.Core
 				return;
 			}
 
-			var activator = collider.GameObject.GetComponent<IEntity>();
+			var activator = collider.GameObject.GetComponentInParent<IEntity>();
 			var signal = new ButtonToggledSignal { Target = _entity, Activator = activator };
 			_signalBus.Fire(signal);
 		}

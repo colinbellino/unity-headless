@@ -24,10 +24,6 @@ namespace Greed.Core.StateMachines.PlayerHead
 
 		public override void OnEnter()
 		{
-			// Hack to make sure the trigger are checked again.
-			_entity.View.PhysicsCollider.Enabled = false;
-			_entity.View.PhysicsCollider.Enabled = true;
-
 			_signalBus.Fire<PlayerInputsEnabledSignal>();
 			_signalBus.Subscribe<FellSignal>(OnFell);
 		}
