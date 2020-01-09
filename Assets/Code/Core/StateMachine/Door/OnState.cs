@@ -1,15 +1,15 @@
 using Zenject;
 
-namespace Greed.Core.StateMachines.Button
+namespace Greed.Core.StateMachines.Door
 {
-	public class OffState : State
+	public class OnState : State
 	{
 		private readonly SignalBus _signalBus;
 		private readonly IEntityView _view;
 		private readonly IPowerSource _powerSource;
 		private readonly LazyInject<StateMachine> _stateMachine;
 
-		public OffState(
+		public OnState(
 			SignalBus signalBus,
 			IEntityView view,
 			IPowerSource powerSource,
@@ -24,7 +24,7 @@ namespace Greed.Core.StateMachines.Button
 
 		public override void OnEnter()
 		{
-			_view.PlayAnimation("Off");
+			_view.PlayAnimation("On");
 
 			_signalBus.Subscribe<PowerSourceToggledSignal>(OnActivated);
 		}

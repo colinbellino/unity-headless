@@ -1,4 +1,3 @@
-using Greed.Core;
 using Zenject;
 
 namespace Greed.Unity
@@ -7,7 +6,7 @@ namespace Greed.Unity
 	{
 		public override void InstallBindings()
 		{
-			Container.Bind<IPowerSource>().To<PowerSource>().FromComponentOnRoot();
+			Container.BindInterfacesAndSelfTo<PowerSource>().FromComponentOnRoot();
 		}
 	}
 }

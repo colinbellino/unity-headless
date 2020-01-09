@@ -5,35 +5,38 @@ namespace Greed.Core.StateMachines.Button
 	public class OnState : State
 	{
 		private readonly SignalBus _signalBus;
-		private readonly IEntity _entity;
+		private readonly IEntityView _view;
+		private readonly IPowerSource _powerSource;
 		private readonly LazyInject<StateMachine> _stateMachine;
 
 		public OnState(
-			IEntity entity,
 			SignalBus signalBus,
+			IEntityView view,
+			IPowerSource powerSource,
 			LazyInject<StateMachine> stateMachine
 		)
 		{
 			_signalBus = signalBus;
-			_entity = entity;
+			_view = view;
+			_powerSource = powerSource;
 			_stateMachine = stateMachine;
 		}
 
 		public override void OnEnter()
 		{
-			_entity.View.PlayAnimation("On");
+			_view.PlayAnimation("On");
 
-			_signalBus.Subscribe<ButtonToggledSignal>(OnActivated);
+			_signalBus.Subscribe<PowerSourceToggledSignal>(OnActivated);
 		}
 
 		public override void OnExit()
 		{
-			_signalBus.Unsubscribe<ButtonToggledSignal>(OnActivated);
+			_signalBus.Unsubscribe<PowerSourceToggledSignal>(OnActivated);
 		}
 
-		private void OnActivated(ButtonToggledSignal args)
+		private void OnActivated(PowerSourceToggledSignal args)
 		{
-			if (args.Target == _entity)
+			if (args.Source == _powerSource)
 			{
 				_stateMachine.Value.Transition("Toggle");
 			}

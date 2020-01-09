@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace Greed.Core.StateMachines.Button
+namespace Greed.Core.StateMachines.Door
 {
 	public class OffState : State
 	{

@@ -9,6 +9,7 @@ namespace Greed.Core
 	{
 		private readonly SignalBus _signalBus;
 		private readonly IEntity _entity;
+		private readonly IPowerSource _powerSource;
 		private readonly string _colliderTag;
 		private readonly int _requiredActivators = 1;
 
@@ -19,11 +20,13 @@ namespace Greed.Core
 		public PressureActivation(
 			SignalBus signalBus,
 			IEntity entity,
+			IPowerSource powerSource,
 			string colliderTag
 		)
 		{
 			_signalBus = signalBus;
 			_entity = entity;
+			_powerSource = powerSource;
 			_colliderTag = colliderTag;
 		}
 
@@ -65,13 +68,12 @@ namespace Greed.Core
 
 		private void TrySendToggleSignal()
 		{
-			var activated = _activators.Count >= _requiredActivators;
-			if (IsActive != activated)
+			var newIsActive = _activators.Count >= _requiredActivators;
+			if (IsActive != newIsActive)
 			{
-				var signal = new ButtonToggledSignal { Target = _entity };
+				IsActive = newIsActive;
+				var signal = new PowerSourceToggledSignal { Source = _powerSource, IsActive = newIsActive };
 				_signalBus.Fire(signal);
-
-				IsActive = activated;
 			}
 		}
 	}
