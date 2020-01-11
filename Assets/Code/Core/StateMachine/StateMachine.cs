@@ -17,6 +17,10 @@ namespace Greed.Core
 		public StateMachine(Dictionary<Type, Transitions> transitions, List<IState> states, IEntity entity)
 		{
 			_transitions = transitions;
+			if (entity == null)
+			{
+				throw new Exception("Missing entity from StateMachine.");
+			}
 			_debugName = entity.Name;
 			_states = states.ToList().ToDictionary(item => item.GetType(), item => item);
 		}

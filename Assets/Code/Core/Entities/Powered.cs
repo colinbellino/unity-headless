@@ -5,11 +5,13 @@ using Zenject;
 
 namespace Greed.Core
 {
-	public class Powered : IInitializable, IDisposable
+	public class Powered : IInitializable, IDisposable, IPowered
 	{
 		private readonly SignalBus _signalBus;
 		private readonly List<IPowerSource> _powerSources;
 		private readonly int _powerRequired = 1;
+
+		private bool _isActive;
 
 		public Powered(
 			SignalBus signalBus,
@@ -34,8 +36,13 @@ namespace Greed.Core
 
 		private void OnPowerSourceActivated()
 		{
-			var isPowered = _powerSources.Where(source => source.IsActive).Count() >= _powerRequired;
-			UnityEngine.Debug.Log($"is powered ? {isPowered}");
+			var isActive = _powerSources.Where(source => source.IsActive).Count() >= _powerRequired;
+			if (_isActive != isActive)
+			{
+				var signal = new PoweredToggledSignal { Powered = this, IsActive = isActive };
+				_signalBus.Fire(signal);
+				_isActive = isActive;
+			}
 		}
 	}
 }

@@ -2,41 +2,41 @@ using Zenject;
 
 namespace Greed.Core.StateMachines.Door
 {
-	public class OffState : State
+	public class OpeningState : State
 	{
 		private readonly SignalBus _signalBus;
 		private readonly IEntityView _view;
-		private readonly IPowerSource _powerSource;
+		private readonly IPowered _powered;
 		private readonly LazyInject<StateMachine> _stateMachine;
 
-		public OffState(
+		public OpeningState(
 			SignalBus signalBus,
 			IEntityView view,
-			IPowerSource powerSource,
+			IPowered powered,
 			LazyInject<StateMachine> stateMachine
 		)
 		{
 			_signalBus = signalBus;
 			_view = view;
-			_powerSource = powerSource;
+			_powered = powered;
 			_stateMachine = stateMachine;
 		}
 
 		public override void OnEnter()
 		{
-			_view.PlayAnimation("Off");
+			_view.PlayAnimation("Opened");
 
-			_signalBus.Subscribe<PowerSourceToggledSignal>(OnActivated);
+			_signalBus.Subscribe<PoweredToggledSignal>(OnActivated);
 		}
 
 		public override void OnExit()
 		{
-			_signalBus.Unsubscribe<PowerSourceToggledSignal>(OnActivated);
+			_signalBus.Unsubscribe<PoweredToggledSignal>(OnActivated);
 		}
 
-		private void OnActivated(PowerSourceToggledSignal args)
+		private void OnActivated(PoweredToggledSignal args)
 		{
-			if (args.Source == _powerSource)
+			if (args.Powered == _powered)
 			{
 				_stateMachine.Value.Transition("Toggle");
 			}
