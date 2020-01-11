@@ -204,7 +204,7 @@ MonoBehaviour:
   _transform: {fileID: 618877341359465107}
   _animator: {fileID: 1425542916803428832}
   _audioSource: {fileID: 6102293313728564602}
-  _physicsCollider: {fileID: 8601473818802745829}
+  _physicsCollider: {fileID: 0}
   _stats: {fileID: 11400000, guid: 2f8c0259734d545109a6dc6f782cd557, type: 2}
   _pickupSlot: {fileID: 2396761187902932465}
 --- !u!114 &8502000720143163144
@@ -260,7 +260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2986634002844118115}
-  - component: {fileID: 8601473818802745829}
+  - component: {fileID: 776400538}
   m_Layer: 12
   m_Name: Physics Collider
   m_TagString: PhysicsCollider
@@ -282,8 +282,8 @@ Transform:
   m_Father: {fileID: 618877341359465107}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &8601473818802745829
-CapsuleCollider2D:
+--- !u!58 &776400538
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -296,8 +296,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 0
+  serializedVersion: 2
+  m_Radius: 0.4
 --- !u!1 &6813319873153815853
 GameObject:
   m_ObjectHideFlags: 0

@@ -392,6 +392,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7599901542118691008, guid: dff04ccc6c3aa4e209d21abd8891402b,
+        type: 3}
+      propertyPath: _physicsCollider
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dff04ccc6c3aa4e209d21abd8891402b, type: 3}
 --- !u!1 &1119440952
@@ -649,7 +654,7 @@ PrefabInstance:
     - target: {fileID: 8213456230611986729, guid: 0c3b956ea95e1b34baca57cbba0e4dc0,
         type: 3}
       propertyPath: m_Radius
-      value: 0.45
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c3b956ea95e1b34baca57cbba0e4dc0, type: 3}
