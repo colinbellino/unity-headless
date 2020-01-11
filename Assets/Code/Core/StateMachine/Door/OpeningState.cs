@@ -26,12 +26,12 @@ namespace Greed.Core.StateMachines.Door
 		{
 			_view.PlayAnimation("Opened");
 
-			_signalBus.Subscribe<PoweredToggledSignal>(OnActivated);
+			// _signalBus.Subscribe<PoweredToggledSignal>(OnActivated);
 		}
 
 		public override void OnExit()
 		{
-			_signalBus.Unsubscribe<PoweredToggledSignal>(OnActivated);
+			// _signalBus.Unsubscribe<PoweredToggledSignal>(OnActivated);
 		}
 
 		private void OnActivated(PoweredToggledSignal args)
