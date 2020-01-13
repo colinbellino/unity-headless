@@ -1,51 +1,27 @@
+using System;
 using Greed.Core;
-using UnityEditor;
 using UnityEngine;
 using Zenject;
 
 namespace Greed.Unity
 {
-	public class CameraRigFacade : MonoBehaviour, ICameraRig
+	public class CameraRigFacade : MonoBehaviour
 	{
-		private CameraRig _rig;
+		private ICameraRig _rig;
 
 		[Inject]
-		public void Construct(CameraRig rig)
+		public void Construct(ICameraRig rig)
 		{
 			_rig = rig;
 		}
 
-		public void MoveCameraInDirection(Vector2Int direction)
+		public void OnCollisionEnter2D(Collision2D collision)
 		{
-			_rig.MoveCameraInDirection(direction);
-		}
-	}
-
-	// FIXME: Delete this once we have the room transitions working.
-	[CustomEditor(typeof(CameraRigFacade))]
-	public class CameraRigFacadeEditor : Editor
-	{
-		public override void OnInspectorGUI()
-		{
-			CameraRigFacade rig = (CameraRigFacade) target;
-
-			DrawDefaultInspector();
-
-			GUI.enabled = EditorApplication.isPlaying;
-			if (GUILayout.Button("left"))
+			if (collision.transform.root.CompareTag("Player"))
 			{
-				rig.MoveCameraInDirection(new Vector2Int(-32, 0));
+				Enum.TryParse(collision.otherCollider.name, out Directions direction);
+				_rig.MoveOnGrid(direction.ToVector());
 			}
-			if (GUILayout.Button("right"))
-			{
-				rig.MoveCameraInDirection(new Vector2Int(32, 0));
-			}
-			// if (GUILayout.Button("Center to Player"))
-			// {
-			// 	var player = FindObjectOfType<Player>();
-			// 	rig.MoveCameraInDirection(player.transform.position);
-			// }
-			GUI.enabled = true;
 		}
 	}
 }
