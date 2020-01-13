@@ -72,7 +72,7 @@ namespace Greed.Unity
 			Container.DeclareSignal<FellSignal>().OptionalSubscriber();
 			Container.DeclareSignal<ButtonActivatedSignal>();
 			Container.DeclareSignal<PowerSourceToggledSignal>();
-			Container.DeclareSignal<PoweredToggledSignal>();
+			Container.DeclareSignal<PoweredToggledSignal>().OptionalSubscriber();
 
 			Container.DeclareSignal<PlayerInputsEnabledSignal>();
 			Container.DeclareSignal<PlayerInputsDisabledSignal>();
