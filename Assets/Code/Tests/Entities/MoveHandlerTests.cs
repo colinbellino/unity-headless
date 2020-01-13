@@ -10,7 +10,6 @@ namespace Greed.Tests
 	{
 		private MoveHandler _handler;
 
-		private EntityInputState _inputState;
 		private IEntityView _view;
 		private ITime _time;
 		private int _speed;
@@ -18,52 +17,48 @@ namespace Greed.Tests
 		[SetUp]
 		public void SetUp()
 		{
-			_inputState = new EntityInputState();
 			_view = Substitute.For<IEntityView>();
 			_time = Substitute.For<ITime>();
 
-			WhenMoveInput(Vector3.right);
 			WhenFixedDeltaTime(1f);
 			WhenSpeed(1);
 		}
 
 		[Test]
-		public void WhenMoveInputEast_DoesMovePositionTo1x0()
+		public void WhenMoveInputIsRight_DoesMovePositionTo1x0()
 		{
-			FixedTick();
-			ThenMovePosition(Vector3.right);
+			Move(Vector3.right);
+			ThenMovePositionWasCalled(Vector3.right);
 		}
 
 		[Test]
-		public void WhenNormalNorth_DoesMovePosition0x1()
+		public void WhenMoveInputIsUp_DoesMovePosition0x1()
 		{
-			WhenMoveInput(Vector3.up);
-			FixedTick();
-			ThenMovePosition(Vector3.up);
+			Move(Vector3.up);
+			ThenMovePositionWasCalled(Vector3.up);
+		}
+
+		[Test]
+		public void WhenMoveInputIs0_DoesntMovePosition()
+		{
+			Move(Vector3.zero);
+			ThenMovePositionWasCalled(Vector3.zero);
 		}
 
 		[Test]
 		public void WhenSpeedIs0_DoesntMovePosition()
 		{
 			WhenSpeed(0);
-			FixedTick();
-			ThenMovePosition(Vector3.zero);
-		}
-
-		[Test]
-		public void WhenMoveIs0_DoesntMovePosition()
-		{
-			WhenMoveInput(Vector3.zero);
-			FixedTick();
-			ThenMovePosition(Vector3.zero);
+			Move(Vector3.right);
+			ThenMovePositionWasCalled(Vector3.zero);
 		}
 
 		[Test]
 		public void WhenFixedDeltaTimeIs0_DoesntMovePosition()
 		{
 			WhenFixedDeltaTime(0f);
-			FixedTick();
-			ThenMovePosition(Vector3.zero);
+			Move(Vector3.right);
+			ThenMovePositionWasCalled(Vector3.zero);
 		}
 
 		private void WhenSpeed(int value)
@@ -71,23 +66,18 @@ namespace Greed.Tests
 			_speed = value;
 		}
 
-		private void WhenMoveInput(Vector3 value)
-		{
-			_inputState.Move = value;
-		}
-
 		private void WhenFixedDeltaTime(float value)
 		{
 			_time.FixedDeltaTime.Returns(value);
 		}
 
-		private void FixedTick()
+		private void Move(Vector3 position)
 		{
-			_handler = new MoveHandler(_inputState, _view, _time, _speed);
-			_handler.FixedTick();
+			_handler = new MoveHandler(_view, _time, _speed);
+			_handler.Move(position);
 		}
 
-		private void ThenMovePosition(Vector3 position)
+		private void ThenMovePositionWasCalled(Vector3 position)
 		{
 			_view.Received().MovePosition(position);
 		}

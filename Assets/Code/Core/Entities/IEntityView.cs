@@ -1,3 +1,4 @@
+using System.Collections;
 using Greed.UnityWrapper;
 using UniRx.Async;
 using UnityEngine;
@@ -20,8 +21,10 @@ namespace Greed.Core
 		void AddForce(Vector2 force, ForceMode2D mode = ForceMode2D.Force);
 		void MoveTowards(Vector3 destination, float step);
 		void RotateAround(Vector3 target, Vector3 axis, float angle);
+		IEnumerator MoveToPosition(Vector3 position, float durationInSeconds);
 
-		UniTask PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity);
+		UniTask PlayAnimationTask(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity);
+		void PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity);
 		void SetAnimationFloat(string name, float value);
 		void SetAnimationTrigger(string name);
 	}

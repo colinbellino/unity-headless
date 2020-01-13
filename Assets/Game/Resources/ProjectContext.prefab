@@ -59,7 +59,7 @@ MonoBehaviour:
     _signalSettings:
       _defaultSyncMode: 0
       _missingHandlerDefaultResponse: 2
-      _requireStrictUnsubscribe: 1
+      _requireStrictUnsubscribe: 0
       _defaultAsyncTickPriority: 1
 --- !u!114 &7022043338189742319
 MonoBehaviour:

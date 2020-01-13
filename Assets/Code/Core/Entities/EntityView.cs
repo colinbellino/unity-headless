@@ -1,3 +1,4 @@
+using System.Collections;
 using Greed.UnityWrapper;
 using UniRx.Async;
 using UnityEngine;
@@ -73,19 +74,37 @@ namespace Greed.Core
 			_transform.Position = Vector3.MoveTowards(_transform.Position, destination, step);
 		}
 
+		public IEnumerator MoveToPosition(Vector3 position, float durationInSeconds)
+		{
+			var currentPosition = _transform.Position;
+			var currentTime = 0f;
+			while (currentTime < 1f)
+			{
+				currentTime += Time.deltaTime / durationInSeconds;
+				_transform.Position = Vector3.Lerp(currentPosition, position, currentTime);
+				yield return null;
+			}
+		}
+
 		public void RotateAround(Vector3 target, Vector3 axis, float angle)
 		{
 			_transform.RotateAround(target, axis, angle);
 		}
 
-		public UniTask PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity)
+		public UniTask PlayAnimationTask(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity)
 		{
 			_animator.Play(stateName, layer, normalizedTime);
 			return UniTask.WaitWhile(() => _animator.GetCurrentAnimatorStateInfo(layer).IsName(stateName));
 		}
 
-		public void SetAnimationFloat(string name, float value) => _animator.SetFloat(name, value);
+		public void PlayAnimation(string stateName, int layer = 0, float normalizedTime = float.NegativeInfinity)
+		{
+			_animator.Play(stateName, layer, normalizedTime);
+			_animator.GetCurrentAnimatorStateInfo(layer).IsName(stateName);
+		}
 
-		public void SetAnimationTrigger(string name) => _animator.SetTrigger(name);
+		public void SetAnimationFloat(string name, float value) => _animator?.SetFloat(name, value);
+
+		public void SetAnimationTrigger(string name) => _animator?.SetTrigger(name);
 	}
 }

@@ -17,6 +17,9 @@ namespace Greed.Unity
 		[Header("Stats")]
 		[SerializeField] private Stats _stats;
 
+		[Header("Picker")]
+		[SerializeField] private Transform _pickupSlot;
+
 		public override void InstallBindings()
 		{
 			Container.Bind<IStats>().FromInstance(_stats);
@@ -35,8 +38,8 @@ namespace Greed.Unity
 					Wrappers.Wrap(_physicsCollider)
 				);
 
-			Container.Bind<IEntity>().FromInstance(_facade);
-			Container.Bind<EntityInputState>().AsSingle();
+			Container.Bind<ITransform>().FromInstance(Wrappers.Wrap(_pickupSlot)).WhenInjectedInto<EntityFacade>();
+			Container.Bind<IEntity>().To<EntityFacade>().FromInstance(_facade);
 		}
 	}
 }

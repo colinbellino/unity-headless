@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: Wall3
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 5389135630992080249, guid: 35d6df1f4f9aa4b25848ced4bc72c3fc,
+  m_DefaultSprite: {fileID: 6913081516446318415, guid: 35d6df1f4f9aa4b25848ced4bc72c3fc,
     type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1

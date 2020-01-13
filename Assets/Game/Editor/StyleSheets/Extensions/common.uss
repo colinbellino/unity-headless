@@ -1,0 +1,18 @@
+/* Play button (when active) */
+.AppCommandLeftOn {
+    background-color: rgba(255, 0, 0, 0.8);
+}
+
+/* Play button (default), uncomment to enable */
+/*
+.AppCommandLeft {
+    background-color: #3a79bb;
+}
+*/
+
+/* Play button (default + hover), uncomment to enable */
+/*
+.AppCommandLeft:hover {
+    background-color: #5493D5;
+}
+*/

@@ -162,6 +162,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Debug1",
+                    "type": "Button",
+                    "id": "d7cf5f9a-1fc9-420a-b37b-e09522dc8698",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -184,6 +192,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9c93887f-3b61-44be-b734-23f57167ed3d",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Debug1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d72ed445-1cca-4948-b42b-237d439ce440",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Debug1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

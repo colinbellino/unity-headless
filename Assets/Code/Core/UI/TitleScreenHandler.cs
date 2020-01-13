@@ -47,7 +47,6 @@ namespace Greed.Core
 
 		private void OnStartPerformed(InputAction.CallbackContext context)
 		{
-			UnityEngine.Debug.Log("--- START GAME ---");
 			_signalBus.Fire(new GameStartedSignal());
 		}
 	}

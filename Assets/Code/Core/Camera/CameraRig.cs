@@ -1,15 +1,20 @@
-using System;
 using System.Collections;
 using Greed.UnityWrapper;
 using UnityEngine;
 
 namespace Greed.Core
 {
-	public class CameraRig
+	public class CameraRig : ICameraRig
 	{
 		private readonly Transform _rig;
 		private readonly float _speed = 10f;
 		private readonly AsyncProcessor _asyncProcessor;
+		private readonly Vector2Int _screenSize = new Vector2Int(16, 9);
+
+		private IEnumerator _moveEnumerator;
+		private Vector2Int _position;
+
+		public static Vector3 GridToWorldSpace(Vector2 value) => new Vector3(value.x, value.y, 0f);
 
 		public CameraRig(Transform rig, AsyncProcessor asyncProcessor)
 		{
@@ -17,34 +22,16 @@ namespace Greed.Core
 			_asyncProcessor = asyncProcessor;
 		}
 
-		public static Vector3 GridToWorldSpace(Vector2 value) => new Vector3(value.x, value.y, 0f);
-
-		public Action OnCameraMoveStart = delegate { };
-		public Action OnCameraMoveEnd = delegate { };
-
-		private IEnumerator _transition;
-		private Vector2Int _gridPosition;
-
-		public void MoveCameraInDirection(Vector2Int direction)
+		public void MoveOnGrid(Vector2Int direction)
 		{
-			if (_transition != null)
+			if (_moveEnumerator != null)
 			{
-				_asyncProcessor.StopCoroutine(_transition);
+				_asyncProcessor.StopCoroutine(_moveEnumerator);
 			}
 
-			_transition = MoveInDirection(direction);
-			_asyncProcessor.StartCoroutine(_transition);
-		}
-
-		private IEnumerator MoveInDirection(Vector2Int direction)
-		{
-			_gridPosition += direction;
-
-			OnCameraMoveStart();
-
-			yield return LerpCameraTo(GridToWorldSpace(_gridPosition));
-
-			OnCameraMoveEnd();
+			_position += direction * _screenSize;
+			_moveEnumerator = LerpCameraTo(GridToWorldSpace(_position));
+			_asyncProcessor.StartCoroutine(_moveEnumerator);
 		}
 
 		private IEnumerator LerpCameraTo(Vector3 destination)

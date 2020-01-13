@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace Greed.Core
 {
-	public class ImpactHandler : IInitializable, IDisposable
+	public class ImpactHandler
 	{
 		private readonly SignalBus _signalBus;
 		private readonly IEntity _entity;
@@ -31,20 +30,22 @@ namespace Greed.Core
 			_impactClip = impactClip;
 		}
 
-		public void Initialize()
+		public void Enable()
 		{
+			_entity.View.PhysicsCollider.Enabled = false;
 			_signalBus.Subscribe<ImpactHitSignal>(OnImpactHit);
 		}
 
-		public void Dispose()
+		public void Disable()
 		{
+			_entity.View.PhysicsCollider.Enabled = true;
 			_signalBus.Unsubscribe<ImpactHitSignal>(OnImpactHit);
 		}
 
 		private void OnImpactHit(ImpactHitSignal args)
 		{
 			(var origin, var other) = args;
-			if (other == _entity)
+			if (origin != _entity)
 			{
 				return;
 			}
