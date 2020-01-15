@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Overworld_54
+  m_Script: {fileID: 11500000, guid: 81a7171d4c5f0314084e896ad12af4fc, type: 3}
+  m_Name: DoorCustom
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -4697379989729154493, guid: 35d6df1f4f9aa4b25848ced4bc72c3fc,
+  m_Sprite: {fileID: 1265346099965646356, guid: 549eceebd3b5eda4782bcbff1e36a379,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
@@ -32,6 +32,7 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 0}
+  m_InstancedGameObject: {fileID: 3575142569279981011, guid: 3410aeac52337a74fa9abb52e49cbcf1,
+    type: 3}
   m_Flags: 1
   m_ColliderType: 1
