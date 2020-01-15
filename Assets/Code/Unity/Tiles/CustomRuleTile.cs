@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Greed.Core;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -6,44 +8,64 @@ using UnityEngine.Tilemaps;
 namespace Greed.Unity
 {
 	[CreateAssetMenu(fileName = "New Custom Rule Tile", menuName = "Tiles/Custom Rule Tile")]
-	public class CustomRuleTile : Tile
+	public class CustomRuleTile : RuleTile
 	{
-		// private readonly List<PowerSource> _powerSources = new List<PowerSource>();
-		private List<PowerSource> PowerSources => gameObject.GetComponent<PoweredInstaller>()._powerSources;
+		private PoweredInstaller _poweredInstaller;
+		private GameObject bla;
+		private List<PowerSource> _powerSources => GetCachedPoweredInstaller().bla;
 
-		public void AddPowerSource(PowerSource powerSource)
+		private PoweredInstaller GetCachedPoweredInstaller()
 		{
-			if (PowerSources.Contains(powerSource))
+			if (_poweredInstaller == null)
 			{
-				return;
+				_poweredInstaller = bla.GetComponent<PoweredInstaller>();
 			}
 
-			PowerSources.Add(powerSource);
-			UnityEngine.Debug.Log(PowerSources.Count);
+			return _poweredInstaller;
 		}
 
-		// public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
-		// {
-		//     tileData.gameObject = m_InstancedGameObject;
-		// }
+		// TODO: Store this in another class maybe instead of inside the tiles?
+		public void AddPowerSource(PowerSource powerSource)
+		{
+			UnityEngine.Debug.Log("AddPowerSource " + bla?.name);
+			// if (_powerSources.Contains(powerSource))
+			// {
+			// 	Debug.LogWarning("Power source already connected: " + powerSource.name, _gameObject);
+			// 	return;
+			// }
 
-		// public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
-		// {
-		// 	UnityEngine.Debug.Log("start up " + _powerSources.Count);
-		// 	return true;
-		// }
+			// _powerSources.Add(powerSource);
+			// Debug.Log("Power source connected: " + powerSource.name, _gameObject);
+		}
 
-		// public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
-		// {
-		// 	base.GetTileData(position, tilemap, ref tileData);
+		public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
+		{
+			base.GetTileData(position, tilemap, ref tileData);
+			// UnityEngine.Debug.Log("GetTileData " + tileData.gameObject?.name);
 
-		// 	var powered = tileData.gameObject.GetComponent<PoweredInstaller>();
-		// 	powered._powerSources = _powerSources;
-		// 	// UnityEngine.Debug.Log(tileData.gameObject.transform.root.hideFlags);
-		// 	// tileData.gameObject.transform.root.hideFlags = HideFlags.None;
+			// UnityEngine.Debug.Log("GetTileData", _gameObject);
+		}
 
-		// 	UnityEngine.Debug.Log("GetTileData " + powered._powerSources.Count);
-		// 	// UnityEngine.Debug.Log("gettiledata " + _powerSources.Count);
-		// }
+		public override bool StartUp(Vector3Int location, ITilemap tilemap, GameObject instantiatedGameObject)
+		{
+			base.StartUp(location, tilemap, instantiatedGameObject);
+
+			if (instantiatedGameObject)
+			{
+				instantiatedGameObject.name = RandomString(10);
+				bla = instantiatedGameObject;
+			}
+			UnityEngine.Debug.Log("StartUp " + instantiatedGameObject?.name);
+
+			return true;
+		}
+
+		private static System.Random random = new System.Random();
+		public static string RandomString(int length)
+		{
+			const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			return new string(Enumerable.Repeat(chars, length)
+				.Select(s => s[random.Next(s.Length)]).ToArray());
+		}
 	}
 }

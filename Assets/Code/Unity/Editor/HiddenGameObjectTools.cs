@@ -1,7 +1,8 @@
-using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace Greed.Unity
 {
@@ -88,6 +89,7 @@ namespace Greed.Unity
 
 		private List<GameObject> HiddenObjects = new List<GameObject>();
 
+		// This is really bad code but it's an editor script sooo... ¯\_(ツ)_/¯
 		private void GatherHiddenObjects()
 		{
 			HiddenObjects.Clear();
@@ -95,18 +97,23 @@ namespace Greed.Unity
 			var allObjects = FindObjectsOfType<GameObject>();
 			foreach (var go in allObjects)
 			{
-				if ((go.hideFlags & HideFlags.HideInHierarchy) != 0)
+				foreach (var child in go.GetComponentsInChildren<Transform>())
 				{
-					HiddenObjects.Add(go);
+					if (IsHidden(child.gameObject))
+					{
+						HiddenObjects.Add(child.gameObject);
+					}
 				}
 			}
+
+			HiddenObjects = HiddenObjects.Distinct().ToList();
 
 			Repaint();
 		}
 
 		private static bool IsHidden(GameObject go)
 		{
-			return (go.hideFlags & HideFlags.HideInHierarchy) != 0;
+			return go.hideFlags != HideFlags.None;
 		}
 
 		#endregion

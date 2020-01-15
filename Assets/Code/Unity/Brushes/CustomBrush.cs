@@ -23,6 +23,23 @@ namespace Greed.Unity
 			}
 		}
 
+		public override void Erase(GridLayout gridLayout, GameObject brushTarget, Vector3Int position)
+		{
+			// Do not allow editing palettes
+			if (brushTarget.layer == 31)
+			{
+				return;
+			}
+
+			var tilemap = brushTarget.GetComponent<Tilemap>();
+			if (tilemap != null)
+			{
+				RemovePowerSource(tilemap, position);
+			}
+		}
+
+		// TODO: Store this in another (seriliazed) class instead of inside the tiles (they are read-only).
+		// -> The scene context is perfect for this.
 		private void AddPowerSource(Tilemap tilemap, Vector3Int position)
 		{
 			var tile = tilemap.GetTile<CustomRuleTile>(position);
@@ -31,8 +48,24 @@ namespace Greed.Unity
 				return;
 			}
 
+			var go = tilemap.GetInstantiatedObject(position);
+
 			var powerSource = FindObjectOfType<PowerSource>();
-			tile.AddPowerSource(powerSource);
+			go.GetComponent<PoweredInstaller>().bla.Add(powerSource);
+		}
+
+		private void RemovePowerSource(Tilemap tilemap, Vector3Int position)
+		{
+			var tile = tilemap.GetTile<CustomRuleTile>(position);
+			if (tile == null)
+			{
+				return;
+			}
+
+			var go = tilemap.GetInstantiatedObject(position);
+
+			var powerSource = FindObjectOfType<PowerSource>();
+			go.GetComponent<PoweredInstaller>().bla.Remove(powerSource);
 		}
 	}
 
