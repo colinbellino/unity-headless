@@ -46,14 +46,14 @@ namespace Greed.Unity
 			RemovePowerSource(tilemap, position);
 		}
 
-		private LevelDataInstaller GetLevelDataInstaller()
+		private LevelInstaller GetLevelInstaller()
 		{
 			var sceneContext = GameObject.Find("Level Context").GetComponent<SceneContext>();
-			foreach (var installer in sceneContext.ScriptableObjectInstallers)
+			foreach (var installer in sceneContext.Installers)
 			{
-				if (installer is LevelDataInstaller)
+				if (installer is LevelInstaller)
 				{
-					return installer as LevelDataInstaller;
+					return installer as LevelInstaller;
 				};
 			}
 
@@ -71,7 +71,7 @@ namespace Greed.Unity
 			}
 
 			var powerSource = FindObjectOfType<PowerSource>();
-			GetLevelDataInstaller().LevelData.AddPowerSource(position, powerSource);
+			GetLevelInstaller().LevelData.AddPowerSource(position, powerSource);
 		}
 
 		private void RemovePowerSource(Tilemap tilemap, Vector3Int position)
@@ -83,7 +83,7 @@ namespace Greed.Unity
 			}
 
 			var powerSource = FindObjectOfType<PowerSource>();
-			GetLevelDataInstaller().LevelData.RemovePowerSource(position, powerSource);
+			GetLevelInstaller().LevelData.RemovePowerSource(position, powerSource);
 		}
 	}
 

@@ -1,23 +1,13 @@
 using UnityEngine;
-using Zenject;
 using System.Collections.Generic;
 using System;
+using Sirenix.OdinInspector;
+using UnityEditor;
 
 namespace Greed.Unity
 {
-	[CreateAssetMenu(fileName = "LevelDataInstaller", menuName = "Installers/LevelDataInstaller")]
-	public class LevelDataInstaller : ScriptableObjectInstaller<LevelDataInstaller>
-	{
-		public LevelData LevelData;
-
-		public override void InstallBindings()
-		{
-			// Container.Bind<LevelData>().AsSingle();
-		}
-	}
-
-	[Serializable]
-	public class LevelData
+	[CreateAssetMenu(menuName = "Greed/LevelData")]
+	public class LevelData : SerializedScriptableObject
 	{
 		public PoweredDevicesMap PoweredDevicesMap = new PoweredDevicesMap();
 
@@ -26,6 +16,8 @@ namespace Greed.Unity
 			var data = GetData(position);
 			data.AddPowerSource(powerSource);
 			PoweredDevicesMap[position] = data;
+
+			Save();
 		}
 
 		public void RemovePowerSource(Vector3Int position, PowerSource powerSource)
@@ -33,6 +25,8 @@ namespace Greed.Unity
 			var data = GetData(position);
 			data.RemovePowerSource(powerSource);
 			PoweredDevicesMap[position] = data;
+
+			Save();
 		}
 
 		private PoweredDeviceData GetData(Vector3Int position)
@@ -45,6 +39,12 @@ namespace Greed.Unity
 			}
 
 			return data;
+		}
+
+		private void Save()
+		{
+			EditorUtility.SetDirty(this);
+			AssetDatabase.SaveAssets();
 		}
 	}
 
