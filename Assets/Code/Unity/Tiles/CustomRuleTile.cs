@@ -55,7 +55,7 @@ namespace Greed.Unity
 				instantiatedGameObject.name = RandomString(10);
 				bla = instantiatedGameObject;
 			}
-			UnityEngine.Debug.Log("StartUp " + instantiatedGameObject?.name);
+			// UnityEngine.Debug.Log("StartUp " + instantiatedGameObject?.name);
 
 			return true;
 		}

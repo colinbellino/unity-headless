@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 270824741}
   - component: {fileID: 270824740}
   m_Layer: 0
-  m_Name: SceneContext
+  m_Name: Level Context
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 4ac55f4ea9aae1148b2fbeba9302adc9, type: 2}
   _monoInstallers: []
   _installerPrefabs: []
   _autoRun: 1
