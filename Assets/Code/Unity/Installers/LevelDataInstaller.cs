@@ -23,15 +23,28 @@ namespace Greed.Unity
 
 		public void AddPowerSource(Vector3Int position, PowerSource powerSource)
 		{
-			var data = new PoweredDeviceData();
+			var data = GetData(position);
 			data.AddPowerSource(powerSource);
-			PoweredDevicesMap.Add(position, data);
-			UnityEngine.Debug.Log("AddPowerSource " + position + " => " + powerSource);
+			PoweredDevicesMap[position] = data;
 		}
 
 		public void RemovePowerSource(Vector3Int position, PowerSource powerSource)
 		{
-			UnityEngine.Debug.Log("RemovePowerSource " + position + " => " + powerSource);
+			var data = GetData(position);
+			data.RemovePowerSource(powerSource);
+			PoweredDevicesMap[position] = data;
+		}
+
+		private PoweredDeviceData GetData(Vector3Int position)
+		{
+			var data = new PoweredDeviceData();
+
+			if (PoweredDevicesMap.ContainsKey(position))
+			{
+				PoweredDevicesMap.TryGetValue(position, out data);
+			}
+
+			return data;
 		}
 	}
 
@@ -41,11 +54,26 @@ namespace Greed.Unity
 	[Serializable]
 	public class PoweredDeviceData
 	{
-		public readonly List<PowerSource> PowerSources = new List<PowerSource>();
+		public List<PowerSource> PowerSources = new List<PowerSource>();
 
 		public void AddPowerSource(PowerSource powerSource)
 		{
+			if (PowerSources.Contains(powerSource))
+			{
+				return;
+			}
+
 			PowerSources.Add(powerSource);
+		}
+
+		public void RemovePowerSource(PowerSource powerSource)
+		{
+			if (!PowerSources.Contains(powerSource))
+			{
+				return;
+			}
+
+			PowerSources.Remove(powerSource);
 		}
 	}
 }

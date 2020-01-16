@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d03caf259bb1bcc43bb16ac72a554155, type: 3}
   m_Name: Pressure Plates & Door
   m_EditorClassIdentifier: 
-  Name: level1
+  LevelData:
+    PoweredDevicesMap:
+      _keyData:
+      - {x: 2, y: -2, z: 0}
+      _valueData:
+      - PowerSources:
+        - {fileID: 0}

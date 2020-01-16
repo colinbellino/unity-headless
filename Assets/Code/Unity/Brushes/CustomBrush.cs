@@ -10,18 +10,6 @@ namespace Greed.Unity
 	[CreateAssetMenu(fileName = "New Custom Brush", menuName = "Brushes/Custom Brush")]
 	public class CustomBrush : UnityEditor.Tilemaps.GridBrush
 	{
-		// [Inject] private LevelData _levelData;
-
-		// public void Reset()
-		// {
-		// 	var sceneContext = FindObjectOfType<SceneContext>();
-		// 	foreach (var installer in sceneContext.Installers)
-		// 	{
-		// 		UnityEngine.Debug.Log(installer.name);
-		// 	}
-		// 	UnityEngine.Debug.Log("reset");
-		// }
-
 		public override void Paint(GridLayout grid, GameObject brushTarget, Vector3Int position)
 		{
 			// Do not allow editing palettes
@@ -31,10 +19,13 @@ namespace Greed.Unity
 			}
 
 			var tilemap = brushTarget.GetComponent<Tilemap>();
-			if (tilemap != null)
+			if (tilemap == null)
 			{
-				AddPowerSource(tilemap, position);
+				Debug.LogWarning("No tilemap selected.");
+				return;
 			}
+
+			AddPowerSource(tilemap, position);
 		}
 
 		public override void Erase(GridLayout gridLayout, GameObject brushTarget, Vector3Int position)
@@ -46,10 +37,13 @@ namespace Greed.Unity
 			}
 
 			var tilemap = brushTarget.GetComponent<Tilemap>();
-			if (tilemap != null)
+			if (tilemap == null)
 			{
-				RemovePowerSource(tilemap, position);
+				Debug.LogWarning("No tilemap selected.");
+				return;
 			}
+
+			RemovePowerSource(tilemap, position);
 		}
 
 		private LevelDataInstaller GetLevelDataInstaller()
