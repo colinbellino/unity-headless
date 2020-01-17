@@ -7,7 +7,6 @@ using Zenject;
 namespace Greed.Unity
 {
 	[CustomGridBrush(true, false, false, "Custom Brush")]
-	[CreateAssetMenu(fileName = "New Custom Brush", menuName = "Brushes/Custom Brush")]
 	public class CustomBrush : UnityEditor.Tilemaps.GridBrush
 	{
 		public override void Paint(GridLayout grid, GameObject brushTarget, Vector3Int position)
@@ -60,8 +59,6 @@ namespace Greed.Unity
 			return null;
 		}
 
-		// TODO: Store this in another (seriliazed) class instead of inside the tiles (they are read-only).
-		// -> The scene context is perfect for this.
 		private void AddPowerSource(Tilemap tilemap, Vector3Int position)
 		{
 			var tile = tilemap.GetTile<CustomRuleTile>(position);
