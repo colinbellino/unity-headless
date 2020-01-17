@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81a7171d4c5f0314084e896ad12af4fc, type: 3}
+  m_Script: {fileID: 11500000, guid: de39950b580dec8428bdd91711b844e1, type: 3}
   m_Name: DoorCustom
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 1265346099965646356, guid: 549eceebd3b5eda4782bcbff1e36a379,
     type: 3}
   m_DefaultGameObject: {fileID: 3575142569279981011, guid: 3410aeac52337a74fa9abb52e49cbcf1,
     type: 3}
-  m_DefaultColliderType: 1
+  m_DefaultColliderType: 0
   m_TilingRules: []

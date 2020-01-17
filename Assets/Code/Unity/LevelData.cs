@@ -1,13 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using Sirenix.OdinInspector;
-using UnityEditor;
 
 namespace Greed.Unity
 {
-	[CreateAssetMenu(menuName = "Greed/LevelData")]
-	public class LevelData : SerializedScriptableObject
+	[Serializable]
+	public class LevelData
 	{
 		public PoweredDevicesMap PoweredDevicesMap = new PoweredDevicesMap();
 
@@ -16,8 +14,6 @@ namespace Greed.Unity
 			var data = GetData(position);
 			data.AddPowerSource(powerSource);
 			PoweredDevicesMap[position] = data;
-
-			Save();
 		}
 
 		public void RemovePowerSource(Vector3Int position, PowerSource powerSource)
@@ -25,8 +21,6 @@ namespace Greed.Unity
 			var data = GetData(position);
 			data.RemovePowerSource(powerSource);
 			PoweredDevicesMap[position] = data;
-
-			Save();
 		}
 
 		private PoweredDeviceData GetData(Vector3Int position)
@@ -39,12 +33,6 @@ namespace Greed.Unity
 			}
 
 			return data;
-		}
-
-		private void Save()
-		{
-			EditorUtility.SetDirty(this);
-			AssetDatabase.SaveAssets();
 		}
 	}
 

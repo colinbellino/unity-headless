@@ -10,6 +10,7 @@ namespace Greed.Unity
 
 		public override void InstallBindings()
 		{
+			// FIXME: Inject power sources
 			// Container.Bind<LevelData>().AsSingle();
 		}
 

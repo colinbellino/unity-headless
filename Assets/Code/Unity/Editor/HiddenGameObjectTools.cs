@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace Greed.Unity
+namespace Greed.Unity.Editor
 {
 	// Source: https://answers.unity.com/questions/613728/how-do-i-remove-a-game-object-that-is-not-visible.html
 	public class HiddenGameObjectTools : EditorWindow
