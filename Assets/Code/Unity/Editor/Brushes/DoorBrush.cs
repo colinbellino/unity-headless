@@ -1,20 +1,25 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEditor.Tilemaps;
-using Zenject;
+using Greed.Core;
 
 namespace Greed.Unity.Editor
 {
 	[CustomGridBrush(true, false, false, "Door Brush")]
+	// TODO: Rename to PowerBrush
 	public class DoorBrush : GridBrush
 	{
+		private Powered _powered;
+		private PowerSource _powerSource;
+
+		private bool _lineStarted;
+		private Vector3Int _startPosition;
+		private LevelData _levelData;
+
 		public override void Paint(GridLayout grid, GameObject brushTarget, Vector3Int position)
 		{
 			// Do not allow editing palettes
-			if (brushTarget.layer == 31)
-			{
-				return;
-			}
+			if (brushTarget.layer == 31) { return; }
 
 			var tilemap = brushTarget.GetComponent<Tilemap>();
 			if (tilemap == null)
@@ -23,16 +28,22 @@ namespace Greed.Unity.Editor
 				return;
 			}
 
-			AddPowerSource(tilemap, position);
+			if (_lineStarted == false)
+			{
+				StartLine(tilemap, position);
+			}
+			else
+			{
+				EndLine(tilemap, position);
+				_levelData.AddPowerSource(_startPosition, _powerSource);
+				Debug.Log($"Connected power source: {_powered.name}[{_powered.GetInstanceID()}] -> {_powerSource.name}[{_powerSource.GetInstanceID()}]");
+			}
 		}
 
 		public override void Erase(GridLayout gridLayout, GameObject brushTarget, Vector3Int position)
 		{
 			// Do not allow editing palettes
-			if (brushTarget.layer == 31)
-			{
-				return;
-			}
+			if (brushTarget.layer == 31) { return; }
 
 			var tilemap = brushTarget.GetComponent<Tilemap>();
 			if (tilemap == null)
@@ -41,45 +52,66 @@ namespace Greed.Unity.Editor
 				return;
 			}
 
-			RemovePowerSource(tilemap, position);
+			if (_lineStarted == false)
+			{
+				StartLine(tilemap, position);
+			}
+			else
+			{
+				EndLine(tilemap, position);
+				_levelData.RemovePowerSource(_startPosition, _powerSource);
+				Debug.Log($"Disconneted power source: {_powered.name}[{_powered.GetInstanceID()}] -> {_powerSource.name}[{_powerSource.GetInstanceID()}]");
+			}
 		}
 
-		private static void AddPowerSource(Tilemap tilemap, Vector3Int position)
+		private void StartLine(Tilemap tilemap, Vector3Int position)
 		{
-			var tile = tilemap.GetTile<DoorTile>(position);
-			if (tile == null)
+			_powered = null;
+			_powerSource = null;
+
+			var powered = tilemap.GetInstantiatedObject(position)?.GetComponent<Powered>();
+			if (powered == null)
+			{
+				Debug.LogWarning("Selected tile can't be powered.");
+				return;
+			}
+
+			InitializeLevelData();
+
+			_startPosition = position;
+			_powered = powered;
+			_lineStarted = true;
+		}
+
+		private void EndLine(Tilemap tilemap, Vector3Int position)
+		{
+			// TODO: Use interface IPowerSource
+			var powerSource = tilemap.GetInstantiatedObject(position)?.GetComponent<PowerSource>();
+			if (powerSource == null)
+			{
+				Debug.LogWarning("Selected tile isn't a power source.");
+				return;
+			}
+
+			_powerSource = powerSource;
+			_lineStarted = false;
+		}
+
+		private void InitializeLevelData()
+		{
+			if (_levelData != null)
 			{
 				return;
 			}
 
-			var powerSource = FindObjectOfType<PowerSource>();
-			GetLevelInstaller().LevelData.AddPowerSource(position, powerSource);
-		}
-
-		private static void RemovePowerSource(Tilemap tilemap, Vector3Int position)
-		{
-			var tile = tilemap.GetTile<DoorTile>(position);
-			if (tile == null)
+			var levelInstaller = FindObjectOfType<LevelInstaller>();
+			if (levelInstaller == null)
 			{
+				Debug.LogError("Couldn't find LevelData in the scene.");
 				return;
 			}
 
-			var powerSource = FindObjectOfType<PowerSource>();
-			GetLevelInstaller().LevelData.RemovePowerSource(position, powerSource);
-		}
-
-		private static LevelInstaller GetLevelInstaller()
-		{
-			var sceneContext = GameObject.Find("Level Context").GetComponent<SceneContext>();
-			foreach (var installer in sceneContext.Installers)
-			{
-				if (installer is LevelInstaller)
-				{
-					return installer as LevelInstaller;
-				};
-			}
-
-			return null;
+			_levelData = levelInstaller.LevelData;
 		}
 	}
 }

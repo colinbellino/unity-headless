@@ -1,26 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Zenject;
 
 namespace Greed.Core
 {
-	public class Powered : IInitializable, IDisposable, IPowered
+	public class Powered : MonoBehaviour, IInitializable, IDisposable, IPowered
 	{
-		private readonly SignalBus _signalBus;
-		private readonly List<IPowerSource> _powerSources;
-		private readonly int _powerRequired = 1;
+		private SignalBus _signalBus;
+		private List<IPowerSource> _powerSources;
+		private int _powerRequired;
 
 		private bool _isActive;
 
-		public Powered(
+		[Inject]
+		public void Construct(
 			SignalBus signalBus,
 			List<IPowerSource> powerSources
 		)
 		{
 			_signalBus = signalBus;
 			_powerSources = powerSources;
-
 			_powerRequired = _powerSources.Count();
 		}
 

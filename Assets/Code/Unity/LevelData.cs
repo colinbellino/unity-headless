@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Sirenix.OdinInspector;
+using System.Linq;
 
 namespace Greed.Unity
 {
@@ -9,6 +11,7 @@ namespace Greed.Unity
 	{
 		public PoweredDevicesMap PoweredDevicesMap = new PoweredDevicesMap();
 
+		// FIXME: tile's instanciated objects are recreated when the tilemap refreshes so we need to use positions only
 		public void AddPowerSource(Vector3Int position, PowerSource powerSource)
 		{
 			var data = GetData(position);
@@ -34,6 +37,15 @@ namespace Greed.Unity
 
 			return data;
 		}
+
+		[Button]
+		public void Clean()
+		{
+			foreach (var (position, data) in PoweredDevicesMap.Select(x => (x.Key, x.Value)))
+			{
+				data.PowerSources = data.PowerSources.Where(powerSource => powerSource != null).Distinct().ToList();
+			}
+		}
 	}
 
 	[Serializable]
@@ -42,6 +54,7 @@ namespace Greed.Unity
 	[Serializable]
 	public class PoweredDeviceData
 	{
+		// TODO: Store coordinates only?
 		public List<PowerSource> PowerSources = new List<PowerSource>();
 
 		public void AddPowerSource(PowerSource powerSource)

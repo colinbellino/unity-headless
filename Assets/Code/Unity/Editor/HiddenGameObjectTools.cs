@@ -52,7 +52,7 @@ namespace Greed.Unity.Editor
 				GUILayout.BeginHorizontal();
 				{
 					var gone = hiddenObject == null;
-					GUILayout.Label(gone ? "null" : hiddenObject.name);
+					GUILayout.Label(gone ? "null" : $"{hiddenObject.name}[{hiddenObject.GetInstanceID()}]");
 					GUILayout.FlexibleSpace();
 					if (gone)
 					{

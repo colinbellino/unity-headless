@@ -1,20 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using Greed.Core;
-using UnityEngine;
 using Zenject;
 
 namespace Greed.Unity
 {
 	public class PoweredInstaller : MonoInstaller
 	{
-		public List<PowerSource> bla = new List<PowerSource>();
+		private List<PowerSource> _powerSources = new List<PowerSource>();
 
 		public override void InstallBindings()
 		{
-			UnityEngine.Debug.Log("Installing powered device: " + string.Join(", ", bla));
-			Container.BindInterfacesAndSelfTo<Powered>().AsSingle()
-				.WithArguments(bla.ToList<IPowerSource>());
+			UnityEngine.Debug.Log("Installing powered device: " + string.Join(", ", _powerSources));
+
+			Container.BindInstance(_powerSources.ToList<IPowerSource>()).WhenInjectedInto<Powered>();
 		}
 	}
 }

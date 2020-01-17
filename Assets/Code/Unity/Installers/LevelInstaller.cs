@@ -17,6 +17,7 @@ namespace Greed.Unity
 		// TODO: Move this to another class
 		public void OnDrawGizmos()
 		{
+			UnityEngine.Debug.Log("LevelInstaller => OnDrawGizmos " + LevelData.PoweredDevicesMap.Count);
 			Gizmos.color = Color.red;
 
 			foreach (var (position, data) in LevelData.PoweredDevicesMap.Select(x => (x.Key, x.Value)))
