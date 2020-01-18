@@ -6,19 +6,18 @@ using System.Linq;
 
 namespace Greed.Unity
 {
-	[Serializable]
-	public class LevelData
+	public class LevelData : MonoBehaviour
 	{
 		public PowerMap PowerMap;
 
-		public void AddPowerSource(Vector3Int poweredPosition, Vector3Int sourcePosition)
+		public void ConnectPower(Vector3Int poweredPosition, Vector3Int sourcePosition)
 		{
 			var data = GetData(poweredPosition);
 			data.AddPowerSource(sourcePosition);
 			PowerMap[poweredPosition] = data;
 		}
 
-		public void RemovePowerSource(Vector3Int poweredPosition, Vector3Int sourcePosition)
+		public void DisconnectPower(Vector3Int poweredPosition, Vector3Int sourcePosition)
 		{
 			var data = GetData(poweredPosition);
 			data.RemovePowerSource(sourcePosition);
@@ -27,23 +26,19 @@ namespace Greed.Unity
 
 		private PoweredDeviceData GetData(Vector3Int position)
 		{
-			var data = new PoweredDeviceData();
-
 			if (PowerMap.ContainsKey(position))
 			{
-				PowerMap.TryGetValue(position, out data);
+				PowerMap.TryGetValue(position, out var data);
+				return data;
 			}
 
-			return data;
+			return new PoweredDeviceData();
 		}
 
 		[Button]
-		public void Clean()
+		public void Clear()
 		{
-			foreach (var (position, data) in PowerMap.Select(x => (x.Key, x.Value)))
-			{
-				data.PowerSources = data.PowerSources.Where(powerSource => powerSource != null).Distinct().ToList();
-			}
+			PowerMap.Clear();
 		}
 	}
 
@@ -72,6 +67,11 @@ namespace Greed.Unity
 
 		public void RemovePowerSource(Vector3Int powerSource)
 		{
+			if (PowerSources == null)
+			{
+				PowerSources = new List<Vector3Int>();
+			}
+
 			if (!PowerSources.Contains(powerSource))
 			{
 				return;

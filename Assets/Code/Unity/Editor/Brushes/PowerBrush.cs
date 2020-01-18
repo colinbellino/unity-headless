@@ -9,11 +9,12 @@ namespace Greed.Unity.Editor
 	[CustomGridBrush(true, false, false, "Power Brush")]
 	public class PowerBrush : GridBrush
 	{
-		private Powered _powered;
-		private PowerSource _powerSource;
 		private bool _lineStarted;
 		private Vector3Int _startPosition;
 		private LevelData _levelData;
+
+		public Powered Powered { get; private set; }
+		public PowerSource PowerSource { get; private set; }
 
 		public override void Paint(GridLayout grid, GameObject brushTarget, Vector3Int position)
 		{
@@ -33,9 +34,13 @@ namespace Greed.Unity.Editor
 			}
 			else
 			{
-				EndLine(tilemap, position);
-				_levelData.AddPowerSource(_startPosition, position);
-				Debug.Log($"Connected power source: {_powered.name}[{_powered.GetInstanceID()}] -> {_powerSource.name}[{_powerSource.GetInstanceID()}]");
+				PowerSource = EndLine(tilemap, position);
+				if (PowerSource)
+				{
+					_levelData.ConnectPower(_startPosition, position);
+					// Debug.Log($"Connected power source: {Powered?.name}[{Powered?.GetInstanceID()}] -> {PowerSource.name}[{PowerSource.GetInstanceID()}]");
+					ResetPower();
+				}
 			}
 		}
 
@@ -57,16 +62,25 @@ namespace Greed.Unity.Editor
 			}
 			else
 			{
-				EndLine(tilemap, position);
-				_levelData.RemovePowerSource(_startPosition, position);
-				Debug.Log($"Disconneted power source: {_powered.name}[{_powered.GetInstanceID()}] -> {_powerSource.name}[{_powerSource.GetInstanceID()}]");
+				PowerSource = EndLine(tilemap, position);
+				if (PowerSource)
+				{
+					_levelData.DisconnectPower(_startPosition, position);
+					// Debug.Log($"Disconneted power source: {Powered?.name}[{Powered?.GetInstanceID()}] -> {PowerSource.name}[{PowerSource.GetInstanceID()}]");
+					ResetPower();
+				}
 			}
+		}
+
+		private void ResetPower()
+		{
+			Powered = null;
+			PowerSource = null;
 		}
 
 		private void StartLine(Tilemap tilemap, Vector3Int position)
 		{
-			_powered = null;
-			_powerSource = null;
+			ResetPower();
 
 			var powered = tilemap.GetInstantiatedObject(position)?.GetComponent<Powered>();
 			if (powered == null)
@@ -78,21 +92,21 @@ namespace Greed.Unity.Editor
 			InitializeLevelData();
 
 			_startPosition = position;
-			_powered = powered;
+			Powered = powered;
 			_lineStarted = true;
 		}
 
-		private void EndLine(Tilemap tilemap, Vector3Int position)
+		private PowerSource EndLine(Tilemap tilemap, Vector3Int position)
 		{
 			var powerSource = tilemap.GetInstantiatedObject(position)?.GetComponent<PowerSource>();
 			if (powerSource == null)
 			{
 				Debug.LogWarning("Selected tile isn't a power source.");
-				return;
+				return null;
 			}
 
-			_powerSource = powerSource;
 			_lineStarted = false;
+			return powerSource;
 		}
 
 		private void InitializeLevelData()
@@ -102,14 +116,14 @@ namespace Greed.Unity.Editor
 				return;
 			}
 
-			var levelInstaller = FindObjectOfType<LevelInstaller>();
-			if (levelInstaller == null)
+			var levelData = FindObjectOfType<LevelData>();
+			if (levelData == null)
 			{
 				Debug.LogError("Couldn't find LevelData in the scene.");
 				return;
 			}
 
-			_levelData = levelInstaller.LevelData;
+			_levelData = levelData;
 		}
 	}
 
@@ -119,6 +133,8 @@ namespace Greed.Unity.Editor
 	[CustomEditor(typeof(PowerBrush))]
 	public class PowerBrushEditor : GridBrushEditor
 	{
+		private Tilemap _tilemap;
+
 		/// <summary>
 		/// Callback for painting the GUI for the GridBrush in the Scene View.
 		/// The PowerBrush Editor overrides this to draw the current coordinates of the brush.
@@ -132,13 +148,38 @@ namespace Greed.Unity.Editor
 		{
 			base.OnPaintSceneGUI(grid, brushTarget, position, tool, executing);
 
-			var labelText = "Pos: " + position.position;
-			if (position.size.x > 1 || position.size.y > 1)
+			if (_tilemap == null)
 			{
-				labelText += " Size: " + position.size;
+				_tilemap = brushTarget.GetComponent<Tilemap>();
 			}
 
-			Handles.Label(grid.CellToWorld(position.position), labelText);
+			var powered = _tilemap.GetInstantiatedObject(position.position)?.GetComponent<Powered>();
+			var powerSource = _tilemap.GetInstantiatedObject(position.position)?.GetComponent<PowerSource>();
+
+			Handles.Label(grid.CellToWorld(position.position), GetLabel(brush as PowerBrush, powered, powerSource));
+		}
+
+		private string GetLabel(PowerBrush brush, Powered powered, PowerSource powerSource)
+		{
+			var label = "";
+
+			if (powered)
+			{
+				label = $"{powered.name} {powered.transform.position - _tilemap.tileAnchor}";
+			}
+			else if (powerSource)
+			{
+				if (brush.Powered)
+				{
+					label = $"{brush.Powered.name} {brush.Powered.transform.position - _tilemap.tileAnchor} -> {powerSource.name} {powerSource.transform.position - _tilemap.tileAnchor}";
+				}
+				else
+				{
+					label = $"{powerSource.name} {powerSource.transform.position - _tilemap.tileAnchor}";
+				}
+			}
+
+			return label;
 		}
 	}
 }
