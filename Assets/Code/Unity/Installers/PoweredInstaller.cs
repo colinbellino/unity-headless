@@ -1,19 +1,65 @@
 using System.Collections.Generic;
 using System.Linq;
 using Greed.Core;
+using UnityEngine;
 using Zenject;
 
 namespace Greed.Unity
 {
 	public class PoweredInstaller : MonoInstaller
 	{
-		private List<PowerSource> _powerSources = new List<PowerSource>();
+		[Inject] private LevelData _levelData;
+
+		private PowerSource[] _scenePowerSources;
 
 		public override void InstallBindings()
 		{
-			UnityEngine.Debug.Log("Installing powered device: " + string.Join(", ", _powerSources));
+			Container.BindInterfacesAndSelfTo<Powered>().FromComponentOnRoot();
 
-			Container.BindInstance(_powerSources.ToList<IPowerSource>()).WhenInjectedInto<Powered>();
+			InstallPowerSources();
+		}
+
+		private void InstallPowerSources()
+		{
+			_scenePowerSources = FindObjectsOfType<PowerSource>();
+
+			var powerSources = GetPowerSourcesFromLevelData();
+			Container.BindInstance(powerSources).WhenInjectedInto<Powered>();
+		}
+
+		private List<IPowerSource> GetPowerSourcesFromLevelData()
+		{
+			var powerSources = new List<IPowerSource>();
+
+			foreach (var (poweredPosition, data) in _levelData.PowerMap.Select(x => (x.Key, x.Value)))
+			{
+				if (transform.position == poweredPosition)
+				{
+					foreach (var powerSourcePosition in data.PowerSources)
+					{
+						var powerSource = GetPowerSourceAtPosition(poweredPosition);
+						if (powerSource != null)
+						{
+							powerSources.Add(powerSource);
+						}
+					}
+				}
+			}
+
+			return powerSources;
+		}
+
+		private IPowerSource GetPowerSourceAtPosition(Vector3Int position)
+		{
+			foreach (var powerSource in _scenePowerSources)
+			{
+				if (powerSource.transform.position == position)
+				{
+					return powerSource;
+				}
+			};
+
+			return null;
 		}
 	}
 }
