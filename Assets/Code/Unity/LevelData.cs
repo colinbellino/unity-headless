@@ -9,30 +9,29 @@ namespace Greed.Unity
 	[Serializable]
 	public class LevelData
 	{
-		public PoweredDevicesMap PoweredDevicesMap = new PoweredDevicesMap();
+		public PowerMap PowerMap;
 
-		// FIXME: tile's instanciated objects are recreated when the tilemap refreshes so we need to use positions only
-		public void AddPowerSource(Vector3Int position, PowerSource powerSource)
+		public void AddPowerSource(Vector3Int poweredPosition, Vector3Int sourcePosition)
 		{
-			var data = GetData(position);
-			data.AddPowerSource(powerSource);
-			PoweredDevicesMap[position] = data;
+			var data = GetData(poweredPosition);
+			data.AddPowerSource(sourcePosition);
+			PowerMap[poweredPosition] = data;
 		}
 
-		public void RemovePowerSource(Vector3Int position, PowerSource powerSource)
+		public void RemovePowerSource(Vector3Int poweredPosition, Vector3Int sourcePosition)
 		{
-			var data = GetData(position);
-			data.RemovePowerSource(powerSource);
-			PoweredDevicesMap[position] = data;
+			var data = GetData(poweredPosition);
+			data.RemovePowerSource(sourcePosition);
+			PowerMap[poweredPosition] = data;
 		}
 
 		private PoweredDeviceData GetData(Vector3Int position)
 		{
 			var data = new PoweredDeviceData();
 
-			if (PoweredDevicesMap.ContainsKey(position))
+			if (PowerMap.ContainsKey(position))
 			{
-				PoweredDevicesMap.TryGetValue(position, out data);
+				PowerMap.TryGetValue(position, out data);
 			}
 
 			return data;
@@ -41,7 +40,7 @@ namespace Greed.Unity
 		[Button]
 		public void Clean()
 		{
-			foreach (var (position, data) in PoweredDevicesMap.Select(x => (x.Key, x.Value)))
+			foreach (var (position, data) in PowerMap.Select(x => (x.Key, x.Value)))
 			{
 				data.PowerSources = data.PowerSources.Where(powerSource => powerSource != null).Distinct().ToList();
 			}
@@ -49,16 +48,20 @@ namespace Greed.Unity
 	}
 
 	[Serializable]
-	public class PoweredDevicesMap : UnitySerializedDictionary<Vector3Int, PoweredDeviceData> { }
+	public class PowerMap : UnitySerializedDictionary<Vector3Int, PoweredDeviceData> { }
 
 	[Serializable]
 	public class PoweredDeviceData
 	{
-		// TODO: Store coordinates only?
-		public List<PowerSource> PowerSources = new List<PowerSource>();
+		public List<Vector3Int> PowerSources;
 
-		public void AddPowerSource(PowerSource powerSource)
+		public void AddPowerSource(Vector3Int powerSource)
 		{
+			if (PowerSources == null)
+			{
+				PowerSources = new List<Vector3Int>();
+			}
+
 			if (PowerSources.Contains(powerSource))
 			{
 				return;
@@ -67,7 +70,7 @@ namespace Greed.Unity
 			PowerSources.Add(powerSource);
 		}
 
-		public void RemovePowerSource(PowerSource powerSource)
+		public void RemovePowerSource(Vector3Int powerSource)
 		{
 			if (!PowerSources.Contains(powerSource))
 			{
