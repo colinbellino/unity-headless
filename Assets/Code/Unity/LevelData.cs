@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using Sirenix.OdinInspector;
-using System.Linq;
 
 namespace Greed.Unity
 {
