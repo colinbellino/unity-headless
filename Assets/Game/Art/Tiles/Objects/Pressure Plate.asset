@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: Pressure Plate
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 517450218321413632, guid: 083291f2183a9294b9fc67202ecdaf6f,
+  m_DefaultSprite: {fileID: -2277346048389759287, guid: 653836939ba1f4e40ae3cb88d52a8f47,
     type: 3}
   m_DefaultGameObject: {fileID: 4105874382419439143, guid: 46ee8f9c750d1ab4da0fc944c2851928,
     type: 3}
