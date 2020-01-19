@@ -7,6 +7,7 @@ namespace Greed.Unity
 {
 	public class LevelData : MonoBehaviour
 	{
+		public GridLayout Grid;
 		public PowerMap PowerMap;
 
 		public void ConnectPower(Vector3Int poweredPosition, Vector3Int sourcePosition)

@@ -10,7 +10,7 @@ namespace Greed.Unity
 	{
 		[Inject] private LevelData _levelData;
 
-		private PowerSource[] _scenePowerSources;
+		private Dictionary<Vector3Int, PowerSource> _scenePowerSources = new Dictionary<Vector3Int, PowerSource>();
 
 		public override void InstallBindings()
 		{
@@ -21,7 +21,10 @@ namespace Greed.Unity
 
 		private void InstallPowerSources()
 		{
-			_scenePowerSources = FindObjectsOfType<PowerSource>();
+			foreach (var powerSource in FindObjectsOfType<PowerSource>())
+			{
+				_scenePowerSources.Add(_levelData.Grid.WorldToCell(powerSource.transform.position), powerSource);
+			}
 
 			var powerSources = GetPowerSourcesFromLevelData();
 			Container.BindInstance(powerSources).WhenInjectedInto<Powered>();
@@ -33,33 +36,22 @@ namespace Greed.Unity
 
 			foreach (var (poweredPosition, data) in _levelData.PowerMap.Select(x => (x.Key, x.Value)))
 			{
-				if (transform.position == poweredPosition)
+				if (_levelData.Grid.WorldToCell(transform.position) != poweredPosition)
 				{
-					foreach (var powerSourcePosition in data.PowerSources)
+					continue;
+				}
+
+				foreach (var powerSourcePosition in data.PowerSources)
+				{
+					_scenePowerSources.TryGetValue(powerSourcePosition, out var powerSource);
+					if (powerSource != null)
 					{
-						var powerSource = GetPowerSourceAtPosition(poweredPosition);
-						if (powerSource != null)
-						{
-							powerSources.Add(powerSource);
-						}
+						powerSources.Add(powerSource);
 					}
 				}
 			}
 
 			return powerSources;
-		}
-
-		private IPowerSource GetPowerSourceAtPosition(Vector3Int position)
-		{
-			foreach (var powerSource in _scenePowerSources)
-			{
-				if (powerSource.transform.position == position)
-				{
-					return powerSource;
-				}
-			};
-
-			return null;
 		}
 	}
 }
