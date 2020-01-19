@@ -11,8 +11,6 @@ namespace Greed.Unity
 	{
 		public override void InstallBindings()
 		{
-			// Container.Bind<IEntity>().To<EntityFacade>().FromComponentOnRoot().AsSingle();
-
 			InstallStateMachine();
 		}
 

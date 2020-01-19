@@ -1,5 +1,6 @@
 using UnityEngine;
 using Zenject;
+
 namespace Greed.Unity
 {
 	public class Spawnable : MonoBehaviour { }
