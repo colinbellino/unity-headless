@@ -40,7 +40,7 @@ namespace Greed.Unity
 					{ typeof(IdleState), new Transitions { { "StartMoving", typeof(MoveState) }, { "Recall", typeof(RecalledState) }, { "Fall", typeof(FallState) } } },
 					{ typeof(MoveState), new Transitions { { "StopMoving", typeof(IdleState) }, { "Recall", typeof(RecalledState) }, { "Fall", typeof(FallState) } } },
 					{ typeof(RecalledState), new Transitions { { "Done", typeof(InactiveState) } } },
-					{ typeof(FallState), new Transitions { { "Done", typeof(IdleState) } } },
+					{ typeof(FallState), new Transitions { { "Done", typeof(RecalledState) } } },
 					{ typeof(ThrownState), new Transitions { { "Done", typeof(IdleState) } } },
 					{ typeof(InactiveState), new Transitions { { "Throw", typeof(ThrownState) }, { "Fall", typeof(FallState) } } },
 				};
