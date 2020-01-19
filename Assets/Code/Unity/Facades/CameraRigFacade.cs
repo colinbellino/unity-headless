@@ -8,6 +8,9 @@ namespace Greed.Unity
 	public class CameraRigFacade : MonoBehaviour
 	{
 		private ICameraRig _rig;
+		private float _timestamp;
+
+		private readonly float _cooldown = 0.1f;
 
 		[Inject]
 		public void Construct(ICameraRig rig)
@@ -17,10 +20,14 @@ namespace Greed.Unity
 
 		public void OnCollisionEnter2D(Collision2D collision)
 		{
-			if (collision.transform.root.CompareTag("Player"))
+			if (Time.time > _timestamp)
 			{
-				Enum.TryParse(collision.otherCollider.name, out Directions direction);
-				_rig.MoveOnGrid(direction.ToVector());
+				if (collision.transform.root.CompareTag("Player"))
+				{
+					Enum.TryParse(collision.otherCollider.name, out Directions direction);
+					_rig.MoveOnGrid(direction.ToVector());
+					_timestamp = Time.time + _cooldown;
+				}
 			}
 		}
 	}
