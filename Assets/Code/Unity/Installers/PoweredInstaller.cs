@@ -33,10 +33,11 @@ namespace Greed.Unity
 		private List<IPowerSource> GetPowerSourcesFromLevelData()
 		{
 			var powerSources = new List<IPowerSource>();
+			var poweredPosition = _levelData.Grid.WorldToCell(transform.position);
 
-			foreach (var (poweredPosition, data) in _levelData.PowerMap.Select(x => (x.Key, x.Value)))
+			foreach (var (currentPosition, data) in _levelData.PowerMap.Select(x => (x.Key, x.Value)))
 			{
-				if (_levelData.Grid.WorldToCell(transform.position) != poweredPosition)
+				if (currentPosition != poweredPosition)
 				{
 					continue;
 				}
