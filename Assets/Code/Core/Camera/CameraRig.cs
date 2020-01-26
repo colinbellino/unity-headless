@@ -1,10 +1,11 @@
 using System.Collections;
 using Greed.UnityWrapper;
 using UnityEngine;
+using Zenject;
 
 namespace Greed.Core
 {
-	public class CameraRig : ICameraRig
+	public class CameraRig : ICameraRig, IInitializable
 	{
 		private readonly Transform _rig;
 		private readonly float _speed = 10f;
@@ -20,6 +21,11 @@ namespace Greed.Core
 		{
 			_rig = rig;
 			_asyncProcessor = asyncProcessor;
+		}
+
+		public void Initialize()
+		{
+			_position = new Vector2Int((int)_rig.position.x, (int)_rig.position.y);
 		}
 
 		public void MoveOnGrid(Vector2Int direction)

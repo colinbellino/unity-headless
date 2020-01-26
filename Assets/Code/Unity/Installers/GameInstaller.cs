@@ -20,7 +20,7 @@ namespace Greed.Unity
 			Container.Bind<AsyncProcessor>().FromNewComponentOnNewGameObject().AsSingle();
 
 			// Use the CameraRig in the scene.
-			Container.Bind<ICameraRig>().FromComponentInHierarchy().AsSingle();
+			Container.BindInterfacesAndSelfTo<ICameraRig>().FromComponentInHierarchy().AsSingle();
 
 			// Scene management.
 			Container.Bind<ZenjectSceneLoaderAddressables>().AsSingle();
