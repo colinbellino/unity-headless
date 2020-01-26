@@ -10,7 +10,7 @@ namespace Greed.Core
 	{
 		private SignalBus _signalBus;
 		private List<IPowerSource> _powerSources;
-		private int _powerRequired;
+		private int _powerRequired = 1;
 
 		private bool _isActive;
 
@@ -22,7 +22,11 @@ namespace Greed.Core
 		{
 			_signalBus = signalBus;
 			_powerSources = powerSources;
-			_powerRequired = _powerSources.Count();
+
+			if (powerSources.Count() > 0)
+			{
+				_powerRequired = _powerSources.Count();
+			}
 		}
 
 		public void Initialize()
