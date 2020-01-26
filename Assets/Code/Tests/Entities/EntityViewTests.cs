@@ -42,17 +42,17 @@ namespace Greed.Tests
 			ThenHasPosition(Vector3.right);
 		}
 
-		[Test]
-		public void PlayAnimation_CallsPlayAndWait()
-		{
-			Assert.Fail("Not tested yet.");
-		}
+		// [Test]
+		// public void PlayAnimation_CallsPlayAndWait()
+		// {
+		// 	Assert.Fail("Not tested yet.");
+		// }
 
-		[Test]
-		public void AttachTo_AttachsToTarget()
-		{
-			Assert.Fail("Not tested yet.");
-		}
+		// [Test]
+		// public void AttachTo_AttachsToTarget()
+		// {
+		// 	Assert.Fail("Not tested yet.");
+		// }
 
 		private void ThenCallsMovePosition(Vector3 position)
 		{

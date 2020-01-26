@@ -26,20 +26,20 @@ namespace Greed.Core.StateMachines.Door
 		{
 			_view.PlayAnimation("Opened");
 
-			// _signalBus.Subscribe<PoweredToggledSignal>(OnActivated);
+			_view.PhysicsCollider.Enabled = false;
 		}
 
-		public override void OnExit()
-		{
-			// _signalBus.Unsubscribe<PoweredToggledSignal>(OnActivated);
-		}
+		// public override void OnExit()
+		// {
+		// 	// _signalBus.Unsubscribe<PoweredToggledSignal>(OnActivated);
+		// }
 
-		private void OnActivated(PoweredToggledSignal args)
-		{
-			if (args.Powered == _powered)
-			{
-				_stateMachine.Value.Transition("Toggle");
-			}
-		}
+		// private void OnActivated(PoweredToggledSignal args)
+		// {
+		// 	if (args.Powered == _powered)
+		// 	{
+		// 		_stateMachine.Value.Transition("Toggle");
+		// 	}
+		// }
 	}
 }

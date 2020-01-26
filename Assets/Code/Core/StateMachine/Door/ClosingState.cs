@@ -25,6 +25,7 @@ namespace Greed.Core.StateMachines.Door
 		public override void OnEnter()
 		{
 			_view.PlayAnimation("Closed");
+			_view.PhysicsCollider.Enabled = true;
 
 			_signalBus.Subscribe<PoweredToggledSignal>(OnActivated);
 		}

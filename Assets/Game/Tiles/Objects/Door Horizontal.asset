@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: Door
+  m_Name: Door Horizontal
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 1265346099965646356, guid: 549eceebd3b5eda4782bcbff1e36a379,
+  m_DefaultSprite: {fileID: -8877267565561185446, guid: 549eceebd3b5eda4782bcbff1e36a379,
     type: 3}
-  m_DefaultGameObject: {fileID: 3575142569279981011, guid: 3410aeac52337a74fa9abb52e49cbcf1,
+  m_DefaultGameObject: {fileID: 234655740336097033, guid: 0d2ddfc6fb6199542a6b83771987afbe,
     type: 3}
   m_DefaultColliderType: 0
   m_TilingRules: []
