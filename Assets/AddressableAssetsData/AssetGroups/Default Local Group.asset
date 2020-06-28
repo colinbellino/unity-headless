@@ -17,14 +17,42 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: c28130a21bdcec14d95d885522a0355e
   m_SerializeEntries:
+  - m_GUID: 2bae61bb4dfb94cf1ad6c32901a69508
+    m_Address: Assets/Game/Scenes/Levels/TestRoom.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 77b4201e47b559e4c8070bcfd73465de
+    m_Address: Assets/Game/Scenes/Levels/Doors & Pressure Plates.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: a82401f8e045b7749a4eeb752b17d6c6
+    m_Address: Assets/Game/Scenes/Levels/New Level.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: c5ff92ed387132440927f8b104dd6a9b
     m_Address: Assets/Game/Scenes/Levels
     m_ReadOnly: 0
     m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: c76c4a50602abf84e97f84a1a1760147
     m_Address: Assets/Game/Visual Effects
     m_ReadOnly: 0
     m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: d95d9280de214144f8e6ef5967364360
+    m_Address: Assets/Game/Scenes/Levels/Room Transition.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6f259d267884ada44884917aee172f6d, type: 2}
   m_SchemaSet:

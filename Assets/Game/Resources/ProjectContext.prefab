@@ -78,5 +78,5 @@ MonoBehaviour:
   _playerPrefab: {fileID: 618877341359465108, guid: dff04ccc6c3aa4e209d21abd8891402b,
     type: 3}
   _loadedScenes:
-  - m_AssetGUID: 2bae61bb4dfb94cf1ad6c32901a69508
+  - m_AssetGUID: 77b4201e47b559e4c8070bcfd73465de
     m_SubObjectName: 
